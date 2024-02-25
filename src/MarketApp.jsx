@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import "./MarketApp.css";
+import { Header } from "./components";
 
 export const MarketApp = () => {
     return (
-        <>
-            <div>TechWall</div>
+        <div className="w-[1100px] mx-auto">
+            <Header />
             <Routes>
                 <Route path="/" element={<div>Главная страница</div>} />
                 <Route path="/login" element={<div>Авторизация</div>} />
@@ -36,6 +36,6 @@ export const MarketApp = () => {
                     element={<div>Ошибка! Такой страницы не существует</div>}
                 />
             </Routes>
-        </>
+        </div>
     );
 };
