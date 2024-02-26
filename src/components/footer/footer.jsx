@@ -4,7 +4,7 @@ export const Footer = () => {
     return (
         <div className="flex w-[100%] h-[340px]">
             <div className="flex justify-center w-1/2 bg-blue text-white p-[40px]">
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-col justify-between max-w-[550px]">
                     <div>
                         <div className="text-white text-4xl font-bold mb-[10px]">
                             Tech<span className="text-black font-light">Wall</span>

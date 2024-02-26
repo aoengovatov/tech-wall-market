@@ -1,6 +1,6 @@
 export const ItemCard = () => {
     return (
-        <div className="flex flex-col items-center justify-around w-[250px] min-h-[315px] border-2 border-gray rounded-xl h-[100px] p-[15px]">
+        <div className="flex flex-col items-center justify-around w-[250px] min-h-[315px] border-[1px] border-midGray rounded-xl h-[100px] p-[15px]">
             <img src="/src/assets/item-logo-min.png" className="w-[185px]"></img>
             <div className="leading-5">
                 15,3" Ноутбук Apple MacBook Air 2023 (M2) 8/512 Гб, Space Gray(Космический

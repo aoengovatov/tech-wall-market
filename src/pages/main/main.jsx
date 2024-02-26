@@ -1,4 +1,4 @@
-import { Popular, Banner, Categories } from "../../components";
+import { Popular, Banner, Categories, Brands } from "../../components";
 
 export const Main = () => {
     return (
@@ -6,6 +6,7 @@ export const Main = () => {
             <Banner />
             <Popular />
             <Categories />
+            <Brands />
         </>
     );
 };
