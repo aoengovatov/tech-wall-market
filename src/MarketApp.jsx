@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { Header } from "./components";
+import { Header, Footer, Banner } from "./components";
 
 export const MarketApp = () => {
     return (
         <>
             <Header />
+            <Banner />
             <div className="w-[1100px] mx-auto">
                 <div className="mx-[20px]">
                     <Routes>
@@ -43,6 +44,7 @@ export const MarketApp = () => {
                     </Routes>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };
