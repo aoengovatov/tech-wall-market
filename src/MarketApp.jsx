@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import { Header, Footer, Banner } from "./components";
+import { Main } from "./pages";
+import { Header, Footer } from "./components";
 
 export const MarketApp = () => {
     return (
         <>
             <Header />
-            <Banner />
             <div className="w-[1100px] mx-auto">
                 <div className="mx-[20px]">
                     <Routes>
-                        <Route path="/" element={<div>Главная страница</div>} />
+                        <Route path="/" element={<Main />} />
                         <Route path="/login" element={<div>Авторизация</div>} />
                         <Route path="/registration" element={<div>Регистрация</div>} />
                         <Route path="/catalog" element={<div>Каталог товаров</div>} />
