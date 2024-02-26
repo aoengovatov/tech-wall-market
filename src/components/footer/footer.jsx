@@ -19,7 +19,12 @@ export const Footer = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center w-1/2">Карта</div>
+            <div className="flex items-center justify-center w-1/2 overflow-hidden">
+                <img
+                    src="/src/assets/footer-map.png"
+                    className="w-full bg-auto bg-no-repeat bg-center object-fill"
+                ></img>
+            </div>
         </div>
     );
 };
