@@ -1,11 +1,11 @@
-import { Popular, Banner } from "../../components";
+import { Popular, Banner, Categories } from "../../components";
 
 export const Main = () => {
     return (
         <>
             <Banner />
             <Popular />
-            <Popular />
+            <Categories />
         </>
     );
 };
