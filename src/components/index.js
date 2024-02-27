@@ -7,3 +7,5 @@ export * from "./brands/brands";
 export * from "./sale-widget/sale-widget";
 export * from "./breadcrumbs/breadcrumbs";
 export * from "./card-price/card-price";
+export * from "./button-blue/button-blue";
+export * from "./button-like/button-like";

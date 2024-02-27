@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SaleWidget } from "../../../sale-widget/sale-widget";
 import { CardPrice } from "../../../card-price/card-price";
+import { ButtonBlue } from "../../../button-blue/button-blue";
 
 export const ItemCard = () => {
     return (
@@ -21,9 +22,7 @@ export const ItemCard = () => {
                 <div className="flex flex-col">
                     <CardPrice price={149990} oldPrice={189990} />
                 </div>
-                <button className="border-2 border-blue bg-white text-blue px-[17px] h-[40px] rounded-xl transition-all duration-200 hover:text-white hover:bg-blue">
-                    в корзину
-                </button>
+                <ButtonBlue>в корзину</ButtonBlue>
             </div>
         </div>
     );
