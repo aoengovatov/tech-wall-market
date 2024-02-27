@@ -1,4 +1,4 @@
-import { CardItem, CategoryPanel } from "./components";
+import { CardItem, CategoryPanel, SortPanel } from "./components";
 import { Breadcrumbs, CardPrice, ButtonBlue, ButtonLike } from "../../components";
 
 export const Catalog = () => {
@@ -13,10 +13,11 @@ export const Catalog = () => {
                     </div>
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
-                            <CardItem />
-                            <CardItem />
-                            <CardItem />
-                            <CardItem />
+                            <SortPanel />
+                            <CardItem url={"/catalog/1"} />
+                            <CardItem url={"/catalog/1"} />
+                            <CardItem url={"/catalog/1"} />
+                            <CardItem url={"/catalog/1"} />
                         </div>
                     </div>
                 </div>

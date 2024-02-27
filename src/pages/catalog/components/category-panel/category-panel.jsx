@@ -14,7 +14,7 @@ export const CategoryPanel = () => {
             <CategoryItem url={"/catalog"}>Смарт-часы</CategoryItem>
             <Link
                 to={"/catalog"}
-                className="text-center px-[15px] py-[10px] text-blue rounded-lg hover:bg-gray"
+                className="text-center px-[15px] py-[10px] text-blue rounded-lg hover:underline"
             >
                 все категории
             </Link>
