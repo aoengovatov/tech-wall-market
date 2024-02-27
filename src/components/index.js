@@ -4,3 +4,6 @@ export * from "./banner/banner";
 export * from "./popular/popular";
 export * from "./categories/categories";
 export * from "./brands/brands";
+export * from "./sale-widget/sale-widget";
+export * from "./breadcrumbs/breadcrumbs";
+export * from "./card-price/card-price";

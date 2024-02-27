@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Main } from "./pages";
+import { Catalog, Main } from "./pages";
 import { Header, Footer } from "./components";
 
 export const MarketApp = () => {
@@ -12,7 +12,7 @@ export const MarketApp = () => {
                         <Route path="/" element={<Main />} />
                         <Route path="/login" element={<div>Авторизация</div>} />
                         <Route path="/registration" element={<div>Регистрация</div>} />
-                        <Route path="/catalog" element={<div>Каталог товаров</div>} />
+                        <Route path="/catalog" element={<Catalog />} />
                         <Route
                             path="/catalog/:category"
                             element={<div>Каталог товаров</div>}
