@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-import { ButtonBlue, ButtonLike, CardPrice, SaleWidget } from "../../../../components";
+import {
+    ButtonBlue,
+    ButtonLike,
+    CardPrice,
+    SaleWidget,
+    GoodCode,
+} from "../../../../components";
 
 export const CardItem = ({ url }) => {
     return (
@@ -24,7 +30,9 @@ export const CardItem = ({ url }) => {
                 </div>
 
                 <div className="flex items-end justify-between">
-                    <div className="w-8/12 text-xs text-gray">код товара: ir1785</div>
+                    <div className="w-8/12">
+                        <GoodCode>ir1785</GoodCode>
+                    </div>
                     <div className="flex">
                         <div className="mr-[5px]">
                             <ButtonLike />

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Catalog, Main } from "./pages";
+import { Catalog, Main, SingleGood } from "./pages";
 import { Header, Footer } from "./components";
 
 export const MarketApp = () => {
@@ -13,14 +13,7 @@ export const MarketApp = () => {
                         <Route path="/login" element={<div>Авторизация</div>} />
                         <Route path="/registration" element={<div>Регистрация</div>} />
                         <Route path="/catalog" element={<Catalog />} />
-                        <Route
-                            path="/catalog/:category"
-                            element={<div>Каталог товаров</div>}
-                        />
-                        <Route
-                            path="/catalog/:category/:id"
-                            element={<div>Страница товара</div>}
-                        />
+                        <Route path="/catalog/:id" element={<SingleGood />} />
                         <Route path="/profile" element={<div>Профиль</div>} />
                         <Route path="/profile/favorites" element={<div>Избранное</div>} />
                         <Route path="/profile/basket" element={<div>Корзина</div>} />
