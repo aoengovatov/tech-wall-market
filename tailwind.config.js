@@ -11,6 +11,7 @@ export default {
         colors: {
             blue: "#156fc1",
             lightBlue: "#73A8DA",
+            midBlue: "#4D85F3",
             white: "#fff",
             darkGray: "#625454",
             midGray: "#E1DEDE",

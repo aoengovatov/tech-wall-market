@@ -1,5 +1,5 @@
 export const CardPrice = ({ price, oldPrice, color }) => {
-    !oldPrice ? (oldPrice = "") : oldPrice;
+    !oldPrice ? (oldPrice = "") : (oldPrice += " ₽");
     let col = "";
 
     switch (color) {
@@ -15,9 +15,7 @@ export const CardPrice = ({ price, oldPrice, color }) => {
     return (
         <div className="flex flex-col">
             <div className={style}>{price} ₽</div>
-            <div className="text-l line-through leading-5 text-darkGray">
-                {oldPrice} ₽
-            </div>
+            <div className="text-l line-through leading-5 text-darkGray">{oldPrice}</div>
         </div>
     );
 };
