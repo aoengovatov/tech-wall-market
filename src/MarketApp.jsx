@@ -17,7 +17,8 @@ export const MarketApp = () => {
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/profile/favorites" element={<div>Избранное</div>} />
                         <Route path="/profile/basket" element={<Basket />} />
-                        <Route path="/profile/orders" element={<div>Заказы</div>} />
+                        <Route path="/profile/orders" element={<div>Заказы пользователей</div>} />
+                        <Route path="/profile/my-orders" element={<div>Мои заказы</div>} />
                         <Route
                             path="/profile/add-product"
                             element={<div>Товары / Добавить товар</div>}
@@ -25,10 +26,6 @@ export const MarketApp = () => {
                         <Route
                             path="/profile/category"
                             element={<div>Категории / Добавить категорию</div>}
-                        />
-                        <Route
-                            path="/profile/user-orders"
-                            element={<div>Заказы пользователей</div>}
                         />
                         <Route
                             path="*"
