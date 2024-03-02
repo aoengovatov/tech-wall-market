@@ -1,20 +1,20 @@
 export const CardPrice = ({ price, oldPrice, color }) => {
     !oldPrice ? (oldPrice = "") : (oldPrice += " ₽");
-    let col = "";
+    let textColor = "";
 
     switch (color) {
         case "green":
-            col = "green";
+            textColor = "#1DC441";
             break;
         default:
-            col = "black";
+            textColor = "#2D2929";
     }
-
-    const style = `text-xl font-semibold leading-5 text-${col}`;
 
     return (
         <div className="flex flex-col">
-            <div className={style}>{price} ₽</div>
+            <div className="text-xl font-semibold leading-5" style={{ color: textColor }}>
+                {price} ₽
+            </div>
             <div className="text-l line-through leading-5 text-darkGray">{oldPrice}</div>
         </div>
     );

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CardPrice, GoodCode } from "../../../../components";
+import { ButtonDelete, CardPrice, ProductCode } from "../../../../components";
 import { ItemAmount } from "../item-amount/item-amount";
 
 export const CardBasket = ({ url }) => {
@@ -7,9 +7,9 @@ export const CardBasket = ({ url }) => {
         <div className="flex w-full items-center h-[130px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] relation transition-all duration-200 relative hover:border-lightBlue">
             <img src="/src/assets/item-logo-min.png" className="h-[70px] mx-[20px]"></img>
 
-            <button className="absolute top-2 right-2 hover:scale-110">
-                <img src="/src/assets/x.png" className="w-[13px] h-[13px]" />
-            </button>
+            <div className="absolute top-2 right-2">
+                <ButtonDelete />
+            </div>
 
             <div className="flex flex-col w-full h-full justify-around">
                 <div className="flex mt-[10px]">
@@ -20,7 +20,7 @@ export const CardBasket = ({ url }) => {
                 </div>
 
                 <div className="flex items-end justify-between">
-                    <GoodCode>ir1785</GoodCode>
+                    <ProductCode>ir1785</ProductCode>
 
                     <div className="flex items-center">
                         <ItemAmount />

@@ -9,5 +9,7 @@ export * from "./breadcrumbs/breadcrumbs";
 export * from "./card-price/card-price";
 export * from "./button-blue/button-blue";
 export * from "./button-like/button-like";
-export * from "./good-code/good-code";
+export * from "./product-code/product-code";
 export * from "./button-red/button-blue";
+export * from "./product-item/product-item";
+export * from "./button-delete/button-delete";

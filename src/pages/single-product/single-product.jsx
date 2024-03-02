@@ -1,13 +1,13 @@
 import {
     Breadcrumbs,
     ButtonLike,
-    GoodCode,
+    ProductCode,
     CardPrice,
     SaleWidget,
     ButtonRed,
 } from "../../components";
 
-export const SingleGood = () => {
+export const SingleProduct = () => {
     return (
         <>
             <Breadcrumbs />
@@ -30,7 +30,7 @@ export const SingleGood = () => {
                                 <ButtonLike />
                             </div>
 
-                            <GoodCode>ir1785</GoodCode>
+                            <ProductCode>ir1785</ProductCode>
                         </div>
                         <div className="flex flex-col w-full bg-lightGray p-[20px] mt-[15px] rounded-xl">
                             <div className="flex items-start justify-between mb-[5px]">

@@ -1,5 +1,5 @@
-import { CardItem, CategoryPanel, SortPanel } from "./components";
-import { Breadcrumbs, CardPrice, ButtonBlue, ButtonLike } from "../../components";
+import { CategoryPanel, SortPanel } from "./components";
+import { Breadcrumbs, ProductItem } from "../../components";
 
 export const Catalog = () => {
     return (
@@ -14,10 +14,10 @@ export const Catalog = () => {
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            <CardItem url={"/catalog/1"} />
-                            <CardItem url={"/catalog/1"} />
-                            <CardItem url={"/catalog/1"} />
-                            <CardItem url={"/catalog/1"} />
+                            <ProductItem url={"/catalog/1"} />
+                            <ProductItem url={"/catalog/1"} />
+                            <ProductItem url={"/catalog/1"} />
+                            <ProductItem url={"/catalog/1"} />
                         </div>
                     </div>
                 </div>
