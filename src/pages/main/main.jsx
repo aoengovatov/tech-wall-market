@@ -5,7 +5,7 @@ export const Main = () => {
         <>
             <Banner />
             <Popular />
-            <Categories />
+            <Categories edit={false} />
             <Brands />
         </>
     );

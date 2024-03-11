@@ -1,5 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import { Basket, Catalog, Main, SingleProduct, Profile, Favorites } from "./pages";
+import {
+    Basket,
+    Catalog,
+    Main,
+    SingleProduct,
+    Profile,
+    Favorites,
+    AddProduct,
+    AddCategory,
+} from "./pages";
 import { Header, Footer } from "./components";
 
 export const MarketApp = () => {
@@ -25,14 +34,8 @@ export const MarketApp = () => {
                             path="/profile/my-orders"
                             element={<div>Мои заказы</div>}
                         />
-                        <Route
-                            path="/profile/add-product"
-                            element={<div>Товары / Добавить товар</div>}
-                        />
-                        <Route
-                            path="/profile/category"
-                            element={<div>Категории / Добавить категорию</div>}
-                        />
+                        <Route path="/profile/add-product" element={<AddProduct />} />
+                        <Route path="/profile/category" element={<AddCategory />} />
                         <Route
                             path="*"
                             element={<div>Ошибка! Такой страницы не существует</div>}

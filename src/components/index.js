@@ -13,3 +13,5 @@ export * from "./product-code/product-code";
 export * from "./button-red/button-blue";
 export * from "./product-item/product-item";
 export * from "./button-delete/button-delete";
+export * from "./input/input";
+export * from "./textarea/textarea";
