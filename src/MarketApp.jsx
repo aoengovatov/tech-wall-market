@@ -8,6 +8,7 @@ import {
     Favorites,
     AddProduct,
     AddCategory,
+    Login,
 } from "./pages";
 import { Header, Footer } from "./components";
 
@@ -19,7 +20,7 @@ export const MarketApp = () => {
                 <div className="mx-[20px]">
                     <Routes>
                         <Route path="/" element={<Main />} />
-                        <Route path="/login" element={<div>Авторизация</div>} />
+                        <Route path="/login" element={<Login />} />
                         <Route path="/registration" element={<div>Регистрация</div>} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/catalog/:id" element={<SingleProduct />} />
