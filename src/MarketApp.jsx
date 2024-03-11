@@ -10,6 +10,7 @@ import {
     AddCategory,
     Login,
     Register,
+    Page404,
 } from "./pages";
 import { Header, Footer } from "./components";
 
@@ -38,10 +39,7 @@ export const MarketApp = () => {
                         />
                         <Route path="/profile/add-product" element={<AddProduct />} />
                         <Route path="/profile/category" element={<AddCategory />} />
-                        <Route
-                            path="*"
-                            element={<div>Ошибка! Такой страницы не существует</div>}
-                        />
+                        <Route path="*" element={<Page404 />} />
                     </Routes>
                 </div>
             </div>
