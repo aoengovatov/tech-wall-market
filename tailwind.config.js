@@ -21,6 +21,7 @@ export default {
             green: "#1DC441",
             red: "#FA4949",
             transparent: "#00000000",
+            blackTransparent: "#00000080",
         },
     },
     plugins: [],

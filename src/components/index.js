@@ -16,3 +16,4 @@ export * from "./button-delete/button-delete";
 export * from "./input/input";
 export * from "./textarea/textarea";
 export * from "./button-edit/button-edit";
+export * from "./modal/modal";

@@ -12,11 +12,12 @@ import {
     Register,
     Page404,
 } from "./pages";
-import { Header, Footer } from "./components";
+import { Header, Footer, Modal } from "./components";
 
 export const MarketApp = () => {
     return (
         <>
+            <Modal on={false} />
             <Header />
             <div className="w-[1100px] mx-auto">
                 <div className="mx-[20px]">
@@ -43,6 +44,7 @@ export const MarketApp = () => {
                     </Routes>
                 </div>
             </div>
+
             <Footer />
         </>
     );
