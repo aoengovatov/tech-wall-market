@@ -11,6 +11,7 @@ import {
     Login,
     Register,
     Page404,
+    AccessDenied,
 } from "./pages";
 import { Header, Footer, Modal } from "./components";
 
