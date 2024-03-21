@@ -36,6 +36,7 @@ export const Profile = () => {
                         link={"/profile/category"}
                     />
                     <WidgetItem name={"orders"} count={387} link={"/profile/orders"} />
+                    <WidgetItem name={"users"} count={517} link={"/profile/users"} />
                 </div>
             </div>
         </>

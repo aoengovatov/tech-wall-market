@@ -16,6 +16,11 @@ export const WidgetItem = ({ name, count, link }) => {
             src = "/src/assets/basket.png";
             color = "#BAFFEB";
             break;
+        case "users":
+            title = "Пользователи";
+            src = "/src/assets/users.png";
+            color = "#BAFFEB";
+            break;
         case "my-orders":
             title = "Мои заказы";
             src = "/src/assets/my-orders.png";
