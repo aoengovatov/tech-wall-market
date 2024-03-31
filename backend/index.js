@@ -29,7 +29,7 @@ app.use("/", userRoute);
 
 app.use(authentificated);
 
-app.use("/users", hasRole(ROLES.ADMIN), userForAdminRoute);
+app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
 
 mongoose.connect(mongoUri).then(() => {
     app.listen(port, () => {
