@@ -1,6 +1,6 @@
 const categoryService = require("../services/category.service");
 
-exports.addCategories = async (req, res) => {
+exports.addCategory = async (req, res) => {
     const { name, imageUrl, color } = req.body;
 
     const newCategory = await categoryService.addCategory(name, imageUrl, color);
