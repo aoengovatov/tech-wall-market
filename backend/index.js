@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user.routes");
 const userForAdminRoute = require("./routes/user-for-admin.routes");
+const categoryRoute = require("./routes/category.routes");
 const authentificated = require("./middlewares/authentificated");
 const hasRole = require("./middlewares/hasRole");
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/", userRoute);
+app.use("/categories", categoryRoute);
 
 app.use(authentificated);
 

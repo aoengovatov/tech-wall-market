@@ -14,6 +14,6 @@ exports.deleteCategory = (id) => {
     return Category.deleteOne({ _id: id });
 };
 
-exports.updateCategory = (id, userData) => {
-    return Category.findByIdAndUpdate(id, userData, { returnDocument: "after" });
+exports.updateCategory = (id, categoryData) => {
+    return Category.findByIdAndUpdate(id, categoryData, { returnDocument: "after" });
 };
