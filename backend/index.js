@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user.routes");
 const userForAdminRoute = require("./routes/user-for-admin.routes");
