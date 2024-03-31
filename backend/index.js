@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user.routes");
 const userForAdminRoute = require("./routes/user-for-admin.routes");
 const categoryRoute = require("./routes/category.routes");
+const categoryForAdminRoute = require("./routes/category-for-admin.routes");
 const authentificated = require("./middlewares/authentificated");
 const hasRole = require("./middlewares/hasRole");
 
@@ -32,6 +33,7 @@ app.use("/categories", categoryRoute);
 app.use(authentificated);
 
 app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
+app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
 
 mongoose.connect(mongoUri).then(() => {
     app.listen(port, () => {
