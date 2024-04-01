@@ -6,6 +6,7 @@ const userRoute = require("./routes/user.routes");
 const userForAdminRoute = require("./routes/user-for-admin.routes");
 const categoryRoute = require("./routes/category.routes");
 const categoryForAdminRoute = require("./routes/category-for-admin.routes");
+const productRoute = require("./routes/product.routes");
 const productForAdminRoute = require("./routes/product-for-admin.routes");
 const authentificated = require("./middlewares/authentificated");
 const hasRole = require("./middlewares/hasRole");
@@ -30,6 +31,7 @@ app.use(express.json());
 
 app.use("/", userRoute);
 app.use("/categories", categoryRoute);
+app.use("/products", productRoute);
 
 app.use(authentificated);
 
