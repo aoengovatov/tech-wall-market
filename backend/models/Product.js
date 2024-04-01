@@ -12,6 +12,10 @@ const ProductSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Category",
         },
+        popular: {
+            type: Boolean,
+            default: false,
+        },
         price: {
             type: String,
             required: true,
