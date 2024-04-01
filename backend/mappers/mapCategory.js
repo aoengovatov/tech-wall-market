@@ -4,5 +4,6 @@ module.exports = function (category) {
         name: category.name,
         imageUrl: category.imageUrl,
         color: category.color,
+        createdAt: category.createdAt,
     };
 };

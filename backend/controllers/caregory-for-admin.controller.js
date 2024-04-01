@@ -1,11 +1,12 @@
 const categoryService = require("../services/category.service");
+const mapCategory = require("../mappers/mapCategory");
 
 exports.addCategory = async (req, res) => {
     const { name, imageUrl, color } = req.body;
 
     const newCategory = await categoryService.addCategory(name, imageUrl, color);
 
-    res.send({ data: newCategory });
+    res.send({ data: mapCategory(newCategory) });
 };
 
 exports.deleteCategory = async (req, res) => {
@@ -23,5 +24,5 @@ exports.updateCategory = async (req, res) => {
         color,
     });
 
-    res.send({ data: updatedCategory });
+    res.send({ data: mapCategory(updatedCategory) });
 };
