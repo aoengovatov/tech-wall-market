@@ -8,6 +8,10 @@ const BasketSchema = mongoose.Schema(
         },
         products: [
             {
+                count: {
+                    type: Number,
+                    default: 1,
+                },
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
             },
