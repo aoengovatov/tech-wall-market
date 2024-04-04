@@ -1,9 +1,10 @@
 const productService = require("../services/product.service");
+const mapProduct = require("../mappers/mapProduct");
 
 exports.addProduct = async (req, res) => {
     const {
         name,
-        categoryId,
+        category,
         popular,
         price,
         oldPrice,
@@ -13,19 +14,19 @@ exports.addProduct = async (req, res) => {
         characteristic,
     } = req.body;
 
-    const newProduct = await productService.addProduct(
+    const newProduct = await productService.addProduct({
         name,
-        categoryId,
+        category,
         popular,
         price,
         oldPrice,
         imageUrl,
         count,
         description,
-        characteristic
-    );
+        characteristic,
+    });
 
-    res.send({ data: newProduct });
+    res.send({ data: mapProduct(newProduct) });
 };
 
 exports.deleteProduct = async (req, res) => {
@@ -37,7 +38,7 @@ exports.deleteProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     const {
         name,
-        categoryId,
+        category,
         popular,
         price,
         oldPrice,
@@ -49,7 +50,7 @@ exports.updateProduct = async (req, res) => {
 
     const updatedProduct = await productService.updateProduct(req.params.id, {
         name,
-        categoryId,
+        category,
         popular,
         price,
         oldPrice,
@@ -59,5 +60,5 @@ exports.updateProduct = async (req, res) => {
         characteristic,
     });
 
-    res.send({ data: updatedProduct });
+    res.send({ data: mapProduct(updatedProduct) });
 };
