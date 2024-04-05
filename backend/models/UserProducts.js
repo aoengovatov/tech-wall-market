@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 
-const BasketSchema = mongoose.Schema(
+const UserProductsSchema = mongoose.Schema(
     {
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
         products: [
-            {
+            {   
                 count: {
-                    type: Number,
+                    type: number,
                     default: 1,
+                },
+                status: {
+                    type: String,
+                    required: true,
                 },
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
@@ -20,6 +24,6 @@ const BasketSchema = mongoose.Schema(
     { timestamps: true }
 );
 
-const Basket = mongoose.model("Basket", BasketSchema);
+const UserProducts = mongoose.model("UserProducts", FavoritSchema);
 
-module.exports = Basket;
+module.exports = UserProducts;
