@@ -1,17 +1,19 @@
-const UserProducts = require("../models/UserProducts");
+const OwnerProductList = require("../models/OwnerProductList");
 
-exports.getUserProducts = (userId) => {
-    return UserProducts.find(userId);
+exports.getOwnerProducts = (userId) => {
+    return OwnerProductList.find(userId);
 };
 
-exports.addUserProduct = async (owner, product, status, count) => {
-    const userProduct = await UserProducts.findByIdAndUpdate(owner, {
+exports.addOwnerProduct = async (owner, product, status, count) => {
+    const userProduct = await OwnerProductList.findByIdAndUpdate(owner, {
         $push: { products: { id: product, status, count } },
     });
 
     return userProduct;
 };
 
-exports.deleteUserProduct = async (owner, product) => {
-    await Post.findByIdAndUpdate(owner, { $pull: { products: { id: product } } });
+exports.deleteOwnerProduct = async (owner, product) => {
+    await OwnerProductList.findByIdAndUpdate(owner, {
+        $pull: { products: { id: product } },
+    });
 };

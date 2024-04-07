@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UserProductsSchema = mongoose.Schema(
+const OwnerProductListSchema = mongoose.Schema(
     {
         owner: {
             type: mongoose.Schema.Types.ObjectId,
@@ -24,6 +24,6 @@ const UserProductsSchema = mongoose.Schema(
     { timestamps: true }
 );
 
-const UserProducts = mongoose.model("UserProducts", FavoritSchema);
+const OwnerProductList = mongoose.model("OwnerProductList", FavoritSchema);
 
-module.exports = UserProducts;
+module.exports = OwnerProductList;
