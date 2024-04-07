@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user.routes");
 const userForAdminRoute = require("./routes/user-for-admin.routes");
+const ownerProductRoute = require("./routes/owner-product.routes");
 const categoryRoute = require("./routes/category.routes");
 const categoryForAdminRoute = require("./routes/category-for-admin.routes");
 const productRoute = require("./routes/product.routes");
@@ -36,6 +37,7 @@ app.use("/products", productRoute);
 app.use(authentificated);
 
 app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
+app.use("/users/products", hasRole([ROLES.USER]), ownerProductRoute);
 app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
 app.use("/products", hasRole([ROLES.ADMIN]), productForAdminRoute);
 
