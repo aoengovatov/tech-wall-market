@@ -1,10 +1,15 @@
 const ownerProductService = require("../services/owner-product-list.service");
 
 exports.addOwnerProduct = async (req, res) => {
-    const userId = req.body.user.id;
-    const {productId, status, count} = req.body;
+    const userId = req.user.id;
+    const { productId, status, count } = req.body;
 
-    const newOwnerProduct = await ownerProductService.addOwnerProduct(userId, productId, status, count);
+    const newOwnerProduct = await ownerProductService.addOwnerProduct(
+        userId,
+        productId,
+        status,
+        count
+    );
 
     res.send({ data: newOwnerProduct });
 };

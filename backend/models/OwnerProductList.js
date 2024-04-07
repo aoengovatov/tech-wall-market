@@ -7,23 +7,25 @@ const OwnerProductListSchema = mongoose.Schema(
             ref: "User",
         },
         products: [
-            {   
+            {
                 count: {
-                    type: number,
+                    type: Number,
                     default: 1,
                 },
                 status: {
                     type: String,
                     required: true,
                 },
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",
+                product: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "Product",
+                },
             },
         ],
     },
     { timestamps: true }
 );
 
-const OwnerProductList = mongoose.model("OwnerProductList", FavoritSchema);
+const OwnerProductList = mongoose.model("OwnerProductList", OwnerProductListSchema);
 
 module.exports = OwnerProductList;

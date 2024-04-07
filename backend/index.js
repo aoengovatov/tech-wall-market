@@ -37,7 +37,7 @@ app.use("/products", productRoute);
 app.use(authentificated);
 
 app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
-app.use("/users/products", hasRole([ROLES.USER]), ownerProductRoute);
+app.use("/users/products", hasRole([ROLES.ADMIN, ROLES.USER]), ownerProductRoute);
 app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
 app.use("/products", hasRole([ROLES.ADMIN]), productForAdminRoute);
 

@@ -5,8 +5,9 @@ exports.getOwnerProducts = (userId) => {
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
-    const ownerProduct = await OwnerProductList.findByIdAndUpdate(owner, {
-        $push: { products: { id: product, status, count } },
+    const ownerProduct = await OwnerProductList.create({
+        owner,
+        products: [{ product, status, count }],
     });
 
     return ownerProduct;
