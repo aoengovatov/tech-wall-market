@@ -3,5 +3,6 @@ const ownerProduct = express.Router({ mergeParams: true });
 const ownerProductController = require("../controllers/owner-product-list.controller");
 
 ownerProduct.post("/", ownerProductController.addOwnerProduct);
+ownerProduct.delete("/:id", ownerProductController.deleteOwnerProduct);
 
 module.exports = ownerProduct;

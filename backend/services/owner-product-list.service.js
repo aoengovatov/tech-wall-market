@@ -14,7 +14,8 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
 };
 
 exports.deleteOwnerProduct = async (owner, product) => {
-    await OwnerProductList.findByIdAndUpdate(owner, {
-        $pull: { products: { id: product } },
-    });
+    await OwnerProductList.findOneAndUpdate(
+        { owner },
+        { $pull: { products: { product } } }
+    );
 };

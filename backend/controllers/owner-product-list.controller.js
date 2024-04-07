@@ -14,12 +14,15 @@ exports.addOwnerProduct = async (req, res) => {
     res.send({ data: newOwnerProduct });
 };
 
-/*exports.deleteCategory = async (req, res) => {
-    await categoryService.deleteCategory(req.params.id);
+exports.deleteOwnerProduct = async (req, res) => {
+    const productId = req.params.id;
+    const userId = req.user.id;
+    await ownerProductService.deleteOwnerProduct(userId, productId);
 
     res.send({ error: null });
 };
 
+/*
 exports.updateCategory = async (req, res) => {
     const { name, imageUrl, color } = req.body;
 

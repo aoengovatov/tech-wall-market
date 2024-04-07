@@ -23,7 +23,8 @@ const OwnerProductListSchema = mongoose.Schema(
             },
         ],
     },
-    { timestamps: true }
+    { timestamps: true },
+    { _id: false }
 );
 
 const OwnerProductList = mongoose.model("OwnerProductList", OwnerProductListSchema);
