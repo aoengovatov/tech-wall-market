@@ -5,11 +5,11 @@ exports.getOwnerProducts = (userId) => {
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
-    const userProduct = await OwnerProductList.findByIdAndUpdate(owner, {
+    const ownerProduct = await OwnerProductList.findByIdAndUpdate(owner, {
         $push: { products: { id: product, status, count } },
     });
 
-    return userProduct;
+    return ownerProduct;
 };
 
 exports.deleteOwnerProduct = async (owner, product) => {
