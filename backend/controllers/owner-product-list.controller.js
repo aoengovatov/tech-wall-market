@@ -1,5 +1,13 @@
 const ownerProductService = require("../services/owner-product-list.service");
 
+exports.getOwnerProducts = async (req, res) => {
+    const userId = req.user.id;
+
+    const ownerProducts = await ownerProductService.getOwnerProducts(userId);
+
+    res.send({ data: ownerProducts });
+};
+
 exports.addOwnerProduct = async (req, res) => {
     const userId = req.user.id;
     const { productId, status, count } = req.body;
@@ -21,17 +29,3 @@ exports.deleteOwnerProduct = async (req, res) => {
 
     res.send({ error: null });
 };
-
-/*
-exports.updateCategory = async (req, res) => {
-    const { name, imageUrl, color } = req.body;
-
-    const updatedCategory = await categoryService.updateCategory(req.params.id, {
-        name,
-        imageUrl,
-        color,
-    });
-
-    res.send({ data: mapCategory(updatedCategory) });
-};
-*/

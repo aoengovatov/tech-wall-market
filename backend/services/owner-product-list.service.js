@@ -1,7 +1,7 @@
 const OwnerProductList = require("../models/OwnerProductList");
 
 exports.getOwnerProducts = (userId) => {
-    return OwnerProductList.find(userId);
+    return OwnerProductList.find({ owner: userId });
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
@@ -30,7 +30,6 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
                 { returnDocument: "after" }
             );
         }
-        
     } else {
         newOwnerProduct = await OwnerProductList.create({
             owner,
