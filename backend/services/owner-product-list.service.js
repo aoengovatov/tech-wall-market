@@ -1,7 +1,7 @@
 const OwnerProductList = require("../models/OwnerProductList");
 
-exports.getOwnerProducts = (userId) => {
-    return OwnerProductList.find({ owner: userId });
+exports.getOwnerProducts = (ownerId) => {
+    return OwnerProductList.find({ owner: ownerId });
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
@@ -12,12 +12,12 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
     let newOwnerProduct = {};
 
     if (isOwnerProductListExist) {
-        const oldProducts = await OwnerProductList.findOne({
+        const oldProduct = await OwnerProductList.findOne({
             owner,
             "products.product": product,
         });
 
-        if (oldProducts) {
+        if (oldProduct) {
             newOwnerProduct = await OwnerProductList.findOneAndUpdate(
                 { owner, "products.product": product },
                 { $set: { "products.$.count": count, "products.$.status": status } },
