@@ -41,11 +41,13 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
 };
 
 exports.updateStatusAll = async (owner, status) => {
-    await OwnerProductList.findOneAndUpdate(
+    const updatedOwnerProductsStatus = await OwnerProductList.findOneAndUpdate(
         { owner },
-        { $set: { "products.$.status": status } },
+        { $set: { "products.$[].status": status } },
         { returnDocument: "after" }
     );
+
+    return updatedOwnerProductsStatus;
 };
 
 exports.deleteOwnerProduct = async (owner, product) => {

@@ -11,9 +11,9 @@ exports.getOwnerProducts = async (req, res) => {
 exports.addOwnerProduct = async (req, res) => {
     const userId = req.user.id;
     const { productId, status, count } = req.body;
-    const updateAll = req.params.updateAll;
+    const updateAll = Boolean(req.query.updateAll);
 
-    let newOwnerProduct = {};
+    let newOwnerProduct;
 
     if (updateAll) {
         newOwnerProduct = await ownerProductService.updateStatusAll(userId, status);
