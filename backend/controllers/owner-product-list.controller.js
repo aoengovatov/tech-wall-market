@@ -11,16 +11,25 @@ exports.getOwnerProducts = async (req, res) => {
 exports.addOwnerProduct = async (req, res) => {
     const userId = req.user.id;
     const { productId, status, count } = req.body;
+    const updateAll = req.params.updateAll;
 
-    const newOwnerProduct = await ownerProductService.addOwnerProduct(
-        userId,
-        productId,
-        status,
-        count
-    );
+    let newOwnerProduct = {};
+
+    if (updateAll) {
+        newOwnerProduct = await ownerProductService.updateStatusAll(userId, status);
+    } else {
+        newOwnerProduct = await ownerProductService.addOwnerProduct(
+            userId,
+            productId,
+            status,
+            count
+        );
+    }
 
     res.send({ data: newOwnerProduct });
 };
+
+exports.updateStatus;
 
 exports.deleteOwnerProduct = async (req, res) => {
     const productId = req.params.id;
