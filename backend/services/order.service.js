@@ -12,12 +12,11 @@ exports.getOrders = async () => {
     return orders;
 };
 
-exports.createOrder = async (userId, products, totalPrice, status) => {
+exports.createOrder = async (userId, products, totalPrice) => {
     const newOrder = await Order.create({
         owner: userId,
         $push: { products: [...products] },
         totalPrice,
-        status,
     });
 
     return newOrder;
