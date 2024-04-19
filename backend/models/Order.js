@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const orderStatus = require("../constants/order-status");
+const validator = require("validator");
 
 const OrderSchema = mongoose.Schema(
     {
@@ -9,9 +10,9 @@ const OrderSchema = mongoose.Schema(
         },
         products: [
             {
-                product: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "Product",
+                productId: {
+                    type: String,
+                    required: true,
                 },
                 count: {
                     type: Number,
@@ -20,6 +21,14 @@ const OrderSchema = mongoose.Schema(
                 price: {
                     type: Number,
                     required: true,
+                },
+                imageUrl: {
+                    type: String,
+                    required: true,
+                    validate: {
+                        validator: validator.isURL,
+                        message: "Image should be a valid url",
+                    },
                 },
             },
         ],
