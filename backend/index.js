@@ -10,6 +10,7 @@ const categoryForAdminRoute = require("./routes/category-for-admin.routes");
 const productRoute = require("./routes/product.routes");
 const productForAdminRoute = require("./routes/product-for-admin.routes");
 const orderRoute = require("./routes/order.routes");
+const orderForAdminRoute = require("./routes/order-for-admin.routes");
 const authentificated = require("./middlewares/authentificated");
 const hasRole = require("./middlewares/hasRole");
 
@@ -42,6 +43,7 @@ app.use("/users/products", hasRole([ROLES.ADMIN, ROLES.USER]), ownerProductRoute
 app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
 app.use("/products", hasRole([ROLES.ADMIN]), productForAdminRoute);
 app.use("/orders", hasRole([ROLES.USER]), orderRoute);
+app.use("/orders", hasRole([ROLES.ADMIN]), orderForAdminRoute);
 
 mongoose.connect(mongoUri).then(() => {
     app.listen(port, () => {
