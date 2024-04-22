@@ -15,3 +15,7 @@ exports.updateStatus = async (req, res) => {
 
     res.send({ data: updatedOrder });
 };
+
+exports.getStatusForOrders = (req, res) => {
+    res.send({ data: orderService.getStatusForOrders() });
+};

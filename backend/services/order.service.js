@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const ORDER_STATUS = require("../constants/order-status.js");
 
 exports.getOrdersByUser = async (userId) => {
     const orders = await Order.find({ owner: userId });
@@ -28,4 +29,8 @@ exports.updateStatus = async (id, data) => {
     });
 
     return updateOrderStatus;
+};
+
+exports.getStatusForOrders = () => {
+    return ORDER_STATUS;
 };
