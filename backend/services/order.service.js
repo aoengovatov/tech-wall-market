@@ -15,17 +15,17 @@ exports.getOrders = async () => {
 exports.createOrder = async (userId, products, totalPrice) => {
     const newOrder = await Order.create({
         owner: userId,
-        $push: { products: [...products] },
+        products,
         totalPrice,
     });
 
     return newOrder;
 };
 
-exports.updateStatus = async (id, status) => {
-    const updateOrderStatus = await Order.findByIdAndUpdate(
-        id,
-        { status },
-        { returnDocument: "after" }
-    );
+exports.updateStatus = async (id, data) => {
+    const updateOrderStatus = await Order.findByIdAndUpdate(id, data, {
+        returnDocument: "after",
+    });
+
+    return updateOrderStatus;
 };

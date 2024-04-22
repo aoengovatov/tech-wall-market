@@ -8,8 +8,10 @@ exports.getOrders = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
     const orderId = req.params.id;
-    const status = req.body;
-    const updatedOrder = await orderService.updateStatus(orderId, status);
+    const status = req.body.status;
+    console.log(orderId, status);
+
+    const updatedOrder = await orderService.updateStatus(orderId, { status });
 
     res.send({ data: updatedOrder });
 };

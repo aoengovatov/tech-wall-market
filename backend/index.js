@@ -42,7 +42,7 @@ app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
 app.use("/users/products", hasRole([ROLES.ADMIN, ROLES.USER]), ownerProductRoute);
 app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
 app.use("/products", hasRole([ROLES.ADMIN]), productForAdminRoute);
-app.use("/orders", hasRole([ROLES.USER]), orderRoute);
+app.use("/orders", hasRole([ROLES.USER, ROLES.ADMIN]), orderRoute);
 app.use("/orders", hasRole([ROLES.ADMIN]), orderForAdminRoute);
 
 mongoose.connect(mongoUri).then(() => {
