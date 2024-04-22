@@ -14,11 +14,15 @@ const OrderSchema = mongoose.Schema(
                     type: String,
                     required: true,
                 },
-                count: {
-                    type: Number,
+                name: {
+                    type: String,
                     required: true,
                 },
                 price: {
+                    type: Number,
+                    required: true,
+                },
+                count: {
                     type: Number,
                     required: true,
                 },
