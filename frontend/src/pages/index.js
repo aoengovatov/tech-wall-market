@@ -10,3 +10,4 @@ export * from "./login/login";
 export * from "./register/register";
 export * from "./404/page-404";
 export * from "./access-denied/access-denied";
+export * from "./my-orders/my-orders";

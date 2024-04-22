@@ -12,6 +12,7 @@ import {
     Register,
     Page404,
     AccessDenied,
+    MyOrders,
 } from "./pages";
 import { Header, Footer, Modal } from "./components";
 
@@ -35,10 +36,7 @@ export const MarketApp = () => {
                             path="/profile/orders"
                             element={<div>Заказы пользователей</div>}
                         />
-                        <Route
-                            path="/profile/my-orders"
-                            element={<div>Мои заказы</div>}
-                        />
+                        <Route path="/profile/my-orders" element={<MyOrders />} />
                         <Route path="/profile/add-product" element={<AddProduct />} />
                         <Route path="/profile/category" element={<AddCategory />} />
                         <Route path="*" element={<Page404 />} />
