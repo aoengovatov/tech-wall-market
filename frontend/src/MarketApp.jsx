@@ -14,6 +14,7 @@ import {
     AccessDenied,
     MyOrders,
     Users,
+    Orders,
 } from "./pages";
 import { Header, Footer, Modal } from "./components";
 
@@ -33,10 +34,7 @@ export const MarketApp = () => {
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/profile/favorites" element={<Favorites />} />
                         <Route path="/profile/basket" element={<Basket />} />
-                        <Route
-                            path="/profile/orders"
-                            element={<div>Заказы пользователей</div>}
-                        />
+                        <Route path="/profile/orders" element={<Orders />} />
                         <Route path="/profile/my-orders" element={<MyOrders />} />
                         <Route path="/profile/add-product" element={<AddProduct />} />
                         <Route path="/profile/category" element={<AddCategory />} />
