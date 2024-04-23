@@ -1,4 +1,6 @@
 export const OrderRoll = () => {
+    const isSave = true;
+
     return (
         <div className="flex items-center">
             <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] p-[5px] bg-lightGray rounded-lg">
@@ -13,7 +15,11 @@ export const OrderRoll = () => {
                     <option>в пути на пункт выдачи</option>
                 </select>
             </div>
-            <div className="ml-[10px] text-blue">Сохранить</div>
+            {isSave && (
+                <div className="ml-[10px] text-blue cursor-pointer hover:underline">
+                    Сохранить
+                </div>
+            )}
         </div>
     );
 };
