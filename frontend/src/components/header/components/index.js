@@ -1,2 +1,2 @@
-export * from "./icon-menu/icon-menu";
+export * from "./icon-nav-menu/icon-nav-menu";
 export * from "./logo/logo";

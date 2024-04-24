@@ -1,4 +1,4 @@
-import { IconMenu, Logo } from "./components";
+import { IconNavMenu, Logo } from "./components";
 
 export const Header = () => {
     return (
@@ -6,9 +6,19 @@ export const Header = () => {
             <div className="flex items-center max-w-[1100px] h-[60px] justify-between px-[20px] m-auto mb-[10px] ">
                 <Logo />
                 <div className="flex">
-                    <IconMenu src={"/src/assets/like-icon-sm.png"} />
-                    <IconMenu src={"/src/assets/basket_icon-sm.png"} />
-                    <IconMenu src={"/src/assets/user-icon-sm.png"} />
+                    <IconNavMenu
+                        url={"/profile/favorites"}
+                        imageSrc={"/src/assets/like-icon-sm.png"}
+                    />
+
+                    <IconNavMenu
+                        url={"/profile/basket"}
+                        imageSrc={"/src/assets/basket_icon-sm.png"}
+                    />
+                    <IconNavMenu
+                        url={"/profile"}
+                        imageSrc={"/src/assets/user-icon-sm.png"}
+                    />
                 </div>
             </div>
         </div>
