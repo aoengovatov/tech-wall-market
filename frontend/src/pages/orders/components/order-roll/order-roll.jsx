@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { getShortName } from "../../../../utils";
 
 export const OrderRoll = ({ id, owner, products, createdAt, totalPrice }) => {
@@ -13,7 +14,9 @@ export const OrderRoll = ({ id, owner, products, createdAt, totalPrice }) => {
                     <div className="bg-white p-[5px] mr-[10px] rounded-md">
                         {products.map(({ id, name, count }) => (
                             <div key={id} className="flex justify-between">
-                                <div className="text-xs">{getShortName(name)}</div>
+                                <Link to={`/catalog/${id}`} className="text-xs">
+                                    {getShortName(name)}
+                                </Link>
                                 <div className="text-xs">х {count}</div>
                             </div>
                         ))}

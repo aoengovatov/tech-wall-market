@@ -17,6 +17,7 @@ export const Order = ({ id, date, status, products, totalPrice }) => {
                 {products.map(({ id, name, price, count, imageUrl }) => (
                     <ProductCard
                         key={id}
+                        id={id}
                         name={name}
                         price={price}
                         count={count}
