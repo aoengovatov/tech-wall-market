@@ -1,12 +1,7 @@
+import { getShortName } from "../../../../utils";
+
 export const OrderRoll = ({ id, owner, products, createdAt, totalPrice }) => {
     const isSave = true;
-
-    const getShortName = (name) => {
-        if (name.length > 30) {
-            return name.substr(0, 30) + "...";
-        }
-        return name;
-    };
 
     return (
         <div className="flex items-center">
