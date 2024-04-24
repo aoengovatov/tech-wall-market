@@ -1,15 +1,31 @@
-export const OrderRoll = () => {
+export const OrderRoll = ({ id, owner, products, createdAt, totalPrice }) => {
     const isSave = true;
+
+    const getShortName = (name) => {
+        if (name.length > 30) {
+            return name.substr(0, 30) + "...";
+        }
+        return name;
+    };
 
     return (
         <div className="flex items-center">
-            <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] p-[5px] bg-lightGray rounded-lg">
-                <div className="text-xs">2019-05-03 21:42</div>
-                <div className="">ivan1994</div>
-                <div className="">015785</div>
-                <div className="col-span-2 text-xs">товары</div>
-                <div className="">19990 Р</div>
-                <select className="">
+            <div className="grid grid-cols-7 items-center mb-[5px] px-[5px] w-[90%] p-[5px] bg-lightGray rounded-lg">
+                <div className="text-xs">{createdAt}</div>
+                <div className="">{owner}</div>
+                <div className="">{id}</div>
+                <div className="col-span-2 text-xs">
+                    <div className="bg-white p-[5px] mr-[10px] rounded-md">
+                        {products.map(({ id, name, count }) => (
+                            <div key={id} className="flex justify-between">
+                                <div className="text-xs">{getShortName(name)}</div>
+                                <div className="text-xs">х {count}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="">{totalPrice} Р</div>
+                <select>
                     <option>доставлен</option>
                     <option>сборка на складе</option>
                     <option>в пути на пункт выдачи</option>
