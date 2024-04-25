@@ -9,7 +9,7 @@ import {
     AddProduct,
     AddCategory,
     Login,
-    Register,
+    Registration,
     Page404,
     AccessDenied,
     MyOrders,
@@ -28,7 +28,7 @@ export const MarketApp = () => {
                     <Routes>
                         <Route path="/" element={<Main />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route path="/register" element={<Registration />} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/catalog/:id" element={<SingleProduct />} />
                         <Route path="/profile" element={<Profile />} />
