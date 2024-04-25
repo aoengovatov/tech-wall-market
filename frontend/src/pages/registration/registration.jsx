@@ -6,23 +6,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const regFormSchema = yup.object().shape({
     login: yup
         .string()
-        .required("Заполните логин.")
-        .matches(/\w+$/, "Неверно заполнен логин. Допускаются буквы и цифры.")
+        .matches(/\w+$/g, "Неверно заполнен логин. Допускаются буквы и цифры.")
         .min(3, "Неверно заполнен логин. Минимум 3 символа.")
         .max(15, "Неверно заполнен логин. Максимум 15 символов."),
     password: yup
         .string()
-        .required("Заполните пароль")
         .matches(
             /^[\w#%]+$/,
             "Неверно заполнен пароль. Допускаются буквы, цифры и знаки # %"
         )
         .min(6, "Неверно заполнен пароль. Минимум 6 символа.")
         .max(30, "Неверно заполнен пароль. Максимум 30 символов."),
-    passcheck: yup
-        .string()
-        .required("Заполните повтор пароля")
-        .oneOf([yup.ref("password"), null], "Пароли не совпадают"),
+    passcheck: yup.string().oneOf([yup.ref("password"), null], "Пароли не совпадают"),
 });
 
 export const Registration = () => {
@@ -34,7 +29,7 @@ export const Registration = () => {
     } = useForm({
         defaultValues: {
             login: "",
-            passeord: "",
+            password: "",
             passcheck: "",
         },
         resolver: yupResolver(regFormSchema),
@@ -58,19 +53,22 @@ export const Registration = () => {
                     <Input
                         type={"text"}
                         placeholder={"логин..."}
+                        required={true}
                         {...register("login")}
                     />
                     <Input
                         type={"password"}
                         placeholder={"пароль..."}
+                        required={true}
                         {...register("password")}
                     />
                     <Input
-                        type={"passcheck"}
+                        type={"password"}
                         placeholder={"повторите пароль..."}
+                        required={true}
                         {...register("passcheck")}
                     />
-                    <ButtonBlue>зарегистрироваться</ButtonBlue>
+                    <ButtonBlue type="submit">зарегистрироваться</ButtonBlue>
                 </form>
 
                 {formError && (

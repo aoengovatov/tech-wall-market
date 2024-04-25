@@ -6,7 +6,7 @@ export * from "./profile/profile";
 export * from "./favorites/favorites";
 export * from "./add-product/add-product";
 export * from "./add-category/add-category";
-export * from "./login/login";
+export * from "./authorization/authorization";
 export * from "./registration/registration";
 export * from "./404/page-404";
 export * from "./access-denied/access-denied";

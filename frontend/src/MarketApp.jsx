@@ -8,7 +8,7 @@ import {
     Favorites,
     AddProduct,
     AddCategory,
-    Login,
+    Authorization,
     Registration,
     Page404,
     AccessDenied,
@@ -27,7 +27,7 @@ export const MarketApp = () => {
                 <div className="mx-[20px]">
                     <Routes>
                         <Route path="/" element={<Main />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/login" element={<Authorization />} />
                         <Route path="/register" element={<Registration />} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/catalog/:id" element={<SingleProduct />} />

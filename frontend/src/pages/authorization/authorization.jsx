@@ -22,7 +22,7 @@ const authFormShema = yup.object().shape({
         .max(30, "Неверно заполнен пароль. Максимум 30 символов."),
 });
 
-export const Login = () => {
+export const Authorization = () => {
     const {
         register,
         reset,
