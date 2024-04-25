@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
 import { ButtonBlue, Input } from "../../components";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const regFormSchema = yup.object().shape({
+const authFormShema = yup.object().shape({
     login: yup
         .string()
         .required("Заполните логин.")
-        .matches(/\w+$/, "Неверно заполнен логин. Допускаются буквы и цифры.")
+        .matches(/\w+$/, "ННеверно заполнен логин. Допускаются буквы и цифры.")
         .min(3, "Неверно заполнен логин. Минимум 3 символа.")
         .max(15, "Неверно заполнен логин. Максимум 15 символов."),
     password: yup
@@ -19,13 +20,9 @@ const regFormSchema = yup.object().shape({
         )
         .min(6, "Неверно заполнен пароль. Минимум 6 символа.")
         .max(30, "Неверно заполнен пароль. Максимум 30 символов."),
-    passcheck: yup
-        .string()
-        .required("Заполните повтор пароля")
-        .oneOf([yup.ref("password"), null], "Пароли не совпадают"),
 });
 
-export const Registration = () => {
+export const Login = () => {
     const {
         register,
         reset,
@@ -35,25 +32,23 @@ export const Registration = () => {
         defaultValues: {
             login: "",
             passeord: "",
-            passcheck: "",
         },
-        resolver: yupResolver(regFormSchema),
+        resolver: yupResolver(authFormShema),
     });
 
-    const formError =
-        errors?.login?.message || errors?.password?.message || errors?.passcheck?.message;
-
-    const onSubmit = ({ login, password, passcheck }) => {
-        console.log(login, password, passcheck);
+    const onSubmit = ({ login, password }) => {
+        console.log(login, password);
     };
+
+    const formError = errors?.login?.message || errors?.password?.message;
 
     return (
         <div className="flex items-center justify-center mb-[40px] w-full]">
             <div className="flex flex-col items-center justify-center w-[300px] mt-[50px]">
-                <h1 className="mb-[10px]">Регистрация</h1>
+                <h1 className="mb-[10px]">Авторизация</h1>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="flex flex-col gap-[8px] mb-[15px] w-full border-2 border-lightGray rounded-lg p-5"
+                    className="flex flex-col gap-[8px] w-full border-2 border-lightGray rounded-lg p-5"
                 >
                     <Input
                         type={"text"}
@@ -65,13 +60,15 @@ export const Registration = () => {
                         placeholder={"пароль..."}
                         {...register("password")}
                     />
-                    <Input
-                        type={"passcheck"}
-                        placeholder={"повторите пароль..."}
-                        {...register("passcheck")}
-                    />
-                    <ButtonBlue>зарегистрироваться</ButtonBlue>
+                    <ButtonBlue type="submit">вход</ButtonBlue>
                 </form>
+
+                <Link
+                    to={"/register"}
+                    className="text-center px-[15px] py-[5px] mb-[10px] text-blue rounded-lg hover:underline"
+                >
+                    регистрация
+                </Link>
 
                 {formError && (
                     <div className="flex items-center justify-center text-white bg-red w-full p-3 rounded-xl">
