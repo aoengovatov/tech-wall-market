@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const authFormShema = yup.object().shape({
     login: yup
         .string()
-        .required("Заполните логин.")
+        .required("Заполните логин")
         .matches(/\w+$/, "ННеверно заполнен логин. Допускаются буквы и цифры.")
         .min(3, "Неверно заполнен логин. Минимум 3 символа.")
         .max(15, "Неверно заполнен логин. Максимум 15 символов."),
@@ -60,7 +60,9 @@ export const Authorization = () => {
                         placeholder={"пароль..."}
                         {...register("password")}
                     />
-                    <ButtonBlue type="submit">вход</ButtonBlue>
+                    <ButtonBlue type="submit" disabled={formError ? true : false}>
+                        вход
+                    </ButtonBlue>
                 </form>
 
                 <Link
