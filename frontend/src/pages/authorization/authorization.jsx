@@ -3,6 +3,8 @@ import { ButtonBlue, Input } from "../../components";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { request } from "../../utils";
+import { useState } from "react";
 
 const authFormShema = yup.object().shape({
     login: yup
@@ -23,6 +25,8 @@ const authFormShema = yup.object().shape({
 });
 
 export const Authorization = () => {
+    const [serverError, setServerError] = useState(null);
+
     const {
         register,
         reset,
@@ -37,10 +41,20 @@ export const Authorization = () => {
     });
 
     const onSubmit = ({ login, password }) => {
-        console.log(login, password);
+        request("/login", "POST", { login, password }).then(({ error, user }) => {
+            if (error) {
+                setServerError(`Ошибка запроса: ${error}`);
+                return;
+            }
+            //dispatch(setUser(user));
+            console.log(user);
+            sessionStorage.setItem("userData", JSON.stringify(user));
+        });
     };
 
     const formError = errors?.login?.message || errors?.password?.message;
+
+    const errorMessage = formError || serverError;
 
     return (
         <div className="flex items-center justify-center mb-[40px] w-full]">
@@ -60,7 +74,7 @@ export const Authorization = () => {
                         placeholder={"пароль..."}
                         {...register("password")}
                     />
-                    <ButtonBlue type="submit" disabled={formError ? true : false}>
+                    <ButtonBlue type="submit" disabled={errorMessage ? true : false}>
                         вход
                     </ButtonBlue>
                 </form>
@@ -72,9 +86,9 @@ export const Authorization = () => {
                     регистрация
                 </Link>
 
-                {formError && (
+                {errorMessage && (
                     <div className="flex items-center justify-center text-white bg-red w-full p-3 rounded-xl">
-                        {formError}
+                        {errorMessage}
                     </div>
                 )}
             </div>
