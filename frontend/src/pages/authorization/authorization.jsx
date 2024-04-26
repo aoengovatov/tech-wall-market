@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { request } from "../../utils";
 import { useState } from "react";
+import { setUser } from "../../store/userSlice";
+import { useDispatch } from "react-redux";
 
 const authFormShema = yup.object().shape({
     login: yup
@@ -26,6 +28,7 @@ const authFormShema = yup.object().shape({
 
 export const Authorization = () => {
     const [serverError, setServerError] = useState(null);
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -46,8 +49,7 @@ export const Authorization = () => {
                 setServerError(`Ошибка запроса: ${error}`);
                 return;
             }
-            //dispatch(setUser(user));
-            console.log(user);
+            dispatch(setUser(user));
             sessionStorage.setItem("userData", JSON.stringify(user));
         });
     };
