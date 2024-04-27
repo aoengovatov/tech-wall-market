@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { request } from "../../utils";
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
-import { setUser } from "../../store/userSlice";
-import { useDispatch } from "react-redux";
+import { setUser, getUserRole } from "../../store/userSlice";
+import { ROLE } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
 
 const regFormSchema = yup.object().shape({
     login: yup
@@ -32,6 +34,7 @@ const regFormSchema = yup.object().shape({
 export const Registration = () => {
     const [serverError, setServerError] = useState(null);
     const dispatch = useDispatch();
+    const roleId = useSelector(getUserRole);
 
     const {
         register,
@@ -62,6 +65,10 @@ export const Registration = () => {
             sessionStorage.setItem("userData", JSON.stringify(user));
         });
     };
+
+    if (roleId != ROLE.GUEST) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <div className="flex items-center justify-center mb-[40px] w-full]">
