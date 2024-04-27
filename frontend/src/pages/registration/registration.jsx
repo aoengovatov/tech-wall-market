@@ -55,7 +55,7 @@ export const Registration = () => {
     const onSubmit = ({ login, password }) => {
         request("/register", "POST", { login, password }).then(({ error, user }) => {
             if (error) {
-                setServerError(`Ошибка запроса: ${error}`);
+                setServerError(`Ошибка: ${error}`);
                 return;
             }
             dispatch(setUser(user));
@@ -74,17 +74,21 @@ export const Registration = () => {
                     <Input
                         type={"text"}
                         placeholder={"логин..."}
-                        {...register("login")}
+                        {...register("login", { onChange: () => setServerError(null) })}
                     />
                     <Input
                         type={"password"}
                         placeholder={"пароль..."}
-                        {...register("password")}
+                        {...register("password", {
+                            onChange: () => setServerError(null),
+                        })}
                     />
                     <Input
                         type={"password"}
                         placeholder={"повторите пароль..."}
-                        {...register("passcheck")}
+                        {...register("passcheck", {
+                            onChange: () => setServerError(null),
+                        })}
                     />
                     <ButtonBlue type="submit" disabled={errorMessage ? true : false}>
                         зарегистрироваться

@@ -46,7 +46,7 @@ export const Authorization = () => {
     const onSubmit = ({ login, password }) => {
         request("/login", "POST", { login, password }).then(({ error, user }) => {
             if (error) {
-                setServerError(`Ошибка запроса: ${error}`);
+                setServerError(`Ошибка: ${error}`);
                 return;
             }
             dispatch(setUser(user));
@@ -69,12 +69,14 @@ export const Authorization = () => {
                     <Input
                         type={"text"}
                         placeholder={"логин..."}
-                        {...register("login")}
+                        {...register("login", { onChange: () => setServerError(null) })}
                     />
                     <Input
                         type={"password"}
                         placeholder={"пароль..."}
-                        {...register("password")}
+                        {...register("password", {
+                            onChange: () => setServerError(null),
+                        })}
                     />
                     <ButtonBlue type="submit" disabled={errorMessage ? true : false}>
                         вход

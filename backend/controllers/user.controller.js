@@ -12,7 +12,14 @@ exports.register = async (req, res) => {
             user: mapUser(user),
         });
     } catch (e) {
-        res.send({ error: e.message || "Unknown error" });
+        let errorMessage = "";
+
+        if (e.code === 11000) {
+            errorMessage = "Такой пользователь уже существует";
+        } else {
+            errorMessage = e.message;
+        }
+        res.send({ error: errorMessage || "Неизвестная ошибка" });
     }
 };
 
@@ -27,7 +34,7 @@ exports.login = async (req, res) => {
             user: mapUser(user),
         });
     } catch (e) {
-        res.send({ error: e.message || "Unknown error" });
+        res.send({ error: e.message || "Неизвестная ошибка" });
     }
 };
 
