@@ -17,3 +17,4 @@ export * from "./input/input";
 export * from "./textarea/textarea";
 export * from "./button-edit/button-edit";
 export * from "./modal/modal";
+export * from "./pagination/pagination";

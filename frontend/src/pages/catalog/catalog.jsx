@@ -1,5 +1,6 @@
 import { CategoryPanel, SortPanel } from "./components";
 import { Breadcrumbs, ProductItem } from "../../components";
+import { Pagination } from "../../components/pagination/pagination";
 
 export const Catalog = () => {
     return (
@@ -18,6 +19,7 @@ export const Catalog = () => {
                             <ProductItem url={"/catalog/1"} />
                             <ProductItem url={"/catalog/1"} />
                             <ProductItem url={"/catalog/1"} />
+                            <Pagination />
                         </div>
                     </div>
                 </div>
