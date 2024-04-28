@@ -1,28 +1,22 @@
 import { Breadcrumbs } from "../../components";
 import { UserRoll } from "./components/user-roll/user-roll";
-
-const users = [
-    {
-        id: "33513",
-        login: "ivan1994",
-        registeredAt: "2019-05-03 21:42",
-        role: "Покупатель",
-    },
-    {
-        id: "123",
-        login: "svetlanaSR",
-        registeredAt: "2020-07-03 15:23",
-        role: "Модератор",
-    },
-    {
-        id: "1342",
-        login: "igorBoldin",
-        registeredAt: "2019-05-03 23:12",
-        role: "Администратор",
-    },
-];
+import { useState, useEffect } from "react";
+import { request } from "../../utils";
 
 export const Users = () => {
+    const [users, setUsers] = useState([]);
+    const [serverError, setServerError] = useState("");
+
+    useEffect(() => {
+        request("/users").then(({ error, users }) => {
+            if (error != null) {
+                setServerError(`Ошибка: ${error}`);
+                return;
+            }
+            setUsers(users);
+        });
+    }, []);
+
     return (
         <>
             <Breadcrumbs />
@@ -34,11 +28,11 @@ export const Users = () => {
                     <div className="text-gray">Роль</div>
                     <div></div>
                 </div>
-                {users.map(({ id, login, registeredAt, role }) => (
+                {users.map(({ id, login, registedAt, roleId: role }) => (
                     <UserRoll
                         key={id}
                         login={login}
-                        registeredAt={registeredAt}
+                        registedAt={registedAt}
                         role={role}
                     />
                 ))}

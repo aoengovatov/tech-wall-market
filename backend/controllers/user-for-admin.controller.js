@@ -4,13 +4,13 @@ const mapUser = require("../mappers/mapUser");
 exports.getUsers = async (req, res) => {
     const users = await userService.getUsers();
 
-    res.send({ data: users.map(mapUser) });
+    res.send({ error: null, users: users.map(mapUser) });
 };
 
 exports.getRoles = async (req, res) => {
     const roles = await userService.getRoles();
 
-    res.send({ data: roles });
+    res.send({ error: null, data: roles });
 };
 
 exports.updateUser = async (req, res) => {
@@ -18,7 +18,7 @@ exports.updateUser = async (req, res) => {
         role: req.body.roleId,
     });
 
-    res.send({ data: mapUser(newUser) });
+    res.send({ error: null, users: mapUser(newUser) });
 };
 
 exports.deleteUser = async (req, res) => {

@@ -3,7 +3,7 @@ const User = require("../models/User");
 module.exports = function (roles) {
     return function (req, res, next) {
         if (!roles.includes(req.user.role)) {
-            res.send({ error: "Access denied!" });
+            res.status(403).send({ error: "Access denied!" });
 
             return;
         }
