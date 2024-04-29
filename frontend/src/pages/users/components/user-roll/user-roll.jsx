@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { request } from "../../../../utils";
+import { datetimeStringFormatter, request } from "../../../../utils";
 
 export const UserRoll = ({ id, login, registedAt, roleId, roles }) => {
     const [initialRoleId, setInitialRoleId] = useState(roleId);
@@ -21,7 +21,7 @@ export const UserRoll = ({ id, login, registedAt, roleId, roles }) => {
         <div className="flex items-center">
             <div className="grid grid-cols-3 gap-y-2 bg-lightGray p-[5px] mb-[3px] rounded-lg w-[80%]">
                 <div className="">{login}</div>
-                <div className="">{registedAt}</div>
+                <div className="">{datetimeStringFormatter(registedAt)}</div>
                 <select value={updatedRoleId} onChange={(target) => onRoleChange(target)}>
                     {roles.map(({ id, name }) => (
                         <option key={id} value={id}>
