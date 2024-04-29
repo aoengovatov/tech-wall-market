@@ -13,7 +13,9 @@ export const AccessDenied = () => {
                         Доступ к странице ограничен. <br /> Пожалуйста, обратитесь к
                         администратору.
                     </div>
-                    <ButtonBlue onClick={() => navigate(-1)}>вернуться назад</ButtonBlue>
+                    <ButtonBlue onClick={() => navigate("/")}>
+                        вернуться на главную
+                    </ButtonBlue>
                 </div>
             </div>
         </div>
