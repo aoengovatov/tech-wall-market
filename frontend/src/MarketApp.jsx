@@ -51,6 +51,7 @@ export const MarketApp = () => {
                                     element={<AddCategory />}
                                 />
                                 <Route path="/profile/users" element={<Users />} />
+                                <Route path="/access-denied" element={<AccessDenied />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         </div>
