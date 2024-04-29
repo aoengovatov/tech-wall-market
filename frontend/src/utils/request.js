@@ -6,5 +6,5 @@ export const request = (url, method, data) => {
         method: method || "GET",
         credentials: "include",
         body: data ? JSON.stringify(data) : undefined,
-    }).then((res) => res.json());
+    }).then((res) => res.json().then((data) => ({ ...data, status: res.status })));
 };

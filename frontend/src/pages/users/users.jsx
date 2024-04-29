@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "../../components";
 import { UserRoll } from "./components/user-roll/user-roll";
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { request } from "../../utils";
 
 export const Users = () => {
@@ -8,7 +9,11 @@ export const Users = () => {
     const [serverError, setServerError] = useState("");
 
     useEffect(() => {
-        request("/users").then(({ error, users }) => {
+        request("/users").then(({error, users, status}) => {
+            if (status === 403) {
+                return <Navigate to="/access-denied"/>
+            }
+
             if (error != null) {
                 setServerError(`Ошибка: ${error}`);
                 return;
