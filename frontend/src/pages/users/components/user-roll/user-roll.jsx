@@ -1,4 +1,4 @@
-export const UserRoll = ({ login, registedAt, role }) => {
+export const UserRoll = ({ login, registedAt, roleId, roles }) => {
     const isSave = true;
 
     return (
@@ -7,9 +7,9 @@ export const UserRoll = ({ login, registedAt, role }) => {
                 <div className="">{login}</div>
                 <div className="">{registedAt}</div>
                 <select>
-                    <option>Покупатель</option>
-                    <option>Модератор</option>
-                    <option>Администратор</option>
+                    {roles.map(({ id, name }) => (
+                        <option key={id}>{name}</option>
+                    ))}
                 </select>
             </div>
             {isSave && (

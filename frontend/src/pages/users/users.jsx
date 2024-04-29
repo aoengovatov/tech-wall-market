@@ -6,20 +6,25 @@ import { request } from "../../utils";
 
 export const Users = () => {
     const [users, setUsers] = useState([]);
+    const [roles, setRoles] = useState([]);
     const [resStatus, setResStatus] = useState(0);
     const [serverError, setServerError] = useState("");
 
     useEffect(() => {
-        request("/users").then(({ users, error, status }) => {
-            setResStatus(status);
+        Promise.all([request("/users"), request("/users/roles")]).then(
+            ([usersRes, rolesRes]) => {
+                setResStatus(usersRes.status);
 
-            if (error) {
-                setServerError(`Ошибка: ${error}`);
-                return;
+                if (usersRes.error || rolesRes.error) {
+                    setServerError(usersRes.error || rolesRes.error);
+                    return;
+                }
+                console.log(rolesRes.roles);
+
+                setRoles(rolesRes.roles);
+                setUsers(usersRes.users);
             }
-
-            setUsers(users);
-        });
+        );
     }, []);
 
     if (resStatus === 403) {
@@ -38,12 +43,13 @@ export const Users = () => {
                     <div></div>
                 </div>
                 {!serverError ? (
-                    users.map(({ id, login, registedAt, roleId: role }) => (
+                    users.map(({ id, login, registedAt, roleId }) => (
                         <UserRoll
                             key={id}
                             login={login}
                             registedAt={registedAt}
-                            role={role}
+                            roleId={roleId}
+                            roles={roles}
                         />
                     ))
                 ) : (
