@@ -42,7 +42,7 @@ exports.getRoles = () => {
     return [
         { id: ROLES.ADMIN, name: "Администратор" },
         { id: ROLES.MODERATOR, name: "Модератор" },
-        { id: ROLES.USER, name: "User" },
+        { id: ROLES.USER, name: "Покупатель" },
     ];
 };
 

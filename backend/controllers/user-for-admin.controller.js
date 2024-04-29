@@ -10,7 +10,7 @@ exports.getUsers = async (req, res) => {
 exports.getRoles = async (req, res) => {
     const roles = await userService.getRoles();
 
-    res.send({ error: null, data: roles });
+    res.send({ error: null, roles: roles });
 };
 
 exports.updateUser = async (req, res) => {
