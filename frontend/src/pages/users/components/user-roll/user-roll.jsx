@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { request } from "../../../../utils";
 
-export const UserRoll = ({ login, registedAt, roleId, roles }) => {
+export const UserRoll = ({ id, login, registedAt, roleId, roles }) => {
     const [initialRoleId, setInitialRoleId] = useState(roleId);
     const [updatedRoleId, setUpdatedRoleId] = useState(roleId);
 
     const onRoleChange = ({ target }) => {
         setUpdatedRoleId(Number(target.value));
+    };
+
+    const updateUserRole = () => {
+        request(`/users/${id}`, "PATCH", { roleId: updatedRoleId }).then(() => {
+            setInitialRoleId(updatedRoleId);
+        });
     };
 
     const isSaveRole = initialRoleId !== updatedRoleId;
@@ -24,7 +31,10 @@ export const UserRoll = ({ login, registedAt, roleId, roles }) => {
                 </select>
             </div>
             {isSaveRole && (
-                <div className="ml-[10px] text-blue cursor-pointer hover:underline">
+                <div
+                    onClick={() => updateUserRole()}
+                    className="ml-[10px] text-blue cursor-pointer hover:underline"
+                >
                     Сохранить
                 </div>
             )}

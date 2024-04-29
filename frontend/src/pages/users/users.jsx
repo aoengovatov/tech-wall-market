@@ -46,6 +46,7 @@ export const Users = () => {
                     users.map(({ id, login, registedAt, roleId }) => (
                         <UserRoll
                             key={id}
+                            id={id}
                             login={login}
                             registedAt={registedAt}
                             roleId={roleId}
