@@ -17,8 +17,24 @@ import {
     Orders,
 } from "./pages";
 import { Header, Footer, Modal } from "./components";
+import { useLayoutEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "./store/userSlice";
 
 export const MarketApp = () => {
+    const dispatch = useDispatch();
+
+    useLayoutEffect(() => {
+        const currentUserJSON = sessionStorage.getItem("userData");
+
+        if (!currentUserJSON) {
+            return;
+        }
+
+        const currentUser = JSON.parse(currentUserJSON);
+        dispatch(setUser(currentUser));
+    }, [dispatch]);
+
     return (
         <>
             <Modal on={false} />
