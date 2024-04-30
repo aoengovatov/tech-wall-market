@@ -1,6 +1,7 @@
 import { ButtonDelete, ButtonEdit } from "../../../../components";
+import { Link } from "react-router-dom";
 
-export const CategoryCard = ({ src, color, edit, children }) => {
+export const CategoryCard = ({ id, src, color, edit, children }) => {
     return (
         <div
             className="flex w-[255px] h-[150px] items-center justify-end  mb-[10px] rounded-xl relative z-0"
@@ -9,7 +10,9 @@ export const CategoryCard = ({ src, color, edit, children }) => {
             {edit && (
                 <>
                     <div className="absolute flex gap-[8px] bg-lightGray px-2 py-2 rounded-lg top-2 right-2 z-30">
-                        <ButtonEdit />
+                        <Link to={`/profile/category/${id}/edit`}>
+                            <ButtonEdit />
+                        </Link>
                         <ButtonDelete />
                     </div>
                 </>
