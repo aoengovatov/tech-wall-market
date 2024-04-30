@@ -1,23 +1,35 @@
-import { useSelector } from "react-redux";
-import { Breadcrumbs } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { Breadcrumbs, ButtonSmall } from "../../components";
 import { WidgetItem } from "./components";
-import { getUser } from "../../store/userSlice";
+import { getUser, reset } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 import { Navigate } from "react-router-dom";
 import { checkAccess } from "../../utils";
 
 export const Profile = () => {
+    const dispatch = useDispatch();
     const user = useSelector(getUser);
 
     if (user.roleId === ROLE.GUEST) {
         return <Navigate to={"/login"} />;
     }
 
+    const userLogout = () => {
+        dispatch(reset());
+        sessionStorage.removeItem("userData");
+    };
+
     return (
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <h1 className="ml-[10px] mb-[10px]">Профиль {user.login}</h1>
+                <div className="flex items-center mb-[10px]">
+                    <h1 className="ml-[10px]">Профиль {user.login}</h1>
+                    <div className="ml-[15px]">
+                        <ButtonSmall onClick={userLogout}>выход</ButtonSmall>
+                    </div>
+                </div>
+
                 <div className="flex flex-wrap">
                     {checkAccess([ROLE.USER], user.roleId) && (
                         <>
