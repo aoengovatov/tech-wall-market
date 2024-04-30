@@ -3,10 +3,20 @@ const mapCategory = require("../mappers/mapCategory");
 
 exports.addCategory = async (req, res) => {
     const { name, imageUrl, color } = req.body;
+    try {
+        const newCategory = await categoryService.addCategory(name, imageUrl, color);
 
-    const newCategory = await categoryService.addCategory(name, imageUrl, color);
+        res.send({ data: mapCategory(newCategory) });
+    } catch (e) {
+        let errorMessage = "";
 
-    res.send({ data: mapCategory(newCategory) });
+        if (e.code === 11000) {
+            errorMessage = "Такая категория уже существует";
+        } else {
+            errorMessage = e.message;
+        }
+        res.send({ error: errorMessage || "Неизвестная ошибка" });
+    }
 };
 
 exports.deleteCategory = async (req, res) => {
