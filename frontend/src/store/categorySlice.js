@@ -11,8 +11,15 @@ const categorySlice = createSlice({
             state.push(action.payload);
         },
         updateCategory: (state, action) => {
-            state.filter((category) => category.id !== action.payload.id);
-            state.push(action.payload);
+            state.map((category) => {
+                if(category.id === action.payload.id) {
+                    const {name, imageUrl, color} = action.payload;
+                    category.name = name;
+                    category.imageUrl = imageUrl;
+                    category.color = color;
+                    return;
+                }
+            });
         },
         deliteCategory: (state, id) => state.filter((category) => category.id !== id),
     },
