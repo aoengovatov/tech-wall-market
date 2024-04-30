@@ -6,7 +6,7 @@ exports.addCategory = async (req, res) => {
     try {
         const newCategory = await categoryService.addCategory(name, imageUrl, color);
 
-        res.send({ data: mapCategory(newCategory) });
+        res.send({ error: null, category: mapCategory(newCategory) });
     } catch (e) {
         let errorMessage = "";
 
@@ -34,5 +34,5 @@ exports.updateCategory = async (req, res) => {
         color,
     });
 
-    res.send({ data: mapCategory(updatedCategory) });
+    res.send({ error: null, category: mapCategory(updatedCategory) });
 };

@@ -4,5 +4,5 @@ const mapCategory = require("../mappers/mapCategory");
 exports.getCategories = async (req, res) => {
     const categoryList = await categoryService.getCategories();
 
-    res.send({ data: categoryList.map(mapCategory) });
+    res.send({ categories: categoryList.map(mapCategory) });
 };
