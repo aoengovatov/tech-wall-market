@@ -1,11 +1,21 @@
 import { Popular, Banner, Categories, Brands } from "../../components";
+import { useState, useEffect } from "react";
+import { request } from "../../utils";
 
 export const Main = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        request("/categories").then(({ categories }) => {
+            setCategories(categories);
+        });
+    }, []);
+
     return (
         <>
             <Banner />
             <Popular />
-            <Categories edit={false} />
+            <Categories categories={categories} edit={false} />
             <Brands />
         </>
     );

@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { Breadcrumbs, ButtonBlue, Input, Categories, ErrorBlock } from "../../components";
 import { request } from "../../utils";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategoryList, getCategory, addCategory } from "../../store/categorySlice";
 
 export const AddCategory = () => {
-    const [editCategory, setEditCategory] = useState(true);
+    const dispatch = useDispatch();
+    const [edit, setEdit] = useState(false);
     const [serverError, setServerError] = useState("");
     const [name, setName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [color, setColor] = useState("");
+
+    useEffect(() => {
+        request("/categories").then(({ categories }) => {
+            dispatch(setCategoryList(categories));
+        });
+    }, []);
+
+    const categories = useSelector(getCategory);
 
     const onChangeColor = ({ target }) => {
         setColor(target.value);
@@ -21,17 +33,24 @@ export const AddCategory = () => {
         setImageUrl(target.value);
     };
 
-    const addCategory = () => {
-        request("/categories", "POST", { name, imageUrl, color }).then((data) => {
-            if (data.error) {
-                setServerError(`Ошибка: ${data.error}`);
+    const addNewCategory = (event) => {
+        event.preventDefault();
+        request("/categories", "POST", { name, imageUrl, color }).then(
+            ({ error, category }) => {
+                if (error) {
+                    setServerError(`Ошибка: ${error}`);
+                    return;
+                }
+                setName("");
+                setColor("");
+                setImageUrl("");
+                dispatch(addCategory(category));
             }
+        );
+    };
 
-            console.log(data);
-            setName("");
-            setColor("");
-            setImageUrl("");
-        });
+    const updateCategory = () => {
+        console.log("Обновление категории");
     };
 
     return (
@@ -39,9 +58,12 @@ export const AddCategory = () => {
             <Breadcrumbs />
             <div className="mb-[20px]">
                 <h1 className="ml-[10px] mb-[10px]">
-                    {editCategory ? "Редактировать категорию" : "Добавить категорию"}
+                    {edit ? "Редактировать категорию" : "Добавить категорию"}
                 </h1>
-                <div className="flex mb-[10px] gap-[12px]">
+                <form
+                    onSubmit={edit ? updateCategory : addNewCategory}
+                    className="flex mb-[10px] gap-[12px]"
+                >
                     <Input
                         type={"text"}
                         placeholder={"название категории..."}
@@ -63,21 +85,19 @@ export const AddCategory = () => {
                         onChange={(target) => onChangeColor(target)}
                     />
 
-                    {editCategory ? (
+                    {edit ? (
                         <>
                             <ButtonBlue>сохранить</ButtonBlue>
-                            <ButtonBlue onClick={() => setEditCategory(false)}>
-                                отмена
-                            </ButtonBlue>
+                            <ButtonBlue onClick={() => setEdit(false)}>отмена</ButtonBlue>
                         </>
                     ) : (
-                        <ButtonBlue onClick={addCategory}>добавить</ButtonBlue>
+                        <ButtonBlue type={"submit"}>добавить</ButtonBlue>
                     )}
-                </div>
+                </form>
                 {serverError && <ErrorBlock>{serverError}</ErrorBlock>}
 
                 <div className="mt-[20px]">
-                    <Categories edit={true} />
+                    <Categories edit={true} categories={categories} />
                 </div>
             </div>
         </>
