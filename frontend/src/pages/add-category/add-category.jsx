@@ -1,8 +1,32 @@
 import { useState } from "react";
 import { Breadcrumbs, ButtonBlue, Input, Categories } from "../../components";
+import { request } from "../../utils";
 
 export const AddCategory = () => {
-    const [editCategory, setEditCategory] = useState(true);
+    const [editCategory, setEditCategory] = useState(false);
+    const [name, setName] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [color, setColor] = useState("");
+
+    const onChangeColor = ({ target }) => {
+        setColor(target.value);
+    };
+
+    const onChangeName = ({ target }) => {
+        setName(target.value);
+    };
+
+    const onChangeImageUrl = ({ target }) => {
+        setImageUrl(target.value);
+    };
+
+    const addCategory = () => {
+        request("/categories", "POST", { name, imageUrl, color }).then((data) => {
+            setName("");
+            setColor("");
+            setImageUrl("");
+        });
+    };
 
     return (
         <>
@@ -16,10 +40,23 @@ export const AddCategory = () => {
                             <Input
                                 type={"text"}
                                 placeholder={"название категории..."}
+                                value={name}
                                 required={true}
+                                onChange={(target) => onChangeName(target)}
                             />
-                            <Input type={"text"} placeholder={"url логотипа..."} />
-                            <Input type={"color"} placeholder={"цвет плашки"} />
+                            <Input
+                                type={"text"}
+                                placeholder={"url логотипа..."}
+                                value={imageUrl}
+                                required={true}
+                                onChange={(target) => onChangeImageUrl(target)}
+                            />
+                            <Input
+                                type={"color"}
+                                placeholder={"цвет плашки"}
+                                value={color}
+                                onChange={(target) => onChangeColor(target)}
+                            />
 
                             <ButtonBlue>сохранить</ButtonBlue>
                             <ButtonBlue onClick={() => setEditCategory(false)}>
@@ -34,12 +71,25 @@ export const AddCategory = () => {
                             <Input
                                 type={"text"}
                                 placeholder={"название категории..."}
+                                value={name}
                                 required={true}
+                                onChange={(target) => onChangeName(target)}
                             />
-                            <Input type={"text"} placeholder={"url логотипа..."} />
-                            <Input type={"color"} placeholder={"цвет плашки"} />
+                            <Input
+                                type={"text"}
+                                placeholder={"url логотипа..."}
+                                value={imageUrl}
+                                required={true}
+                                onChange={(target) => onChangeImageUrl(target)}
+                            />
+                            <Input
+                                type={"color"}
+                                placeholder={"цвет плашки"}
+                                value={color}
+                                onChange={(target) => onChangeColor(target)}
+                            />
 
-                            <ButtonBlue>добавить</ButtonBlue>
+                            <ButtonBlue onClick={addCategory}>добавить</ButtonBlue>
                         </div>
                     </>
                 )}
