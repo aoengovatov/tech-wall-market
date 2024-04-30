@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Breadcrumbs, ButtonBlue, Input, Categories } from "../../components";
+import { Breadcrumbs, ButtonBlue, Input, Categories, ErrorBlock } from "../../components";
 import { request } from "../../utils";
 
 export const AddCategory = () => {
-    const [editCategory, setEditCategory] = useState(false);
+    const [editCategory, setEditCategory] = useState(true);
+    const [serverError, setServerError] = useState("");
     const [name, setName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [color, setColor] = useState("");
@@ -22,6 +23,11 @@ export const AddCategory = () => {
 
     const addCategory = () => {
         request("/categories", "POST", { name, imageUrl, color }).then((data) => {
+            if (data.error) {
+                setServerError(`Ошибка: ${data.error}`);
+            }
+
+            console.log(data);
             setName("");
             setColor("");
             setImageUrl("");
@@ -31,70 +37,48 @@ export const AddCategory = () => {
     return (
         <>
             <Breadcrumbs />
-
             <div className="mb-[20px]">
-                {editCategory ? (
-                    <>
-                        <h1 className="ml-[10px] mb-[10px]">Редактировать категорию</h1>
-                        <div className="flex mb-[30px] gap-[12px]">
-                            <Input
-                                type={"text"}
-                                placeholder={"название категории..."}
-                                value={name}
-                                required={true}
-                                onChange={(target) => onChangeName(target)}
-                            />
-                            <Input
-                                type={"text"}
-                                placeholder={"url логотипа..."}
-                                value={imageUrl}
-                                required={true}
-                                onChange={(target) => onChangeImageUrl(target)}
-                            />
-                            <Input
-                                type={"color"}
-                                placeholder={"цвет плашки"}
-                                value={color}
-                                onChange={(target) => onChangeColor(target)}
-                            />
+                <h1 className="ml-[10px] mb-[10px]">
+                    {editCategory ? "Редактировать категорию" : "Добавить категорию"}
+                </h1>
+                <div className="flex mb-[10px] gap-[12px]">
+                    <Input
+                        type={"text"}
+                        placeholder={"название категории..."}
+                        value={name}
+                        required={true}
+                        onChange={(target) => onChangeName(target)}
+                    />
+                    <Input
+                        type={"text"}
+                        placeholder={"url логотипа..."}
+                        value={imageUrl}
+                        required={true}
+                        onChange={(target) => onChangeImageUrl(target)}
+                    />
+                    <Input
+                        type={"color"}
+                        placeholder={"цвет плашки"}
+                        value={color}
+                        onChange={(target) => onChangeColor(target)}
+                    />
 
+                    {editCategory ? (
+                        <>
                             <ButtonBlue>сохранить</ButtonBlue>
                             <ButtonBlue onClick={() => setEditCategory(false)}>
                                 отмена
                             </ButtonBlue>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <h1 className="ml-[10px] mb-[10px]">Добавить категорию</h1>
-                        <div className="flex mb-[30px] gap-[12px]">
-                            <Input
-                                type={"text"}
-                                placeholder={"название категории..."}
-                                value={name}
-                                required={true}
-                                onChange={(target) => onChangeName(target)}
-                            />
-                            <Input
-                                type={"text"}
-                                placeholder={"url логотипа..."}
-                                value={imageUrl}
-                                required={true}
-                                onChange={(target) => onChangeImageUrl(target)}
-                            />
-                            <Input
-                                type={"color"}
-                                placeholder={"цвет плашки"}
-                                value={color}
-                                onChange={(target) => onChangeColor(target)}
-                            />
+                        </>
+                    ) : (
+                        <ButtonBlue onClick={addCategory}>добавить</ButtonBlue>
+                    )}
+                </div>
+                {serverError && <ErrorBlock>{serverError}</ErrorBlock>}
 
-                            <ButtonBlue onClick={addCategory}>добавить</ButtonBlue>
-                        </div>
-                    </>
-                )}
-
-                <Categories edit={true} />
+                <div className="mt-[20px]">
+                    <Categories edit={true} />
+                </div>
             </div>
         </>
     );

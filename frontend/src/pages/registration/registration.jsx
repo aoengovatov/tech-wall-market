@@ -1,4 +1,4 @@
-import { ButtonBlue, Input } from "../../components";
+import { ButtonBlue, ErrorBlock, Input } from "../../components";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -102,11 +102,7 @@ export const Registration = () => {
                     </ButtonBlue>
                 </form>
 
-                {errorMessage && (
-                    <div className="flex items-center justify-center text-white bg-red w-full p-3 rounded-xl">
-                        {errorMessage}
-                    </div>
-                )}
+                {errorMessage && <ErrorBlock>{errorMessage}</ErrorBlock>}
             </div>
         </div>
     );
