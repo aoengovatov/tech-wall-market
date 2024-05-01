@@ -1,7 +1,31 @@
+import { useDispatch } from "react-redux";
 import { ButtonDelete, ButtonEdit } from "../../../../components";
 import { Link } from "react-router-dom";
+import { setOpenModal } from "../../../../store/modalSlice";
+import { deleteCategory } from "../../../../store/categorySlice";
+import { request } from "../../../../utils";
 
 export const CategoryCard = ({ id, src, color, edit, children }) => {
+    const dispatch = useDispatch();
+
+    const deleteCategoryById = (id) => {
+        request(`/categories/${id}`, "DELETE").then((data) => {
+            if (data.error === null) {
+                dispatch(deleteCategory(id));
+            }
+        });
+    };
+
+    const onDeleteCategory = () => {
+        const modalWindow = {
+            isOpen: true,
+            text: `Вы точно хотите удалить категорию: ${children}?`,
+            onConfirn: () => deleteCategoryById(id),
+        };
+
+        dispatch(setOpenModal(modalWindow));
+    };
+
     return (
         <div
             className="flex w-[255px] h-[150px] items-center justify-end  mb-[10px] rounded-xl relative z-0"
@@ -13,7 +37,7 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
                         <Link to={`/profile/category/${id}/edit`}>
                             <ButtonEdit />
                         </Link>
-                        <ButtonDelete />
+                        <ButtonDelete onClick={() => onDeleteCategory()} />
                     </div>
                 </>
             )}

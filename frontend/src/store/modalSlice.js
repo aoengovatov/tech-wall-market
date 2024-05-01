@@ -4,7 +4,6 @@ const initialModal = {
     isOpen: false,
     text: "",
     onConfirn: () => {},
-    onCancel: () => {},
 };
 
 const modalSlice = createSlice({

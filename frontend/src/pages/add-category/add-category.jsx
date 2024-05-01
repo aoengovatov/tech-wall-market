@@ -42,14 +42,17 @@ export const AddCategory = () => {
 
     const onChangeColor = ({ target }) => {
         setColor(target.value);
+        setServerError("");
     };
 
     const onChangeName = ({ target }) => {
         setName(target.value);
+        setServerError("");
     };
 
     const onChangeImageUrl = ({ target }) => {
         setImageUrl(target.value);
+        setServerError("");
     };
 
     const onCancelUpdate = () => {

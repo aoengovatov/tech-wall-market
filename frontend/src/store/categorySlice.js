@@ -12,8 +12,8 @@ const categorySlice = createSlice({
         },
         updateCategory: (state, action) => {
             state.map((category) => {
-                if(category.id === action.payload.id) {
-                    const {name, imageUrl, color} = action.payload;
+                if (category.id === action.payload.id) {
+                    const { name, imageUrl, color } = action.payload;
                     category.name = name;
                     category.imageUrl = imageUrl;
                     category.color = color;
@@ -21,7 +21,7 @@ const categorySlice = createSlice({
                 }
             });
         },
-        deliteCategory: (state, id) => state.filter((category) => category.id !== id),
+        deleteCategory: (state, action) => state.filter((category) => category.id !== action.payload),
     },
     selectors: {
         getCategory: (state) => state,
@@ -29,6 +29,6 @@ const categorySlice = createSlice({
 });
 
 export default categorySlice.reducer;
-export const { setCategoryList, addCategory, deliteCategory, updateCategory } =
+export const { setCategoryList, addCategory, deleteCategory, updateCategory } =
     categorySlice.actions;
 export const { getCategory } = categorySlice.selectors;
