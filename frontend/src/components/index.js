@@ -20,3 +20,4 @@ export * from "./modal/modal";
 export * from "./pagination/pagination";
 export * from "./button-small/button-small";
 export * from "./error-block/error-block";
+export * from "./back-btn/back-btn";

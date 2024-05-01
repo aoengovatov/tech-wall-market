@@ -1,5 +1,6 @@
-import { Breadcrumbs } from "../../components";
+import { Breadcrumbs, BackBtn } from "../../components";
 import { OrderRoll } from "./components/order-roll/order-roll";
+import { useNavigate } from "react-router-dom";
 
 const orders = [
     {
@@ -51,11 +52,18 @@ const orders = [
 ];
 
 export const Orders = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <h1 className="ml-[10px] mb-[10px]">Заказы</h1>
+                <div className="flex items-center mb-[10px]">
+                    <BackBtn onClick={() => navigate(-1)} />
+                    <h1 className="ml-[10px]">
+                       Заказы
+                    </h1>
+                </div>
                 <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] px-[5px]">
                     <div className="text-gray">дата</div>
                     <div className="text-gray">покупатель</div>

@@ -28,13 +28,13 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
 
     return (
         <div
-            className="flex w-[255px] h-[150px] items-center justify-end  mb-[10px] rounded-xl relative z-0"
+            className="flex w-[255px] h-[150px] items-center justify-end  mb-[10px] rounded-xl shadow-md relative z-0"
             style={{ backgroundColor: color }}
         >
             {edit && (
                 <>
-                    <div className="absolute flex gap-[8px] bg-lightGray px-2 py-2 rounded-lg top-2 right-2 z-30">
-                        <Link to={`/profile/category/${id}/edit`}>
+                    <div className="absolute flex items-center gap-[8px] bg-lightGray px-2 py-2 rounded-lg top-2 right-2 z-30">
+                        <Link className="flex h-fit" to={`/profile/category/${id}/edit`}>
                             <ButtonEdit />
                         </Link>
                         <ButtonDelete onClick={() => onDeleteCategory()} />

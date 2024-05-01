@@ -1,7 +1,7 @@
-import { Breadcrumbs } from "../../components";
+import { Breadcrumbs, BackBtn } from "../../components";
 import { UserRoll } from "./components/user-roll/user-roll";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { request } from "../../utils";
 
 export const Users = () => {
@@ -9,6 +9,7 @@ export const Users = () => {
     const [roles, setRoles] = useState([]);
     const [resStatus, setResStatus] = useState(0);
     const [serverError, setServerError] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         Promise.all([request("/users"), request("/users/roles")]).then(
@@ -35,7 +36,10 @@ export const Users = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <h1 className="ml-[10px] mb-[10px]">Пользователи</h1>
+                <div className="flex items-center mb-[10px]">
+                    <BackBtn onClick={() => navigate(-1)} />
+                    <h1 className="ml-[10px]">Пользователи</h1>
+                </div>
                 <div className="grid grid-cols-3 mb-[5px] px-[5px] w-[80%]">
                     <div className="text-gray">Логин</div>
                     <div className="text-gray">Дата создания</div>

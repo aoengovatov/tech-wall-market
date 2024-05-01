@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useParams, useMatch, useNavigate } from "react-router-dom";
-import { Breadcrumbs, ButtonBlue, Input, Categories, ErrorBlock } from "../../components";
+import {
+    Breadcrumbs,
+    ButtonBlue,
+    Input,
+    Categories,
+    ErrorBlock,
+    BackBtn,
+} from "../../components";
 import { request } from "../../utils";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -99,9 +106,12 @@ export const AddCategory = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[20px]">
-                <h1 className="ml-[10px] mb-[10px]">
-                    {isEdit ? "Редактировать категорию" : "Добавить категорию"}
-                </h1>
+                <div className="flex items-center mb-[10px]">
+                    <BackBtn onClick={() => navigate(-1)} />
+                    <h1 className="ml-[10px]">
+                        {isEdit ? "Редактировать категорию" : "Добавить категорию"}
+                    </h1>
+                </div>
                 <form
                     onSubmit={isEdit ? updateCategoryData : addNewCategory}
                     className="flex mb-[10px] gap-[12px]"

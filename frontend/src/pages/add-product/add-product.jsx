@@ -1,11 +1,19 @@
-import { Breadcrumbs, ButtonBlue, Input, Textarea } from "../../components";
+import { Breadcrumbs, ButtonBlue, Input, Textarea, BackBtn } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 export const AddProduct = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <Breadcrumbs />
             <div className="mb-[20px] max-w-[50%]">
-                <h1 className="ml-[10px] mb-[10px]">Добавить товар</h1>
+                <div className="flex items-center mb-[10px]">
+                    <BackBtn onClick={() => navigate(-1)} />
+                    <h1 className="ml-[10px]">
+                        Добавить товар
+                    </h1>
+                </div>
                 <div className="flex flex-col mb-[30px]">
                     <Input
                         type={"text"}

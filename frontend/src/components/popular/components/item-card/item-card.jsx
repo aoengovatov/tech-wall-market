@@ -5,7 +5,7 @@ import { ButtonBlue } from "../../../button-blue/button-blue";
 
 export const ItemCard = () => {
     return (
-        <div className="flex flex-col items-center justify-around w-[250px] min-h-[315px] border-2 border-midGray rounded-xl h-[100px] p-[15px] transition-all duration-300 hover:border-lightBlue relative">
+        <div className="flex flex-col items-center justify-around w-[250px] min-h-[315px] border-2 shadow-md border-midGray rounded-xl h-[100px] p-[15px] transition-all duration-300 hover:border-lightBlue relative">
             <div className="absolute top-2 right-2">
                 <SaleWidget count={30} />
             </div>
