@@ -37,7 +37,7 @@ export const MarketApp = () => {
 
     return (
         <>
-            <Modal on={false} />
+            <Modal open={false} />
             <div className="flex flex-col min-h-[100vh] justify-between">
                 <div>
                     <Header />
