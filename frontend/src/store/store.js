@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducers from "./userSlice";
-import categoryRedusers from "./categorySlice";
+import categoryReducers from "./categorySlice";
+import modalReducers from "./modalSlice";
 
 export const store = configureStore({
     reducer: {
         user: userReducers,
-        category: categoryRedusers,
+        category: categoryReducers,
+        modal: modalReducers,
     },
     devTools: true,
 });
