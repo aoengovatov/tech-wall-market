@@ -51,6 +51,12 @@ exports.getProducts = async (
     return { products, lastPage: Math.ceil(count / limit) };
 };
 
+exports.getProductsCountByCategoryId = async (categoryId) => {
+    const productsCount = await Product.countDocuments({ category: categoryId });
+
+    return productsCount;
+};
+
 exports.addProduct = async (newProduct) => {
     const product = await Product.create(newProduct);
 

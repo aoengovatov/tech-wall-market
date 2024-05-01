@@ -1,4 +1,5 @@
 const categoryService = require("../services/category.service");
+const productService = require("../services/product.service");
 const mapCategory = require("../mappers/mapCategory");
 
 exports.addCategory = async (req, res) => {
@@ -20,6 +21,19 @@ exports.addCategory = async (req, res) => {
 };
 
 exports.deleteCategory = async (req, res) => {
+    const productCountInCategory = await productService.getProductsCountByCategoryId(
+        req.params.id
+    );
+
+    console.log(productCountInCategory);
+
+    if (productCountInCategory > 0) {
+        res.send({
+            error: `Ошибка удаления. Найдены связанные записи Products: ${productCountInCategory}`,
+        });
+        return;
+    }
+
     await categoryService.deleteCategory(req.params.id);
 
     res.send({ error: null });
