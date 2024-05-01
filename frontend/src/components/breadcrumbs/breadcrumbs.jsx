@@ -8,7 +8,7 @@ export const Breadcrumbs = () => {
         if (index === 0) {
             pathMap.push("/" + path);
         } else {
-            if (path[index-1] === "catalog") {
+            if (pathMap[index - 1] !== "/catalog") {
                 pathMap.push(pathMap[index - 1] + "/" + path);
             }
         }
