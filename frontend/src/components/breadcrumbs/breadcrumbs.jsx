@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PathBlock } from "./components/path-block/path-block";
 
 export const Breadcrumbs = () => {
     const path = window.location.pathname.slice(1).split("/");
@@ -19,12 +20,14 @@ export const Breadcrumbs = () => {
             <Link to={"/"}>
                 <span>home</span>
             </Link>
-            {pathMap.map((pathLink, index) => (
+            {pathMap.map((pathLink, index, arr) => (
                 <>
-                    <div className="mx-[5px]"> / </div>
-                    <Link to={pathLink}>
-                        <span>{path[index]}</span>
-                    </Link>
+                    <PathBlock
+                        isLink={index + 1 !== arr.length ? true : false}
+                        url={pathLink}
+                    >
+                        {path[index]}
+                    </PathBlock>
                 </>
             ))}
         </div>
