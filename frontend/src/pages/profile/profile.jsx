@@ -4,11 +4,25 @@ import { WidgetItem } from "./components";
 import { getUser, reset } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 import { Navigate } from "react-router-dom";
-import { checkAccess } from "../../utils";
+import { checkAccess, request } from "../../utils";
+import { useEffect, useState } from "react";
 
 export const Profile = () => {
     const dispatch = useDispatch();
     const user = useSelector(getUser);
+    const [countAll, setCountAll] = useState({});
+
+    useEffect(() => {
+        if (checkAccess([ROLE.ADMIN, ROLE.MODERATOR], user.roleId)) {
+            request("/users/count-all").then((data) => {
+                if (data.error === null) {
+                    setCountAll(data.count);
+                }
+            });
+        }
+    }, []);
+
+    console.log(countAll);
 
     if (user.roleId === ROLE.GUEST) {
         return <Navigate to={"/login"} />;
@@ -55,24 +69,28 @@ export const Profile = () => {
                         <>
                             <WidgetItem
                                 name={"add-product"}
-                                count={857}
+                                count={countAll.products}
                                 link={"/profile/add-product"}
                             />
                             <WidgetItem
                                 name={"categories"}
-                                count={8}
+                                count={countAll.categories}
                                 link={"/profile/category"}
                             />
                             <WidgetItem
                                 name={"orders"}
-                                count={387}
+                                count={countAll.orders}
                                 link={"/profile/orders"}
                             />
                         </>
                     )}
 
                     {checkAccess([ROLE.ADMIN], user.roleId) && (
-                        <WidgetItem name={"users"} count={517} link={"/profile/users"} />
+                        <WidgetItem
+                            name={"users"}
+                            count={countAll.users}
+                            link={"/profile/users"}
+                        />
                     )}
                 </div>
             </div>

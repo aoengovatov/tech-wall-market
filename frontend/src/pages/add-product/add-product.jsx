@@ -10,11 +10,9 @@ export const AddProduct = () => {
             <div className="mb-[20px] max-w-[50%]">
                 <div className="flex items-center mb-[10px]">
                     <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">
-                        Добавить товар
-                    </h1>
+                    <h1 className="ml-[10px]">Добавить товар</h1>
                 </div>
-                <div className="flex flex-col mb-[30px]">
+                <form className="flex flex-col mb-[30px]">
                     <Input
                         type={"text"}
                         placeholder={"название товара..."}
@@ -36,8 +34,8 @@ export const AddProduct = () => {
                     <Input type={"text"} placeholder={"количество товара"} />
                     <Textarea placeholder={"Описание товара"} />
                     <Textarea placeholder={"характеристики товара"} />
-                    <ButtonBlue>добавить</ButtonBlue>
-                </div>
+                    <ButtonBlue type={"submit"}>добавить</ButtonBlue>
+                </form>
             </div>
         </>
     );
