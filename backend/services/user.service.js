@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Category = require('../models/Category');
+const Product = require("../models/Product");
+const Order = require('../models/Order')
 const { generate } = require("../utils/token");
 const ROLES = require("../constants/roles");
 
@@ -45,6 +48,17 @@ exports.getRoles = () => {
         { id: ROLES.USER, name: "Покупатель" },
     ];
 };
+
+exports.getCountUsersCategoriesProductsOrders = async () => {
+    const [users, categories, products, orders] = await Promise.all([
+        User.countDocuments(),
+        Category.countDocuments(),
+        Product.countDocuments(),
+        Order.countDocuments(),
+    ])
+
+    return ({users, categories, products, orders});
+}
 
 exports.deleteUser = (id) => {
     return User.deleteOne({ _id: id });
