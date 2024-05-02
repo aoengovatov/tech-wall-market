@@ -1,8 +1,22 @@
 import { CategoryPanel, SortPanel } from "./components";
 import { Breadcrumbs, ProductItem } from "../../components";
 import { Pagination } from "../../components/pagination/pagination";
+import { useEffect } from "react";
+import { request } from "../../utils";
+import { setCategoryList } from "../../store/categorySlice";
+import { useDispatch } from "react-redux";
 
 export const Catalog = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        request("/categories").then((data) => {
+            if (data.error === null) {
+                dispatch(setCategoryList(data.categories));
+            }
+        });
+    }, [dispatch]);
+
     return (
         <>
             <Breadcrumbs />

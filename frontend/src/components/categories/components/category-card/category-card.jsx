@@ -27,8 +27,9 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
     };
 
     return (
-        <div
-            className="flex w-[255px] h-[150px] items-center justify-end  mb-[10px] rounded-xl shadow-md relative z-0"
+        <Link
+            to={edit ? null : `/catalog?caterory=${children}`}
+            className="flex w-[48%] h-[100px] items-center justify-end  mb-[10px] rounded-xl shadow-md relative z-0 transition-all duration-150 hover:scale-105 sm:h-[130px] md:h-[150px] md:w-[30%] lg:w-[255px]"
             style={{ backgroundColor: color }}
         >
             {edit && (
@@ -41,8 +42,8 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
                     </div>
                 </>
             )}
-            <h2 className="font-medium absolute bottom-3 left-7 z-20">{children}</h2>
-            <img src={src} className="h-[75%] pr-[20px] z-10"></img>
-        </div>
+            <h2 className="font-medium text-[18px] absolute bottom-3 left-7 z-20 sm:text-[22px]">{children}</h2>
+            <img src={src} className="h-[50%] pr-[20px] z-10 sm:h-[60%] lg:h-[70%]"></img>
+        </Link>
     );
 };

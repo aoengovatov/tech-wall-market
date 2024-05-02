@@ -22,8 +22,6 @@ export const Profile = () => {
         }
     }, []);
 
-    console.log(countAll);
-
     if (user.roleId === ROLE.GUEST) {
         return <Navigate to={"/login"} />;
     }

@@ -20,7 +20,6 @@ export const Users = () => {
                     setServerError(usersRes.error || rolesRes.error);
                     return;
                 }
-                console.log(rolesRes.roles);
 
                 setRoles(rolesRes.roles);
                 setUsers(usersRes.users);

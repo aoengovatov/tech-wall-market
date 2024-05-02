@@ -42,8 +42,8 @@ export const MarketApp = () => {
                 <div>
                     <Header />
 
-                    <div className="w-[1100px] mx-auto">
-                        <div className="mx-[20px]">
+                    <div className="max-w-[1100px] mx-auto">
+                        <div className="mx-[5px] md:mx-[20px]">
                             <Routes>
                                 <Route path="/" element={<Main />} />
                                 <Route path="/login" element={<Authorization />} />

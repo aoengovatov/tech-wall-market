@@ -9,7 +9,10 @@ export const Breadcrumbs = () => {
         if (index === 0) {
             pathMap.push("/" + path);
         } else {
-            if (pathMap[index - 1] !== "/catalog") {
+            if (
+                pathMap[index - 1] !== "/catalog" &&
+                pathMap[index - 1] !== "/profile/category"
+            ) {
                 pathMap.push(pathMap[index - 1] + "/" + path);
             }
         }
@@ -20,15 +23,10 @@ export const Breadcrumbs = () => {
             <Link to={"/"}>
                 <span>home</span>
             </Link>
-            {pathMap.map((pathLink, index, arr) => (
-                <>
-                    <PathBlock
-                        isLink={index + 1 !== arr.length ? true : false}
-                        url={pathLink}
-                    >
-                        {path[index]}
-                    </PathBlock>
-                </>
+            {pathMap.map((pathLink, index) => (
+                <PathBlock key={pathLink} url={pathLink}>
+                    {path[index]}
+                </PathBlock>
             ))}
         </div>
     );
