@@ -105,16 +105,16 @@ export const AddCategory = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className="mb-[20px]">
+            <div className="mb-[20px] w-full">
                 <div className="flex items-center mb-[10px]">
                     <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">
+                    <h1 className="ml-[10px] w-fit leading-10">
                         {isEdit ? "Редактировать категорию" : "Добавить категорию"}
                     </h1>
                 </div>
                 <form
                     onSubmit={isEdit ? updateCategoryData : addNewCategory}
-                    className="flex mb-[10px] gap-[12px]"
+                    className="flex flex-col sm:flex-row sm:w-full mb-[10px] gap-[12px] gap-y-1"
                 >
                     <Input
                         type={"text"}
@@ -131,6 +131,7 @@ export const AddCategory = () => {
                         onChange={(target) => onChangeImageUrl(target)}
                     />
                     <Input
+                       
                         type={"color"}
                         placeholder={"цвет плашки"}
                         value={color}
