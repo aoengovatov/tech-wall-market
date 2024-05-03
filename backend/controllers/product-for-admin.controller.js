@@ -2,31 +2,21 @@ const productService = require("../services/product.service");
 const mapProduct = require("../mappers/mapProduct");
 
 exports.addProduct = async (req, res) => {
-    const {
-        name,
-        category,
-        popular,
-        price,
-        oldPrice,
-        imageUrl,
-        count,
-        description,
-        characteristic,
-    } = req.body;
+    const product = req.body;
 
-    const newProduct = await productService.addProduct({
-        name,
-        category,
-        popular,
-        price,
-        oldPrice,
-        imageUrl,
-        count,
-        description,
-        characteristic,
-    });
+    try {
+        const newProduct = await productService.addProduct(product);
+        res.send({ error: null, product: mapProduct(newProduct) });
+    } catch (e) {
+        let errorMessage = "";
 
-    res.send({ data: mapProduct(newProduct) });
+        if (e.code === 11000) {
+            errorMessage = "Такой продукт уже существует";
+        } else {
+            errorMessage = e.message;
+        }
+        res.send({ error: errorMessage || "Неизвестная ошибка" });
+    }
 };
 
 exports.deleteProduct = async (req, res) => {
@@ -36,29 +26,9 @@ exports.deleteProduct = async (req, res) => {
 };
 
 exports.updateProduct = async (req, res) => {
-    const {
-        name,
-        category,
-        popular,
-        price,
-        oldPrice,
-        imageUrl,
-        count,
-        description,
-        characteristic,
-    } = req.body;
+    const product = req.body;
 
-    const updatedProduct = await productService.updateProduct(req.params.id, {
-        name,
-        category,
-        popular,
-        price,
-        oldPrice,
-        imageUrl,
-        count,
-        description,
-        characteristic,
-    });
+    const updatedProduct = await productService.updateProduct(req.params.id, product);
 
-    res.send({ data: mapProduct(updatedProduct) });
+    res.send({ error: null, product: mapProduct(updatedProduct) });
 };

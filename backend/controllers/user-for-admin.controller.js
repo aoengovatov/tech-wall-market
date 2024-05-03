@@ -30,5 +30,5 @@ exports.deleteUser = async (req, res) => {
 exports.getCountUsersCategoriesProductsOrders = async (req, res) => {
     const countAll = await userService.getCountUsersCategoriesProductsOrders();
 
-    res.send(countAll);
+    res.send({error: null, count:countAll});
 };

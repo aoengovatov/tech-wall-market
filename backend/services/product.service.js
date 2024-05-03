@@ -58,11 +58,15 @@ exports.getProductsCountByCategoryId = async (categoryId) => {
 };
 
 exports.addProduct = async (newProduct) => {
-    const product = await Product.create(newProduct);
+    try {
+        const product = await Product.create(newProduct);
 
-    await product.populate("category");
+        await product.populate("category");
 
-    return product;
+        return product;
+    } catch (e) {
+        return e.message;
+    }
 };
 
 exports.deleteProduct = (id) => {
