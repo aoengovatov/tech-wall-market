@@ -11,7 +11,8 @@ export const Breadcrumbs = () => {
         } else {
             if (
                 pathMap[index - 1] !== "/catalog" &&
-                pathMap[index - 1] !== "/profile/category"
+                pathMap[index - 1] !== "/profile/category" &&
+                pathMap[index - 2] !== "/profile/category"
             ) {
                 pathMap.push(pathMap[index - 1] + "/" + path);
             }
