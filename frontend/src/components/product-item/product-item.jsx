@@ -8,7 +8,7 @@ import {
     ButtonDelete,
 } from "..";
 
-export const ProductItem = ({ url, likeButton = true, buttonDelete = false }) => {
+export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
 
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
@@ -25,22 +25,21 @@ export const ProductItem = ({ url, likeButton = true, buttonDelete = false }) =>
             </div>
             <div className={mainContentStyle}>
                 <img
-                    src="/src/assets/item-logo-min.png"
+                    src={props.imageUrl}
                     className="h-[100px] mx-[20px]"
                 ></img>
 
                 <div className="flex flex-col w-full h-full justify-around">
                     <div className="flex justify-between">
-                        <Link to={url} className="font-semibold text-base w-8/12">
-                            15,3" Ноутбук Apple MacBook Air 2023 (M2) 8/512 Гб, Space
-                            Gray(Космический серый)
+                        <Link to={`/catalog/${props._id}`} className="font-semibold text-base w-8/12">
+                            {props.name}
                         </Link>
-                        <CardPrice price={149900} oldPrice={189900} />
+                        <CardPrice price={props.price} oldPrice={props.oldPrice} />
                     </div>
 
                     <div className="flex items-end justify-between">
                         <div className="w-8/12">
-                            <ProductCode>ir1785</ProductCode>
+                            <ProductCode>{props._id.slice(-8)}</ProductCode>
                         </div>
                         <div className="flex">
                             {likeButton && (

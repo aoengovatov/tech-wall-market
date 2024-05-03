@@ -1,19 +1,23 @@
 import { CategoryPanel, SortPanel } from "./components";
 import { Breadcrumbs, ProductItem } from "../../components";
 import { Pagination } from "../../components/pagination/pagination";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { request } from "../../utils";
 import { setCategoryList } from "../../store/categorySlice";
 import { useDispatch } from "react-redux";
 
 export const Catalog = () => {
     const dispatch = useDispatch();
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         request("/categories").then((data) => {
             if (data.error === null) {
                 dispatch(setCategoryList(data.categories));
             }
+        });
+        request("/products").then(({ lastPage, products }) => {
+            setProducts(products);
         });
     }, [dispatch]);
 
@@ -29,10 +33,12 @@ export const Catalog = () => {
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            <ProductItem url={"/catalog/1"} />
-                            <ProductItem url={"/catalog/1"} />
-                            <ProductItem url={"/catalog/1"} />
-                            <ProductItem url={"/catalog/1"} />
+                            {products.map((product) => (
+                                <ProductItem
+                                    key={product.id}
+                                    {...product}
+                                />
+                            ))}
                             <Pagination />
                         </div>
                     </div>
