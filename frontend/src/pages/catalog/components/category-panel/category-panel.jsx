@@ -1,20 +1,25 @@
 import { CategoryItem } from "../category-item/category-item";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../../../../store/categorySlice";
-import { setCategoryName } from "../../../../store/searchProductSlice";
+import { getCategoryName, setCategoryName } from "../../../../store/searchProductSlice";
 
 export const CategoryPanel = () => {
     const dispatch = useDispatch();
     const categoryList = useSelector(getCategory);
+    const currentCategory = useSelector(getCategoryName);
 
     const onSelectCategory = (name) => {
         dispatch(setCategoryName(name));
     };
 
     return (
-        <div className="flex flex-col w-full bg-lightGray p-[10px] mr-[10px] rounded-xl">
+        <div className="flex flex-col w-full bg-lightGray p-[10px] mr-[10px] gap-y-1 rounded-xl">
             {categoryList.map(({ id, name }) => (
-                <CategoryItem key={id} onSelectCategory={onSelectCategory}>
+                <CategoryItem
+                    key={id}
+                    onSelectCategory={onSelectCategory}
+                    currentCategory={currentCategory}
+                >
                     {name}
                 </CategoryItem>
             ))}
