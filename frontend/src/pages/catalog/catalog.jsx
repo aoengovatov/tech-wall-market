@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 export const Catalog = () => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
+    const [lastPage, setLastPage] = useState(0);
 
     useEffect(() => {
         request("/categories").then((data) => {
@@ -18,6 +19,7 @@ export const Catalog = () => {
         });
         request("/products").then(({ lastPage, products }) => {
             setProducts(products);
+            setLastPage(lastPage);
         });
     }, [dispatch]);
 
@@ -34,12 +36,9 @@ export const Catalog = () => {
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
                             {products.map((product) => (
-                                <ProductItem
-                                    key={product.id}
-                                    {...product}
-                                />
+                                <ProductItem key={product.id} {...product} />
                             ))}
-                            <Pagination />
+                            <Pagination lastPage={lastPage} />
                         </div>
                     </div>
                 </div>
