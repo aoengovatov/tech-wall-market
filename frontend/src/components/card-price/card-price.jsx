@@ -1,5 +1,4 @@
 export const CardPrice = ({ price, oldPrice, color }) => {
-    !oldPrice ? (oldPrice = "") : (oldPrice += " ₽");
     let textColor = "";
 
     switch (color) {
@@ -13,9 +12,13 @@ export const CardPrice = ({ price, oldPrice, color }) => {
     return (
         <div className="flex flex-col">
             <div className="text-xl font-semibold leading-5" style={{ color: textColor }}>
-                {price} ₽
+                {price === 0 ? oldPrice : price} ₽
             </div>
-            <div className="text-l line-through leading-5 text-darkGray">{oldPrice}</div>
+            {price !== 0 && (
+                <div className="text-l line-through leading-5 text-darkGray">
+                    {oldPrice} ₽
+                </div>
+            )}
         </div>
     );
 };

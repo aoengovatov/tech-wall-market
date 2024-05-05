@@ -96,13 +96,13 @@ export const AddProduct = () => {
                     <Input
                         type={"number"}
                         onChange={() => setServerError("")}
-                        ref={oldPrice}
-                        placeholder={"цена со скидкой"}
+                        ref={price}
+                        placeholder={"цена со скидкой (или 0)"}
                     />
                     <Input
                         type={"number"}
                         onChange={() => setServerError("")}
-                        ref={price}
+                        ref={oldPrice}
                         placeholder={"цена без скидки"}
                         required={true}
                     />
