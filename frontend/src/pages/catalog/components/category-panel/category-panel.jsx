@@ -7,7 +7,6 @@ export const CategoryPanel = () => {
     const dispatch = useDispatch();
     const categoryList = useSelector(getCategory);
     const currentCategoryId = useSelector(getCategoryId);
-    console.log(categoryList);
 
     const onSelectCategory = (id) => {
         dispatch(setCategoryId(id));

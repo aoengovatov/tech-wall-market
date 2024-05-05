@@ -49,7 +49,7 @@ export const MarketApp = () => {
                                 <Route path="/login" element={<Authorization />} />
                                 <Route path="/register" element={<Registration />} />
                                 <Route path="/catalog" element={<Catalog />} />
-                                <Route path="/catalog/:id" element={<SingleProduct />} />
+                                <Route path="/catalog/:productId" element={<SingleProduct />} />
                                 <Route path="/profile" element={<Profile />} />
                                 <Route
                                     path="/profile/favorites"

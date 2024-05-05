@@ -7,13 +7,14 @@ import {
     ProductCode,
     ButtonDelete,
 } from "..";
+import { saleCount } from "../../utils";
 
 export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
 
-    let saleCount = 0;
+    let sale = 0;
     if (props.price && props.oldPrice) {
-        saleCount = Math.floor(100 - (props.price * 100) / props.oldPrice);
+        sale = saleCount(props.price, props.oldPrice);
     }
 
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
@@ -21,7 +22,7 @@ export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props 
     return (
         <div className="flex flex-col w-full h-[160px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] pr-[${paddingBlockRight}px] transition-all duration-200 hover:border-lightBlue">
             <div className="flex justify-end">
-                <SaleWidget count={saleCount} />
+                <SaleWidget count={sale} />
                 {buttonDelete && (
                     <div className="ml-[10px]">
                         <ButtonDelete />
