@@ -4,12 +4,16 @@ import { Pagination } from "../../components/pagination/pagination";
 import { useEffect, useState } from "react";
 import { request } from "../../utils";
 import { setCategoryList } from "../../store/categorySlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPage, getSearchPhrase } from "../../store/searchProductSlice";
+import { PAGE_LIMIT } from "../../constants";
 
 export const Catalog = () => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const [lastPage, setLastPage] = useState(0);
+    const searchPhrase = useSelector(getSearchPhrase);
+    const currentPage = useSelector(getPage);
 
     useEffect(() => {
         request("/categories").then((data) => {
@@ -17,11 +21,13 @@ export const Catalog = () => {
                 dispatch(setCategoryList(data.categories));
             }
         });
-        request("/products").then(({ lastPage, products }) => {
+        request(
+            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&search=${searchPhrase}`
+        ).then(({ lastPage, products }) => {
             setProducts(products);
             setLastPage(lastPage);
         });
-    }, [dispatch]);
+    }, [dispatch, searchPhrase, currentPage]);
 
     return (
         <>
