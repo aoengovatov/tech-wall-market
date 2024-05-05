@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setOpenModal } from "../../../../store/modalSlice";
 import { deleteCategory } from "../../../../store/categorySlice";
 import { request } from "../../../../utils";
-import { setCategoryName } from "../../../../store/searchProductSlice";
+import { setCategoryId } from "../../../../store/catalogSlice";
 
 export const CategoryCard = ({ id, src, color, edit, children }) => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
     };
 
     const onClickCategory = () => {
-        dispatch(setCategoryName(children));
+        dispatch(setCategoryId(id));
         return navigate("/catalog");
     };
 

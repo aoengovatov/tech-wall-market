@@ -1,4 +1,4 @@
-import { getPage, setPage } from "../../store/searchProductSlice";
+import { getPage, setPage } from "../../store/catalogSlice";
 import { Button } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 

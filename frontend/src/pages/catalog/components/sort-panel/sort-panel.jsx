@@ -4,7 +4,7 @@ import {
     getSortPrice,
     setSearchPhrase,
     setSortPrice,
-} from "../../../../store/searchProductSlice";
+} from "../../../../store/catalogSlice";
 
 export const SortPanel = () => {
     const dispatch = useDispatch();

@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialSearch = {
-    categoryName: "",
+    categoryId: "",
     searchPhrase: "",
     sortPrice: "1",
     page: 1,
 };
 
-const searchProductSlice = createSlice({
-    name: "searchProduct",
+const catalogSlice = createSlice({
+    name: "catalog",
     initialState: initialSearch,
     reducers: {
-        setCategoryName: (state, action) => {
-            state.categoryName = action.payload;
+        setCategoryId: (state, action) => {
+            state.categoryId = action.payload;
         },
         setSearchPhrase: (state, action) => {
             state.searchPhrase = action.payload;
@@ -26,15 +26,15 @@ const searchProductSlice = createSlice({
     },
     selectors: {
         getSearch: (state) => state,
-        getCategoryName: (state) => state.categoryName,
+        getCategoryId: (state) => state.categoryId,
         getSearchPhrase: (state) => state.searchPhrase,
         getSortPrice: (state) => state.sortPrice,
         getPage: (state) => state.page,
     },
 });
 
-export default searchProductSlice.reducer;
-export const { setCategoryName, setSearchPhrase, setSortPrice, setPage } =
-    searchProductSlice.actions;
-export const { getSearch, getCategoryName, getSearchPhrase, getSortPrice, getPage } =
-    searchProductSlice.selectors;
+export default catalogSlice.reducer;
+export const { setCategoryId, setSearchPhrase, setSortPrice, setPage } =
+    catalogSlice.actions;
+export const { getSearch, getCategoryId, getSearchPhrase, getSortPrice, getPage } =
+    catalogSlice.selectors;

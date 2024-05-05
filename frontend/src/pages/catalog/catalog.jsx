@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { request } from "../../utils";
 import { setCategoryList } from "../../store/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getPage, getSearchPhrase } from "../../store/searchProductSlice";
+import { getCategoryId, getPage, getSearchPhrase } from "../../store/catalogSlice";
 import { PAGE_LIMIT } from "../../constants";
 
 export const Catalog = () => {
@@ -14,6 +14,7 @@ export const Catalog = () => {
     const [lastPage, setLastPage] = useState(0);
     const searchPhrase = useSelector(getSearchPhrase);
     const currentPage = useSelector(getPage);
+    const categoryId = useSelector(getCategoryId);
 
     useEffect(() => {
         request("/categories").then((data) => {
@@ -22,12 +23,12 @@ export const Catalog = () => {
             }
         });
         request(
-            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&search=${searchPhrase}`
+            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&category=${categoryId}&search=${searchPhrase}`
         ).then(({ lastPage, products }) => {
             setProducts(products);
             setLastPage(lastPage);
         });
-    }, [dispatch, searchPhrase, currentPage]);
+    }, [dispatch, searchPhrase, currentPage, categoryId]);
 
     return (
         <>
