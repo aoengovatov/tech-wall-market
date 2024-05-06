@@ -2,9 +2,14 @@ const productService = require("../services/product.service");
 const mapProduct = require("../mappers/mapProduct");
 
 exports.getProduct = async (req, res) => {
-    const product = await productService.getProduct(req.params.id);
+    try {
+        const product = await productService.getProduct(req.params.id);
 
-    res.send({ error: null, product });
+        res.send({ error: null, product });
+    }catch(e) {
+        res.send({error: e.message})
+    }
+    
 };
 
 exports.getProducts = async (req, res) => {

@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
 exports.getProduct = (id) => {
-    return Product.findOne({ _id: id }).populate("category");
+    return product = Product.findOne({ _id: id });
 };
 
 exports.getProducts = async (search = "", limit = 10, page = 1, category, priceSort) => {
@@ -60,7 +60,7 @@ exports.addProduct = async (newProduct) => {
 
         return product;
     } catch (e) {
-        return e.message;
+        return e;
     }
 };
 
