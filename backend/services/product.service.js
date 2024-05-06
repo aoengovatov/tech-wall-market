@@ -4,15 +4,10 @@ exports.getProduct = (id) => {
     return Product.findOne({ _id: id }).populate("category");
 };
 
-exports.getProducts = async (
-    search = "",
-    limit = 10,
-    page = 1,
-    category,
-    priceSort = false
-) => {
+exports.getProducts = async (search = "", limit = 10, page = 1, category, priceSort) => {
     let products = [];
     let count = 0;
+    const sort = priceSort === "true" ? 1 : -1;
 
     if (category) {
         [products, count] = await Promise.all([
@@ -24,7 +19,7 @@ exports.getProducts = async (
                 .in([category])
                 .limit(limit)
                 .skip((page - 1) * limit)
-                .sort({ price: priceSort ? 1 : -1 }),
+                .sort({ price: sort }),
 
             Product.countDocuments({
                 name: { $regex: search, $options: "i" },
@@ -40,7 +35,7 @@ exports.getProducts = async (
             })
                 .limit(limit)
                 .skip((page - 1) * limit)
-                .sort({ price: priceSort ? 1 : -1 }),
+                .sort({ price: sort }),
 
             Product.countDocuments({
                 name: { $regex: search, $options: "i" },
