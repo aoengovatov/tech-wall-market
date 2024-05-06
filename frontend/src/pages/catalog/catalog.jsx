@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import { request } from "../../utils";
 import { setCategoryList } from "../../store/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoryId, getPage, getSearchPhrase } from "../../store/catalogSlice";
+import {
+    getCategoryId,
+    getPage,
+    getSearchPhrase,
+    getPriceSort,
+} from "../../store/catalogSlice";
 import { PAGE_LIMIT } from "../../constants";
 
 export const Catalog = () => {
@@ -15,6 +20,7 @@ export const Catalog = () => {
     const searchPhrase = useSelector(getSearchPhrase);
     const currentPage = useSelector(getPage);
     const categoryId = useSelector(getCategoryId);
+    const priceSort = useSelector(getPriceSort);
 
     useEffect(() => {
         request("/categories").then((data) => {
@@ -23,12 +29,12 @@ export const Catalog = () => {
             }
         });
         request(
-            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&category=${categoryId}&search=${searchPhrase}`
+            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&category=${categoryId}&search=${searchPhrase}&priceSort=${priceSort}`
         ).then(({ lastPage, products }) => {
             setProducts(products);
             setLastPage(lastPage);
         });
-    }, [dispatch, searchPhrase, currentPage, categoryId]);
+    }, [dispatch, searchPhrase, currentPage, categoryId, priceSort]);
 
     return (
         <>
@@ -43,7 +49,7 @@ export const Catalog = () => {
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
                             {products.map((product) => (
-                                <ProductItem key={product.id} {...product} />
+                                <ProductItem key={product._id} {...product} />
                             ))}
                             <Pagination lastPage={lastPage} />
                         </div>

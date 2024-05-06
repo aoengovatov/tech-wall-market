@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
     getSearchPhrase,
-    getSortPrice,
+    getPriceSort,
     setSearchPhrase,
-    setSortPrice,
+    setPriceSort,
 } from "../../../../store/catalogSlice";
 
 export const SortPanel = () => {
     const dispatch = useDispatch();
-    const currentSort = useSelector(getSortPrice);
+    const currentPriceSort = useSelector(getPriceSort);
     const currentSearchPhrase = useSelector(getSearchPhrase);
 
     const onSortChange = ({ target }) => {
-        dispatch(setSortPrice(target.value));
+        dispatch(setPriceSort(target.value));
     };
 
     const onSearchPhraseChange = ({ target }) => {
@@ -22,12 +22,12 @@ export const SortPanel = () => {
     return (
         <div className="flex justify-end mb-[15px]">
             <select
-                value={currentSort}
+                value={currentPriceSort}
                 onChange={(target) => onSortChange(target)}
                 className="outline-none text-darkGray border-2 px-[7px] py-[3px] border-gray rounded-lg mr-[10px] focus:border-blue"
             >
-                <option value="1">сначала дешевле</option>
-                <option value="-1">сначала дороже</option>
+                <option value={true}>сначала дешевле</option>
+                <option value={false}>сначала дороже</option>
             </select>
             <input
                 value={currentSearchPhrase}
