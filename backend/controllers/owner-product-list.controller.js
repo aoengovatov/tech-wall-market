@@ -5,7 +5,7 @@ exports.getOwnerProducts = async (req, res) => {
 
     const ownerProducts = await ownerProductService.getOwnerProducts(userId);
 
-    res.send({ data: ownerProducts });
+    res.send({ error: null, data: ownerProducts });
 };
 
 exports.addOwnerProduct = async (req, res) => {
