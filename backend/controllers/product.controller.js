@@ -4,7 +4,7 @@ const mapProduct = require("../mappers/mapProduct");
 exports.getProduct = async (req, res) => {
     const product = await productService.getProduct(req.params.id);
 
-    res.send({ data: product });
+    res.send({ error: null, product });
 };
 
 exports.getProducts = async (req, res) => {
@@ -18,5 +18,5 @@ exports.getProducts = async (req, res) => {
         priceSort
     );
 
-    res.send({ data: { lastPage, products } });
+    res.send({ lastPage, products });
 };
