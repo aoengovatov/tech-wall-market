@@ -8,6 +8,7 @@ const OwnerProductListSchema = mongoose.Schema(
         },
         products: [
             {
+                _id: false,
                 count: {
                     type: Number,
                     default: 1,

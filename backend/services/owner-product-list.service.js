@@ -5,13 +5,11 @@ exports.getOwnerProducts = (ownerId) => {
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
-    const isOwnerProductListExist = await Boolean(
-        OwnerProductList.countDocuments({ owner })
-    );
-
+    const ownerProductsCount = await OwnerProductList.countDocuments({ owner });
+    
     let newOwnerProduct = {};
 
-    if (isOwnerProductListExist) {
+    if (ownerProductsCount !== 0) {
         const oldProduct = await OwnerProductList.findOne({
             owner,
             "products.product": product,
@@ -37,7 +35,12 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
         });
     }
 
-    return newOwnerProduct;
+    return await newOwnerProduct.populate({
+        path: "products",
+        populate: {
+           path: "product"
+        }
+     });
 };
 
 exports.updateStatusAll = async (owner, status) => {

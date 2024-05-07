@@ -26,7 +26,7 @@ exports.addOwnerProduct = async (req, res) => {
         );
     }
 
-    res.send({ data: newOwnerProduct });
+    res.send({ error: null, data: newOwnerProduct });
 };
 
 exports.updateStatus;
