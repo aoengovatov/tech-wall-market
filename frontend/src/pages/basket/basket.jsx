@@ -1,7 +1,20 @@
 import { Breadcrumbs, CardPrice, ButtonRed } from "../../components";
+import { request } from "../../utils";
 import { CardBasket } from "./components";
+import { useState, useEffect } from "react";
 
 export const Basket = () => {
+    const [basketProducts, setBasketProducts] = useState([])
+
+    useEffect(() => {
+        request('/users/products').then((data) => {
+            if(data.error === null) {
+                console.log(data);
+                //setBasketProducts(data.products)
+            }
+        })
+    })
+
     return (
         <>
             <Breadcrumbs />
@@ -20,7 +33,7 @@ export const Basket = () => {
                         <div className="flex flex-col w-full bg-lightGray p-[20px] rounded-xl">
                             <div className="flex items-center justify-between mb-[5px]">
                                 <div className="text-2xl font-semibold">Итого:</div>
-                                <CardPrice price={149900} color="green" />
+                                <CardPrice price={149900} oldPrice={0} color="green" />
                             </div>
                             <div className="text-sm text-darkGray mb-[10px]">
                                 количество товаров в корзине: 1

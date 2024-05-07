@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     ButtonBlue,
     ButtonLike,
@@ -7,10 +7,15 @@ import {
     ProductCode,
     ButtonDelete,
 } from "..";
-import { saleCount } from "../../utils";
+import { request, saleCount } from "../../utils";
+import { useSelector } from "react-redux";
+import { getUserRole } from "../../store/userSlice";
+import { ROLE } from "../../constants";
 
 export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
+    const navigate = useNavigate();
+    const userRole = useSelector(getUserRole);
 
     let sale = 0;
     if (props.price && props.oldPrice) {
@@ -18,6 +23,35 @@ export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props 
     }
 
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
+
+    const addOwnerProduct = (type) => {
+
+        if (userRole === ROLE.GUEST) {
+            return navigate("/login");
+        }
+        
+        let status = "";
+
+        switch (type) {
+            case "basket":
+                status = "BASKET";
+                break;
+            case "favorite":
+                status = "FAVORITE";
+                break;
+            default:
+        }
+
+        const newOwnerProduct = {
+            productId: props._id,
+            status,
+            count: 1,
+        };
+
+        request("/users/products", "POST", newOwnerProduct).then((data) => {
+            console.log(data);
+        });
+    };
 
     return (
         <div className="flex flex-col w-full h-[160px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] pr-[${paddingBlockRight}px] transition-all duration-200 hover:border-lightBlue">
@@ -50,10 +84,14 @@ export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props 
                         <div className="flex">
                             {likeButton && (
                                 <div className="mr-[5px]">
-                                    <ButtonLike />
+                                    <ButtonLike
+                                        onClick={() => addOwnerProduct("favorite")}
+                                    />
                                 </div>
                             )}
-                            <ButtonBlue>в корзину</ButtonBlue>
+                            <ButtonBlue onClick={() => addOwnerProduct("basket")}>
+                                в корзину
+                            </ButtonBlue>
                         </div>
                     </div>
                 </div>

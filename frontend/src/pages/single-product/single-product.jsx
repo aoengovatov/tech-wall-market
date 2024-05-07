@@ -35,10 +35,7 @@ export const SingleProduct = () => {
             <div className="mt-[10px] mb-[30px] border-2 border-lightGray rounded-lg">
                 <div className="flex w-full mb-[15px] p-[15px]">
                     <div className="flex items-center justify-center w-1/2">
-                        <img
-                            src="/src/assets/item-logo-min.png"
-                            className="w-[300px] m-[20px]"
-                        ></img>
+                        <img src={product.imageUrl} className="w-[300px] m-[20px]"></img>
                     </div>
 
                     <div className="w-1/2">

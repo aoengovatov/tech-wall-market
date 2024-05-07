@@ -14,7 +14,7 @@ export const CardPrice = ({ price, oldPrice, color }) => {
             <div className="text-xl font-semibold leading-5" style={{ color: textColor }}>
                 {price === 0 ? oldPrice : price} ₽
             </div>
-            {price !== 0 && (
+            {oldPrice !== 0 && (
                 <div className="text-l line-through leading-5 text-darkGray">
                     {oldPrice} ₽
                 </div>

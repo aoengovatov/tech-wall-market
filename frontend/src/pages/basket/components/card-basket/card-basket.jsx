@@ -24,7 +24,7 @@ export const CardBasket = ({ url }) => {
 
                     <div className="flex items-center">
                         <ItemAmount />
-                        <CardPrice price={149900} className="w-4/12" />
+                        <CardPrice price={149900} oldPrice={0} className="w-4/12" />
                     </div>
                 </div>
             </div>
