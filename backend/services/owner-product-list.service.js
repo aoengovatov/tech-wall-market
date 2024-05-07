@@ -1,7 +1,14 @@
 const OwnerProductList = require("../models/OwnerProductList");
 
-exports.getOwnerProducts = (ownerId) => {
-    return OwnerProductList.find({ owner: ownerId });
+exports.getOwnerProducts = async (ownerId) => {
+    const productList = OwnerProductList.find({ owner: ownerId });
+
+    return await productList.populate({
+        path: "products",
+        populate: {
+           path: "product"
+        }
+     });
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
