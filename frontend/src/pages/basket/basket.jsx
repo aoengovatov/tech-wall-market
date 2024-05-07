@@ -1,19 +1,25 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumbs, CardPrice, ButtonRed } from "../../components";
 import { request } from "../../utils";
 import { CardBasket } from "./components";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { getBasketProducts, setBasketList } from "../../store/basketSlice";
 
 export const Basket = () => {
-    const [basketProducts, setBasketProducts] = useState([])
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        request('/users/products').then((data) => {
-            if(data.error === null) {
-                console.log(data);
-                //setBasketProducts(data.products)
+        request("/users/products").then(({ error, data }) => {
+            if (error === null) {
+                const basketProducts = data.products.filter(
+                    (product) => product.status === "BASKET"
+                );
+                dispatch(setBasketList(basketProducts));
             }
-        })
-    })
+        });
+    }, [dispatch]);
+
+    const basketProducts = useSelector(getBasketProducts);
 
     return (
         <>
@@ -23,10 +29,22 @@ export const Basket = () => {
                 <div className="flex">
                     <div className="w-8/12">
                         <div className="flex flex-col mr-[10px]">
-                            <CardBasket url={"/catalog/1"} />
-                            <CardBasket url={"/catalog/1"} />
-                            <CardBasket url={"/catalog/1"} />
-                            <CardBasket url={"/catalog/1"} />
+                            {basketProducts.map(
+                                ({
+                                    count,
+                                    product: { _id: id, name, price, oldPrice, imageUrl },
+                                }) => (
+                                    <CardBasket
+                                        key={id}
+                                        id={id}
+                                        count={count}
+                                        name={name}
+                                        price={price}
+                                        oldPrice={oldPrice}
+                                        imageUrl={imageUrl}
+                                    />
+                                )
+                            )}
                         </div>
                     </div>
                     <div className="w-4/12">

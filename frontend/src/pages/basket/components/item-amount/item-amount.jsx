@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ButtonAdd } from "./components";
 
-export const ItemAmount = () => {
-    const [count, setCount] = useState(1);
+export const ItemAmount = ({ currentCount }) => {
+    const [count, setCount] = useState(currentCount);
 
     const onButtonClick = (value) => {
         console.log("клик", value);
