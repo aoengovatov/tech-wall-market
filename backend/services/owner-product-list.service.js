@@ -1,19 +1,19 @@
 const OwnerProductList = require("../models/OwnerProductList");
 
 exports.getOwnerProducts = async (ownerId) => {
-    const productList = OwnerProductList.find({ owner: ownerId });
+    const productList = OwnerProductList.findOne({ owner: ownerId });
 
     return await productList.populate({
         path: "products",
         populate: {
-           path: "product"
-        }
-     });
+            path: "product",
+        },
+    });
 };
 
 exports.addOwnerProduct = async (owner, product, status, count) => {
     const ownerProductsCount = await OwnerProductList.countDocuments({ owner });
-    
+
     let newOwnerProduct = {};
 
     if (ownerProductsCount !== 0) {
@@ -45,9 +45,9 @@ exports.addOwnerProduct = async (owner, product, status, count) => {
     return await newOwnerProduct.populate({
         path: "products",
         populate: {
-           path: "product"
-        }
-     });
+            path: "product",
+        },
+    });
 };
 
 exports.updateStatusAll = async (owner, status) => {
