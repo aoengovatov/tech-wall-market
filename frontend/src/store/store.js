@@ -13,7 +13,7 @@ export const store = configureStore({
         modal: modalReducers,
         catalog: catalogReducers,
         basket: basketReducers,
-        favorute: favoriteReducers,
+        favorite: favoriteReducers,
     },
     devTools: true,
 });

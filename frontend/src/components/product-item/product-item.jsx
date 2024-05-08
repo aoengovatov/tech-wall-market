@@ -8,9 +8,11 @@ import {
     ButtonDelete,
 } from "..";
 import { request, saleCount } from "../../utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
+import { setBasketList } from "../../store/basketSlice";
+import { setFavoriteList } from "../../store/favoriteSlice";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const ProductItem = ({
@@ -24,6 +26,7 @@ export const ProductItem = ({
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
 
     let sale = 0;
@@ -44,9 +47,18 @@ export const ProductItem = ({
             count: 1,
         };
 
-        request("/users/products", "POST", newOwnerProduct).then((data) => {
-            console.log(data);
-            //после добавления в зависимости от статуса (корзина или избранное) обновляем store
+        request("/users/products", "POST", newOwnerProduct).then(({ error, data }) => {
+            if (error === null) {
+                const favoriteProducts = data.products.filter(
+                    (product) => product.status === OWNER_PRODUCT_STATUS.FAVORITE
+                );
+                dispatch(setFavoriteList(favoriteProducts));
+
+                const basketProducts = data.products.filter(
+                    (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
+                );
+                dispatch(setBasketList(basketProducts));
+            }
         });
     };
 

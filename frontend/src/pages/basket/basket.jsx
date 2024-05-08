@@ -4,6 +4,7 @@ import { request } from "../../utils";
 import { CardBasket } from "./components";
 import { useEffect } from "react";
 import { getBasketProducts, setBasketList } from "../../store/basketSlice";
+import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const Basket = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export const Basket = () => {
         request("/users/products").then(({ error, data }) => {
             if (error === null) {
                 const basketProducts = data.products.filter(
-                    (product) => product.status === "BASKET"
+                    (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
                 );
                 dispatch(setBasketList(basketProducts));
             }
