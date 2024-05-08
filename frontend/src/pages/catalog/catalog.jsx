@@ -48,9 +48,18 @@ export const Catalog = () => {
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            {products.map((product) => (
-                                <ProductItem key={product._id} {...product} />
-                            ))}
+                            {products.map(
+                                ({ _id: id, name, price, oldPrice, imageUrl }) => (
+                                    <ProductItem
+                                        key={id}
+                                        id={id}
+                                        name={name}
+                                        price={price}
+                                        oldPrice={oldPrice}
+                                        imageUrl={imageUrl}
+                                    />
+                                )
+                            )}
                             <Pagination lastPage={lastPage} />
                         </div>
                     </div>

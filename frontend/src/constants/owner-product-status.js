@@ -1,0 +1,4 @@
+export const OWNER_PRODUCT_STATUS = {
+    BASKET: "BASKET",
+    FAVORITE: "FAVORITE",
+};

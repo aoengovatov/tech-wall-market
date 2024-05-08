@@ -12,24 +12,31 @@ import { useSelector } from "react-redux";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 
-export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props }) => {
+export const ProductItem = ({
+    likeButton = true,
+    buttonDelete = false,
+    id,
+    name,
+    price,
+    oldPrice,
+    imageUrl,
+}) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
     const navigate = useNavigate();
     const userRole = useSelector(getUserRole);
 
     let sale = 0;
-    if (props.price && props.oldPrice) {
-        sale = saleCount(props.price, props.oldPrice);
+    if (price && oldPrice) {
+        sale = saleCount(price, oldPrice);
     }
 
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
 
     const addOwnerProduct = (type) => {
-
         if (userRole === ROLE.GUEST) {
             return navigate("/login");
         }
-        
+
         let status = "";
 
         switch (type) {
@@ -43,7 +50,7 @@ export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props 
         }
 
         const newOwnerProduct = {
-            productId: props._id,
+            productId: id,
             status,
             count: 1,
         };
@@ -64,22 +71,22 @@ export const ProductItem = ({ likeButton = true, buttonDelete = false, ...props 
                 )}
             </div>
             <div className={mainContentStyle}>
-                <img src={props.imageUrl} className="h-[100px] mx-[20px]"></img>
+                <img src={imageUrl} className="h-[100px] mx-[20px]"></img>
 
                 <div className="flex flex-col w-full h-full justify-around">
                     <div className="flex justify-between">
                         <Link
-                            to={`/catalog/${props._id}`}
+                            to={`/catalog/${id}`}
                             className="font-semibold text-base w-8/12"
                         >
-                            {props.name}
+                            {name}
                         </Link>
-                        <CardPrice price={props.price} oldPrice={props.oldPrice} />
+                        <CardPrice price={price} oldPrice={oldPrice} />
                     </div>
 
                     <div className="flex items-end justify-between">
                         <div className="w-8/12">
-                            <ProductCode>{props._id.slice(-8)}</ProductCode>
+                            <ProductCode>{id.slice(-8)}</ProductCode>
                         </div>
                         <div className="flex">
                             {likeButton && (
