@@ -25,7 +25,7 @@ export const CardBasket = ({ id, count, name, price, oldPrice, imageUrl }) => {
                     <ProductCode>{id.slice(-8)}</ProductCode>
 
                     <div className="flex items-center">
-                        <ItemAmount currentCount={count} />
+                        <ItemAmount currentCount={count} id={id} />
                         <CardPrice price={price} oldPrice={oldPrice} className="w-4/12" />
                     </div>
                 </div>

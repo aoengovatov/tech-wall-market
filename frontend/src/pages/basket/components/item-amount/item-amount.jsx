@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { ButtonAdd } from "./components";
+import { useDispatch } from "react-redux";
+import { setBasketProductCount } from "../../../../store/basketSlice";
 
-export const ItemAmount = ({ currentCount }) => {
+export const ItemAmount = ({ currentCount, id }) => {
     const [count, setCount] = useState(currentCount);
+    const dispatch = useDispatch();
 
     const onButtonClick = (value) => {
-        console.log("клик", value);
         let newCount = count + value;
-        console.log(newCount);
 
         newCount < 1 ? (newCount = 1) : newCount;
         newCount > 99 ? (newCount = 99) : newCount;
-        setCount(newCount);
+        if (newCount !== count) {
+            dispatch(setBasketProductCount({ id, count: newCount }));
+            setCount(newCount);
+        }
     };
 
     return (

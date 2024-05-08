@@ -8,9 +8,9 @@ const basketSlice = createSlice({
     reducers: {
         setBasketList: (state, action) => (state = action.payload),
         setBasketProductCount: (state, action) => {
-            state.map((product) => {
-                if (product._id === action.payload.id) {
-                    product.count = action.payload.count;
+            state.map((item) => {
+                if (item.product._id === action.payload.id) {
+                    item.count = action.payload.count;
                 }
             });
         },
