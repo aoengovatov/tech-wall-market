@@ -22,6 +22,16 @@ export const Basket = () => {
 
     const basketProducts = useSelector(getBasketProducts);
 
+    let totalCount = 0;
+    let totalPrice = 0;
+
+    basketProducts.map((item) => {
+        const price =
+            item.product.price !== 0 ? item.product.price : item.product.oldPrice;
+        totalPrice += price * item.count;
+        totalCount += item.count;
+    }, 0);
+
     return (
         <>
             <Breadcrumbs />
@@ -52,10 +62,14 @@ export const Basket = () => {
                         <div className="flex flex-col w-full bg-lightGray p-[20px] rounded-xl">
                             <div className="flex items-center justify-between mb-[5px]">
                                 <div className="text-2xl font-semibold">Итого:</div>
-                                <CardPrice price={149900} oldPrice={0} color="green" />
+                                <CardPrice
+                                    price={totalPrice}
+                                    oldPrice={0}
+                                    color="green"
+                                />
                             </div>
                             <div className="text-sm text-darkGray mb-[10px]">
-                                количество товаров в корзине: 1
+                                количество товаров в корзине: {totalCount}
                             </div>
                             <div className="w-full m-auto">
                                 <ButtonRed>оформить заказ</ButtonRed>
