@@ -4,6 +4,7 @@ import categoryReducers from "./categorySlice";
 import modalReducers from "./modalSlice";
 import catalogReducers from "./catalogSlice";
 import basketReducers from "./basketSlice";
+import favoriteReducers from "./favoriteSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         modal: modalReducers,
         catalog: catalogReducers,
         basket: basketReducers,
+        favorute: favoriteReducers,
     },
     devTools: true,
 });

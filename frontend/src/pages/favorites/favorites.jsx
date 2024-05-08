@@ -12,21 +12,6 @@ export const Favorites = () => {
                         buttonDelete={true}
                         url={"/catalog/1"}
                     />
-                    <ProductItem
-                        likeButton={false}
-                        buttonDelete={true}
-                        url={"/catalog/1"}
-                    />
-                    <ProductItem
-                        likeButton={false}
-                        buttonDelete={true}
-                        url={"/catalog/1"}
-                    />
-                    <ProductItem
-                        likeButton={false}
-                        buttonDelete={true}
-                        url={"/catalog/1"}
-                    />
                 </div>
             </div>
         </>

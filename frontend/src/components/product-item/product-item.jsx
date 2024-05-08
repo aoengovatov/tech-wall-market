@@ -34,7 +34,6 @@ export const ProductItem = ({
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
 
     const addOwnerProduct = (status) => {
-        
         if (userRole === ROLE.GUEST) {
             return navigate("/login");
         }
@@ -47,6 +46,7 @@ export const ProductItem = ({
 
         request("/users/products", "POST", newOwnerProduct).then((data) => {
             console.log(data);
+            //после добавления в зависимости от статуса (корзина или избранное) обновляем store
         });
     };
 
