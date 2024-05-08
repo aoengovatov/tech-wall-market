@@ -11,6 +11,7 @@ import { request, saleCount } from "../../utils";
 import { useSelector } from "react-redux";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
+import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const ProductItem = ({
     likeButton = true,
@@ -32,21 +33,10 @@ export const ProductItem = ({
 
     const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
 
-    const addOwnerProduct = (type) => {
+    const addOwnerProduct = (status) => {
+        
         if (userRole === ROLE.GUEST) {
             return navigate("/login");
-        }
-
-        let status = "";
-
-        switch (type) {
-            case "basket":
-                status = "BASKET";
-                break;
-            case "favorite":
-                status = "FAVORITE";
-                break;
-            default:
         }
 
         const newOwnerProduct = {
@@ -92,11 +82,17 @@ export const ProductItem = ({
                             {likeButton && (
                                 <div className="mr-[5px]">
                                     <ButtonLike
-                                        onClick={() => addOwnerProduct("favorite")}
+                                        onClick={() =>
+                                            addOwnerProduct(OWNER_PRODUCT_STATUS.FAVORITE)
+                                        }
                                     />
                                 </div>
                             )}
-                            <ButtonBlue onClick={() => addOwnerProduct("basket")}>
+                            <ButtonBlue
+                                onClick={() =>
+                                    addOwnerProduct(OWNER_PRODUCT_STATUS.BASKET)
+                                }
+                            >
                                 в корзину
                             </ButtonBlue>
                         </div>
