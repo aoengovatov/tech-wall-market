@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
     Breadcrumbs,
@@ -11,23 +11,75 @@ import {
 import { request } from "../../utils";
 import { Page404 } from "../404/page-404";
 import { saleCount } from "../../utils";
+import { OWNER_PRODUCT_STATUS } from "../../constants";
+import { ROLE } from "../../constants";
+import { getBasketProducts, setBasketList } from "../../store/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserRole } from "../../store/userSlice";
 
 export const SingleProduct = () => {
     const params = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userRole = useSelector(getUserRole);
     const [product, setProduct] = useState(null);
+    const [isBasketFlag, setIsBasketFlag] = useState(false);
     const [sale, setSale] = useState(0);
 
     useEffect(() => {
-        request(`/products/${params.productId}`).then((data) => {
-            if (data.error === null) {
-                setProduct(data.product);
-            }
+        Promise.all([
+            request(`/products/${params.productId}`).then((data) => {
+                if (data.error === null) {
+                    setProduct(data.product);
+                }
 
-            if (product.price && product.oldPrice) {
-                setSale(saleCount(product.price, product.oldPrice));
+                if (product.price && product.oldPrice) {
+                    setSale(saleCount(product.price, product.oldPrice));
+                }
+            }),
+            request("/users/products").then(({ error, data }) => {
+                if (error === null) {
+                    const basketProducts = data.products.filter(
+                        (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
+                    );
+                    dispatch(setBasketList(basketProducts));
+                }
+            }),
+        ]);
+    }, [params.productId, product, dispatch]);
+
+    const basketProducts = useSelector(getBasketProducts);
+
+    basketProducts.map((item) => {
+        if (item.product._id === params.productId && isBasketFlag === false) {
+            setIsBasketFlag(true);
+        }
+    });
+
+    const addProductInBasket = () => {
+        if (userRole === ROLE.GUEST) {
+            return navigate("/login");
+        }
+
+        const newOwnerProduct = {
+            productId: params.productId,
+            status: OWNER_PRODUCT_STATUS.BASKET,
+            count: 1,
+        };
+
+        request("/users/products", "POST", newOwnerProduct).then(({ error, data }) => {
+            if (error === null) {
+                const basketProducts = data.products.filter(
+                    (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
+                );
+                dispatch(setBasketList(basketProducts));
             }
         });
-    }, [params.productId, product]);
+    };
+
+    const redirectToBasket = () => {
+        return navigate("/profile/basket");
+    };
 
     return product ? (
         <>
@@ -62,7 +114,17 @@ export const SingleProduct = () => {
                                 бесплатная доставка курьером
                             </div>
                             <div className="w-8/12 m-auto">
-                                <ButtonRed>Добавить в корзину</ButtonRed>
+                                <ButtonRed
+                                    onClick={
+                                        isBasketFlag
+                                            ? redirectToBasket
+                                            : addProductInBasket
+                                    }
+                                >
+                                    {isBasketFlag
+                                        ? "Перейти в корзину"
+                                        : "Добавить в корзину"}
+                                </ButtonRed>
                             </div>
                         </div>
                     </div>
