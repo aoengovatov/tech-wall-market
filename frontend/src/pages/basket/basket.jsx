@@ -3,7 +3,11 @@ import { Breadcrumbs, CardPrice, ButtonRed } from "../../components";
 import { request } from "../../utils";
 import { CardBasket } from "./components";
 import { useEffect } from "react";
-import { getBasketProducts, setBasketList } from "../../store/basketSlice";
+import {
+    deleteBasketProduct,
+    getBasketProducts,
+    setBasketList,
+} from "../../store/basketSlice";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const Basket = () => {
@@ -32,6 +36,14 @@ export const Basket = () => {
         totalCount += item.count;
     }, 0);
 
+    const deleteProduct = (id) => {
+        request(`/users/products/${id}`, "DELETE").then(({ error }) => {
+            if (error === null) {
+                dispatch(deleteBasketProduct(id));
+            }
+        });
+    };
+
     return (
         <>
             <Breadcrumbs />
@@ -53,6 +65,7 @@ export const Basket = () => {
                                         price={price}
                                         sale={sale}
                                         imageUrl={imageUrl}
+                                        deleteProduct={deleteProduct}
                                     />
                                 )
                             )}

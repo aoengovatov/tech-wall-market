@@ -34,8 +34,8 @@ export const SingleProduct = () => {
                     setProduct(data.product);
                 }
 
-                if (product.sale > 0) {
-                    setOldPrice(oldPriceCount(product.price, product.sale));
+                if (data.product.sale > 0) {
+                    setOldPrice(oldPriceCount(data.product.price, data.product.sale));
                 }
             }),
             request("/users/products").then(({ error, data }) => {
@@ -51,7 +51,7 @@ export const SingleProduct = () => {
                 }
             }),
         ]);
-    }, [params.productId, product, dispatch]);
+    }, [params.productId, dispatch]);
 
     const basketProducts = useSelector(getBasketProducts);
     const favoriteProducts = useSelector(getFavoriteProducts);

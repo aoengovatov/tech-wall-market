@@ -15,7 +15,7 @@ const basketSlice = createSlice({
             });
         },
         deleteBasketProduct: (state, action) =>
-            state.filter((product) => product._id !== action.payload),
+            state.filter((item) => item.product._id !== action.payload),
     },
     selectors: {
         getBasketProducts: (state) => state,

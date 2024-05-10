@@ -14,7 +14,7 @@ import { getBasketProducts } from "../../store/basketSlice";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 import { setBasketList } from "../../store/basketSlice";
-import { setFavoriteList } from "../../store/favoriteSlice";
+import { getFavoriteProducts, setFavoriteList } from "../../store/favoriteSlice";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const ProductItem = ({
@@ -28,6 +28,7 @@ export const ProductItem = ({
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
     const [isBasketFlag, setIsBasketFlag] = useState(false);
+    const [isFavoriteFlag, setIsFavoriteFlag] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
@@ -64,6 +65,7 @@ export const ProductItem = ({
     };
 
     const basketProducts = useSelector(getBasketProducts);
+    const favoriteProducts = useSelector(getFavoriteProducts);
 
     basketProducts.map((item) => {
         if (item.product._id === id && isBasketFlag === false) {
@@ -71,7 +73,13 @@ export const ProductItem = ({
         }
     });
 
-    const redirectToBasket = () => {
+    favoriteProducts.map((item) => {
+        if (item.product._id === id && isFavoriteFlag === false) {
+            setIsFavoriteFlag(true);
+        }
+    });
+
+    const redirectToBasketPage = () => {
         return navigate("/profile/basket");
     };
 
@@ -109,8 +117,13 @@ export const ProductItem = ({
                             {likeButton && !isBasketFlag && (
                                 <div className="mr-[5px]">
                                     <ButtonLike
-                                        onClick={() =>
-                                            addOwnerProduct(OWNER_PRODUCT_STATUS.FAVORITE)
+                                        favoriteFlag={isFavoriteFlag}
+                                        onClick={
+                                            !isFavoriteFlag &&
+                                            (() =>
+                                                addOwnerProduct(
+                                                    OWNER_PRODUCT_STATUS.FAVORITE
+                                                ))
                                         }
                                     />
                                 </div>
@@ -118,7 +131,7 @@ export const ProductItem = ({
                             <ButtonBlue
                                 onClick={
                                     isBasketFlag
-                                        ? redirectToBasket
+                                        ? redirectToBasketPage
                                         : () =>
                                               addOwnerProduct(OWNER_PRODUCT_STATUS.BASKET)
                                 }

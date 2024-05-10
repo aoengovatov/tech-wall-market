@@ -3,7 +3,7 @@ import { ButtonDelete, CardPrice, ProductCode } from "../../../../components";
 import { ItemAmount } from "../item-amount/item-amount";
 import { oldPriceCount } from "../../../../utils";
 
-export const CardBasket = ({ id, count, name, price, sale, imageUrl }) => {
+export const CardBasket = ({ id, count, name, price, sale, imageUrl, deleteProduct }) => {
     let oldPrice = 0;
     if (sale > 0) {
         oldPrice = oldPriceCount(price, sale);
@@ -14,7 +14,7 @@ export const CardBasket = ({ id, count, name, price, sale, imageUrl }) => {
             <img src={imageUrl} className="h-[70px] mx-[20px]"></img>
 
             <div className="absolute top-2 right-2">
-                <ButtonDelete />
+                <ButtonDelete onClick={() => deleteProduct(id)}/>
             </div>
 
             <div className="flex flex-col w-full h-full justify-around">
