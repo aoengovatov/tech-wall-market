@@ -6,27 +6,11 @@ import { deleteCategory } from "../../../../store/categorySlice";
 import { request } from "../../../../utils";
 import { setCategoryId } from "../../../../store/catalogSlice";
 
-export const CategoryCard = ({ id, src, color, edit, children }) => {
+export const CategoryCard = ({ id, src, color, edit, deleteCategory = null, children }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const deleteCategoryById = (id) => {
-        request(`/categories/${id}`, "DELETE").then((data) => {
-            if (data.error === null) {
-                dispatch(deleteCategory(id));
-            }
-        });
-    };
-
-    const onDeleteCategory = () => {
-        const modalWindow = {
-            isOpen: true,
-            text: `Вы точно хотите удалить категорию: ${children}?`,
-            onConfirn: () => deleteCategoryById(id),
-        };
-
-        dispatch(setOpenModal(modalWindow));
-    };
+    
 
     const onClickCategory = () => {
         dispatch(setCategoryId(id));
@@ -45,7 +29,7 @@ export const CategoryCard = ({ id, src, color, edit, children }) => {
                         <Link className="flex h-fit" to={`/profile/category/${id}/edit`}>
                             <ButtonEdit />
                         </Link>
-                        <ButtonDelete onClick={() => onDeleteCategory()} />
+                        <ButtonDelete onClick={() => deleteCategory(id, children)} />
                     </div>
                 </>
             )}

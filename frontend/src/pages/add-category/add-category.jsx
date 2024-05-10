@@ -10,6 +10,8 @@ import {
 } from "../../components";
 import { request } from "../../utils";
 import { useEffect } from "react";
+import { setOpenModal } from "../../store/modalSlice";
+import { deleteCategory } from "../../store/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
     setCategoryList,
@@ -102,6 +104,26 @@ export const AddCategory = () => {
         );
     };
 
+    const deleteCategoryById = (id) => {
+        request(`/categories/${id}`, "DELETE").then(({ error }) => {
+            if (error) {
+                setServerError(error);
+                return;
+            }
+            dispatch(deleteCategory(id));
+        });
+    };
+
+    const onDeleteCategory = (id, name) => {
+        const modalWindow = {
+            isOpen: true,
+            text: `Вы точно хотите удалить категорию: ${name}?`,
+            onConfirn: () => deleteCategoryById(id),
+        };
+
+        dispatch(setOpenModal(modalWindow));
+    };
+
     return (
         <>
             <Breadcrumbs />
@@ -131,7 +153,6 @@ export const AddCategory = () => {
                         onChange={(target) => onChangeImageUrl(target)}
                     />
                     <Input
-                       
                         type={"color"}
                         placeholder={"цвет плашки"}
                         value={color}
@@ -150,7 +171,11 @@ export const AddCategory = () => {
                 {serverError && <ErrorBlock>{serverError}</ErrorBlock>}
 
                 <div className="mt-[20px]">
-                    <Categories edit={true} categories={categories} />
+                    <Categories
+                        edit={true}
+                        categories={categories}
+                        deleteCategory={onDeleteCategory}
+                    />
                 </div>
             </div>
         </>

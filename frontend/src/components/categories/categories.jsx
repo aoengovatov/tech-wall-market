@@ -1,6 +1,6 @@
 import { CategoryCard } from "./components";
 
-export const Categories = ({ edit, categories }) => {
+export const Categories = ({ edit, categories, deleteCategory = null }) => {
     return (
         <div className="mb-[30px]">
             <h1 className="ml-[10px] mb-[15px]">Категории</h1>
@@ -12,6 +12,7 @@ export const Categories = ({ edit, categories }) => {
                         src={imageUrl}
                         color={color}
                         edit={edit}
+                        deleteCategory={deleteCategory}
                     >
                         {name}
                     </CategoryCard>
