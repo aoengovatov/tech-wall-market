@@ -11,7 +11,9 @@ import {
     getSearchPhrase,
     getPriceSort,
 } from "../../store/catalogSlice";
+import { setBasketList } from "../../store/basketSlice";
 import { PAGE_LIMIT } from "../../constants";
+import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const Catalog = () => {
     const dispatch = useDispatch();
@@ -35,6 +37,14 @@ export const Catalog = () => {
                 setProducts(products);
                 setLastPage(lastPage);
             }),
+            request("/users/products").then(({ error, data }) => {
+                if (error === null) {
+                    const basketProducts = data.products.filter(
+                        (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
+                    );
+                    dispatch(setBasketList(basketProducts));
+                }
+            }),
         ]);
     }, [dispatch, searchPhrase, currentPage, categoryId, priceSort]);
 
@@ -50,18 +60,16 @@ export const Catalog = () => {
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            {products.map(
-                                ({ _id: id, name, price, sale, imageUrl }) => (
-                                    <ProductItem
-                                        key={id}
-                                        id={id}
-                                        name={name}
-                                        price={price}
-                                        sale={sale}
-                                        imageUrl={imageUrl}
-                                    />
-                                )
-                            )}
+                            {products.map(({ _id: id, name, price, sale, imageUrl }) => (
+                                <ProductItem
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    price={price}
+                                    sale={sale}
+                                    imageUrl={imageUrl}
+                                />
+                            ))}
                             <Pagination lastPage={lastPage} />
                         </div>
                     </div>

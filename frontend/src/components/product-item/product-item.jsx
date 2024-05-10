@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
     ButtonBlue,
     ButtonLike,
@@ -9,6 +10,7 @@ import {
 } from "..";
 import { request, oldPriceCount } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
+import { getBasketProducts } from "../../store/basketSlice";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 import { setBasketList } from "../../store/basketSlice";
@@ -25,6 +27,7 @@ export const ProductItem = ({
     imageUrl,
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
+    const [isBasketFlag, setIsBasketFlag] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
@@ -60,6 +63,18 @@ export const ProductItem = ({
         });
     };
 
+    const basketProducts = useSelector(getBasketProducts);
+
+    basketProducts.map((item) => {
+        if (item.product._id === id && isBasketFlag === false) {
+            setIsBasketFlag(true);
+        }
+    });
+
+    const redirectToBasket = () => {
+        return navigate("/profile/basket");
+    };
+
     return (
         <div className="flex flex-col w-full h-[160px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] pr-[${paddingBlockRight}px] transition-all duration-200 hover:border-lightBlue">
             <div className="flex justify-end">
@@ -91,7 +106,7 @@ export const ProductItem = ({
                             <ProductCode>{id.slice(-8)}</ProductCode>
                         </div>
                         <div className="flex">
-                            {likeButton && (
+                            {likeButton && !isBasketFlag && (
                                 <div className="mr-[5px]">
                                     <ButtonLike
                                         onClick={() =>
@@ -101,11 +116,14 @@ export const ProductItem = ({
                                 </div>
                             )}
                             <ButtonBlue
-                                onClick={() =>
-                                    addOwnerProduct(OWNER_PRODUCT_STATUS.BASKET)
+                                onClick={
+                                    isBasketFlag
+                                        ? redirectToBasket
+                                        : () =>
+                                              addOwnerProduct(OWNER_PRODUCT_STATUS.BASKET)
                                 }
                             >
-                                в корзину
+                                {isBasketFlag ? "оформить заказ" : "в корзину"}
                             </ButtonBlue>
                         </div>
                     </div>
