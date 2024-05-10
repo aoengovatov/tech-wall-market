@@ -1,4 +1,5 @@
 const ownerProductService = require("../services/owner-product-list.service");
+const userService = require("../services/user.service");
 
 exports.getOwnerProducts = async (req, res) => {
     const userId = req.user.id;
@@ -37,4 +38,12 @@ exports.deleteOwnerProduct = async (req, res) => {
     await ownerProductService.deleteOwnerProduct(userId, productId);
 
     res.send({ error: null });
+};
+
+exports.getCountFavoritesBasketOrders = async (req, res) => {
+    const ownerId = req.user.id;
+
+    const countAll = await userService.getCountFavoritesBasketOrders(ownerId);
+
+    res.send({ error: null, count: countAll });
 };

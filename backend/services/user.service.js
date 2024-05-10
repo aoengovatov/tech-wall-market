@@ -1,10 +1,11 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const Category = require('../models/Category');
+const Category = require("../models/Category");
 const Product = require("../models/Product");
-const Order = require('../models/Order')
+const Order = require("../models/Order");
 const { generate } = require("../utils/token");
 const ROLES = require("../constants/roles");
+const OwnerProductList = require("../models/OwnerProductList");
 
 exports.register = async (login, password) => {
     if (!password) {
@@ -55,10 +56,30 @@ exports.getCountUsersCategoriesProductsOrders = async () => {
         Category.countDocuments(),
         Product.countDocuments(),
         Order.countDocuments(),
-    ])
+    ]);
 
-    return ({users, categories, products, orders});
-}
+    return { users, categories, products, orders };
+};
+
+exports.getCountFavoritesBasketOrders = async (ownerId) => {
+    const [orders, ownerProducts] = await Promise.all([
+        Order.find({ owner: ownerId }).countDocuments(),
+        OwnerProductList.findOne({ owner: ownerId }),
+    ]);
+
+    let basket = 0;
+    let favorites = 0;
+
+    ownerProducts.products.map((product) => {
+        if (product.status === "BASKET") {
+            basket += 1;
+        } else {
+            favorites += 1;
+        }
+    });
+
+    return { basket, favorites, orders };
+};
 
 exports.deleteUser = (id) => {
     return User.deleteOne({ _id: id });

@@ -20,7 +20,7 @@ const ProductSchema = mongoose.Schema(
             type: Number,
             required: true,
         },
-        oldPrice: {
+        sale: {
             type: Number,
         },
         imageUrl: {
