@@ -51,13 +51,13 @@ export const Catalog = () => {
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
                             {products.map(
-                                ({ _id: id, name, price, oldPrice, imageUrl }) => (
+                                ({ _id: id, name, price, sale, imageUrl }) => (
                                     <ProductItem
                                         key={id}
                                         id={id}
                                         name={name}
                                         price={price}
-                                        oldPrice={oldPrice}
+                                        sale={sale}
                                         imageUrl={imageUrl}
                                     />
                                 )

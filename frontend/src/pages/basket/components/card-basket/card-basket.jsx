@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { ButtonDelete, CardPrice, ProductCode } from "../../../../components";
 import { ItemAmount } from "../item-amount/item-amount";
+import { oldPriceCount } from "../../../../utils";
 
-export const CardBasket = ({ id, count, name, price, oldPrice, imageUrl }) => {
+export const CardBasket = ({ id, count, name, price, sale, imageUrl }) => {
+    let oldPrice = 0;
+    if (sale > 0) {
+        oldPrice = oldPriceCount(price, sale);
+    }
+
     return (
         <div className="flex w-full items-center h-[130px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] relation transition-all duration-200 relative hover:border-lightBlue">
             <img src={imageUrl} className="h-[70px] mx-[20px]"></img>

@@ -8,9 +8,8 @@ import {
     SaleWidget,
     ButtonRed,
 } from "../../components";
-import { request } from "../../utils";
+import { oldPriceCount, request } from "../../utils";
 import { Page404 } from "../404/page-404";
-import { saleCount } from "../../utils";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 import { ROLE } from "../../constants";
 import { getBasketProducts, setBasketList } from "../../store/basketSlice";
@@ -24,7 +23,7 @@ export const SingleProduct = () => {
     const userRole = useSelector(getUserRole);
     const [product, setProduct] = useState(null);
     const [isBasketFlag, setIsBasketFlag] = useState(false);
-    const [sale, setSale] = useState(0);
+    const [oldPrice, setOldPrice] = useState(0);
 
     useEffect(() => {
         Promise.all([
@@ -33,8 +32,8 @@ export const SingleProduct = () => {
                     setProduct(data.product);
                 }
 
-                if (product.price && product.oldPrice) {
-                    setSale(saleCount(product.price, product.oldPrice));
+                if (product.sale > 0) {
+                    setOldPrice(oldPriceCount(product.price, product.sale));
                 }
             }),
             request("/users/products").then(({ error, data }) => {
@@ -105,10 +104,10 @@ export const SingleProduct = () => {
                             <div className="flex items-start justify-between mb-[5px]">
                                 <CardPrice
                                     price={product.price}
-                                    oldPrice={product.oldPrice}
+                                    oldPrice={oldPrice}
                                     color={"green"}
                                 />
-                                <SaleWidget count={sale} />
+                                <SaleWidget count={product.sale} />
                             </div>
                             <div className="text-sm text-darkGray mb-[10px]">
                                 бесплатная доставка курьером

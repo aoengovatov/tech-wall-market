@@ -43,7 +43,7 @@ export const Basket = () => {
                             {basketProducts.map(
                                 ({
                                     count,
-                                    product: { _id: id, name, price, oldPrice, imageUrl },
+                                    product: { _id: id, name, price, sale, imageUrl },
                                 }) => (
                                     <CardBasket
                                         key={id}
@@ -51,7 +51,7 @@ export const Basket = () => {
                                         count={count}
                                         name={name}
                                         price={price}
-                                        oldPrice={oldPrice}
+                                        sale={sale}
                                         imageUrl={imageUrl}
                                     />
                                 )

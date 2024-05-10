@@ -7,7 +7,7 @@ import {
     ProductCode,
     ButtonDelete,
 } from "..";
-import { request, saleCount } from "../../utils";
+import { request, oldPriceCount } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
@@ -21,7 +21,7 @@ export const ProductItem = ({
     id,
     name,
     price,
-    oldPrice,
+    sale,
     imageUrl,
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
@@ -29,12 +29,10 @@ export const ProductItem = ({
     const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
 
-    let sale = 0;
-    if (price && oldPrice) {
-        sale = saleCount(price, oldPrice);
+    let oldPrice = 0;
+    if (sale > 0) {
+        oldPrice = oldPriceCount(price, sale);
     }
-
-    const mainContentStyle = `flex pr-[${paddingContentRight}px]`;
 
     const addOwnerProduct = (status) => {
         if (userRole === ROLE.GUEST) {
@@ -72,7 +70,7 @@ export const ProductItem = ({
                     </div>
                 )}
             </div>
-            <div className={mainContentStyle}>
+            <div className={`flex pr-[${paddingContentRight}px]`}>
                 <img src={imageUrl} className="h-[100px] mx-[20px]"></img>
 
                 <div className="flex flex-col w-full h-full justify-around">

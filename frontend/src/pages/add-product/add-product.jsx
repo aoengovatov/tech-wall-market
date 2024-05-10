@@ -8,9 +8,10 @@ export const AddProduct = () => {
     const [serverError, setServerError] = useState("");
     const [categories, setCategories] = useState([]);
     const name = useRef("");
+    const popular = useRef(false);
     const categoryId = useRef("");
     const imageUrl = useRef("");
-    const oldPrice = useRef(0);
+    const sale = useRef(0);
     const price = useRef(0);
     const count = useRef(0);
     const description = useRef("");
@@ -31,7 +32,8 @@ export const AddProduct = () => {
             name: name.current.value,
             category: categoryId.current.value,
             imageUrl: imageUrl.current.value,
-            oldPrice: oldPrice.current.value,
+            sale: sale.current.value,
+            popular: popular.current.value,
             price: price.current.value,
             count: count.current.value,
             description: description.current.value,
@@ -43,11 +45,11 @@ export const AddProduct = () => {
                 setServerError(`Ошибка: ${data.error}`);
                 return;
             }
-            console.log("Создан продукт", data.product);
             name.current.value = "";
             categoryId.current.value = "";
             imageUrl.current.value = "";
-            oldPrice.current.value = 0;
+            sale.current.value = 0;
+            popular.current.value = false;
             price.current.value = 0;
             count.current.value = 0;
             description.current.value = "";
@@ -72,38 +74,55 @@ export const AddProduct = () => {
                         type={"text"}
                         onChange={() => setServerError("")}
                         ref={name}
-                        placeholder={"название товара..."}
+                        placeholder={"название товара"}
                         required={true}
                     />
-                    <select
-                        ref={categoryId}
-                        onChange={() => setServerError("")}
-                        className="outline-none text-darkGray px-[10px] py-[5px] border-2 border-transparent bg-lightGray rounded-lg focus:border-blue"
-                    >
-                        {categories.map(({ id, name }) => (
-                            <option key={id} value={id}>
-                                {name}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="flex w-full justify-between items-center">
+                        <label className="min-w-fit mr-2">Популярный товар:</label>
+                        <select
+                            ref={popular}
+                            placeholder={"популярный товар"}
+                            onChange={() => setServerError("")}
+                            className="outline-none w-full text-darkGray px-[10px] py-[5px] border-2 border-transparent bg-lightGray rounded-lg focus:border-blue"
+                        >
+                            <option value={false}>нет</option>
+                            <option value={true}>да</option>
+                        </select>
+                    </div>
+
+                    <div className="flex w-full justify-between items-center">
+                        <label className="min-w-fit mr-2">Категория:</label>
+                        <select
+                            ref={categoryId}
+                            onChange={() => setServerError("")}
+                            className="outline-none w-full text-darkGray px-[10px] py-[5px] border-2 border-transparent bg-lightGray rounded-lg focus:border-blue"
+                        >
+                            {categories.map(({ id, name }) => (
+                                <option key={id} value={id}>
+                                    {name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     <Input
                         type={"text"}
                         onChange={() => setServerError("")}
                         ref={imageUrl}
-                        placeholder={"url картинки..."}
+                        placeholder={"url картинки"}
                         required={true}
                     />
                     <Input
                         type={"number"}
                         onChange={() => setServerError("")}
                         ref={price}
-                        placeholder={"цена со скидкой (или 0)"}
+                        placeholder={"цена"}
                     />
                     <Input
                         type={"number"}
                         onChange={() => setServerError("")}
-                        ref={oldPrice}
-                        placeholder={"цена без скидки"}
+                        ref={sale}
+                        placeholder={"скидка, %"}
                         required={true}
                     />
                     <Input
@@ -116,7 +135,7 @@ export const AddProduct = () => {
                     <Textarea
                         ref={description}
                         onChange={() => setServerError("")}
-                        placeholder={"Описание товара"}
+                        placeholder={"описание товара"}
                         required={true}
                     />
                     <Textarea
