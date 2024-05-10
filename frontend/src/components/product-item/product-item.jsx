@@ -120,11 +120,11 @@ export const ProductItem = ({
                                     <ButtonLike
                                         favoriteFlag={isFavoriteFlag}
                                         onClick={
-                                            !isFavoriteFlag &&
+                                            isFavoriteFlag === false ?
                                             (() =>
                                                 addOwnerProduct(
                                                     OWNER_PRODUCT_STATUS.FAVORITE
-                                                ))
+                                                )): null
                                         }
                                     />
                                 </div>

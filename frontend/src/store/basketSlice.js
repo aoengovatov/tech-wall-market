@@ -16,6 +16,7 @@ const basketSlice = createSlice({
         },
         deleteBasketProduct: (state, action) =>
             state.filter((item) => item.product._id !== action.payload),
+        deleteAllBasketProducts: () => initialBasket,
     },
     selectors: {
         getBasketProducts: (state) => state,
@@ -23,6 +24,10 @@ const basketSlice = createSlice({
 });
 
 export default basketSlice.reducer;
-export const { setBasketList, setBasketProductCount, deleteBasketProduct } =
-    basketSlice.actions;
+export const {
+    setBasketList,
+    setBasketProductCount,
+    deleteBasketProduct,
+    deleteAllBasketProducts,
+} = basketSlice.actions;
 export const { getBasketProducts } = basketSlice.selectors;
