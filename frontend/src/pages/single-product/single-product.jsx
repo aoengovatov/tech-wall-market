@@ -13,6 +13,7 @@ import { Page404 } from "../404/page-404";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 import { ROLE } from "../../constants";
 import { getBasketProducts, setBasketList } from "../../store/basketSlice";
+import { getFavoriteProducts, setFavoriteList } from "../../store/favoriteSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserRole } from "../../store/userSlice";
 
@@ -23,6 +24,7 @@ export const SingleProduct = () => {
     const userRole = useSelector(getUserRole);
     const [product, setProduct] = useState(null);
     const [isBasketFlag, setIsBasketFlag] = useState(false);
+    const [isFavoriteFlag, setIsFavoriteFlag] = useState(false);
     const [oldPrice, setOldPrice] = useState(0);
 
     useEffect(() => {
@@ -42,12 +44,17 @@ export const SingleProduct = () => {
                         (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
                     );
                     dispatch(setBasketList(basketProducts));
+                    const favoriteProducts = data.products.filter(
+                        (product) => product.status === OWNER_PRODUCT_STATUS.FAVORITE
+                    );
+                    dispatch(setFavoriteList(favoriteProducts));
                 }
             }),
         ]);
     }, [params.productId, product, dispatch]);
 
     const basketProducts = useSelector(getBasketProducts);
+    const favoriteProducts = useSelector(getFavoriteProducts);
 
     basketProducts.map((item) => {
         if (item.product._id === params.productId && isBasketFlag === false) {
@@ -55,19 +62,30 @@ export const SingleProduct = () => {
         }
     });
 
-    const addProductInBasket = () => {
+    favoriteProducts.map((item) => {
+        if (item.product._id === params.productId && isFavoriteFlag === false) {
+            setIsFavoriteFlag(true);
+        }
+    });
+
+    const addOwnerProduct = (status) => {
         if (userRole === ROLE.GUEST) {
             return navigate("/login");
         }
 
         const newOwnerProduct = {
             productId: params.productId,
-            status: OWNER_PRODUCT_STATUS.BASKET,
+            status,
             count: 1,
         };
 
         request("/users/products", "POST", newOwnerProduct).then(({ error, data }) => {
             if (error === null) {
+                const favoriteProducts = data.products.filter(
+                    (product) => product.status === OWNER_PRODUCT_STATUS.FAVORITE
+                );
+                dispatch(setFavoriteList(favoriteProducts));
+
                 const basketProducts = data.products.filter(
                     (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
                 );
@@ -76,8 +94,12 @@ export const SingleProduct = () => {
         });
     };
 
-    const redirectToBasket = () => {
+    const redirectToBasketPage = () => {
         return navigate("/profile/basket");
+    };
+
+    const redirectToFavoritePage = () => {
+        return navigate("/profile/favorites");
     };
 
     return product ? (
@@ -95,7 +117,17 @@ export const SingleProduct = () => {
                                 <div className="font-semibold text-xl w-10/12 mb-[10px]">
                                     {product.name}
                                 </div>
-                                <ButtonLike />
+                                <ButtonLike
+                                    favoriteFlag={isFavoriteFlag}
+                                    onClick={
+                                        isFavoriteFlag
+                                            ? redirectToFavoritePage
+                                            : () =>
+                                                  addOwnerProduct(
+                                                      OWNER_PRODUCT_STATUS.FAVORITE
+                                                  )
+                                    }
+                                />
                             </div>
 
                             <ProductCode>{product._id.slice(-8)}</ProductCode>
@@ -116,8 +148,11 @@ export const SingleProduct = () => {
                                 <ButtonRed
                                     onClick={
                                         isBasketFlag
-                                            ? redirectToBasket
-                                            : addProductInBasket
+                                            ? redirectToBasketPage
+                                            : () =>
+                                                  addOwnerProduct(
+                                                      OWNER_PRODUCT_STATUS.BASKET
+                                                  )
                                     }
                                 >
                                     {isBasketFlag

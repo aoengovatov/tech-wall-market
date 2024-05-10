@@ -20,7 +20,7 @@ export const Favorites = () => {
     }, [dispatch]);
 
     const favoriteProducts = useSelector(getFavoriteProducts);
-   
+
     return (
         <>
             <Breadcrumbs />
@@ -28,13 +28,13 @@ export const Favorites = () => {
                 <h1 className="ml-[10px] mb-[10px]">Избранное</h1>
                 <div className="flex flex-col ml-[10px]">
                     {favoriteProducts.map(
-                        ({ product: { _id: id, name, price, oldPrice, imageUrl } }) => (
+                        ({ product: { _id: id, name, price, sale, imageUrl } }) => (
                             <ProductItem
                                 key={id}
                                 id={id}
                                 name={name}
                                 price={price}
-                                oldPrice={oldPrice}
+                                sale={sale}
                                 imageUrl={imageUrl}
                                 likeButton={false}
                                 buttonDelete={true}
