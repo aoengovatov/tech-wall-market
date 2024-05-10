@@ -6,6 +6,10 @@ export const Pagination = ({ lastPage }) => {
     const dispatch = useDispatch();
     const currentPage = useSelector(getPage);
 
+    if (currentPage > lastPage) {
+        dispatch(setPage(1));
+    }
+
     const isVisible = lastPage > 1;
 
     const onLastPage = () => {

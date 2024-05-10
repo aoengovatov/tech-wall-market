@@ -23,17 +23,19 @@ export const Catalog = () => {
     const priceSort = useSelector(getPriceSort);
 
     useEffect(() => {
-        request("/categories").then((data) => {
-            if (data.error === null) {
-                dispatch(setCategoryList(data.categories));
-            }
-        });
-        request(
-            `/products?page=${currentPage}&limit=${PAGE_LIMIT}&category=${categoryId}&search=${searchPhrase}&priceSort=${priceSort}`
-        ).then(({ lastPage, products }) => {
-            setProducts(products);
-            setLastPage(lastPage);
-        });
+        Promise.all([
+            request("/categories").then((data) => {
+                if (data.error === null) {
+                    dispatch(setCategoryList(data.categories));
+                }
+            }),
+            request(
+                `/products?page=${currentPage}&limit=${PAGE_LIMIT}&category=${categoryId}&search=${searchPhrase}&priceSort=${priceSort}`
+            ).then(({ lastPage, products }) => {
+                setProducts(products);
+                setLastPage(lastPage);
+            }),
+        ]);
     }, [dispatch, searchPhrase, currentPage, categoryId, priceSort]);
 
     return (
