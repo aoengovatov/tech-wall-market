@@ -71,7 +71,9 @@ export const ProductItem = ({
                 )}
             </div>
             <div className={`flex pr-[${paddingContentRight}px]`}>
-                <img src={imageUrl} className="h-[100px] mx-[20px]"></img>
+                <div className="flex min-w-[200px] justify-center">
+                    <img src={imageUrl} className="h-[100px] mx-[20px]"></img>
+                </div>
 
                 <div className="flex flex-col w-full h-full justify-around">
                     <div className="flex justify-between">
