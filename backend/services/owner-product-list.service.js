@@ -66,3 +66,10 @@ exports.deleteOwnerProduct = async (owner, product) => {
         { $pull: { products: { product } } }
     );
 };
+
+exports.deleteAllBasketProducts = async (owner) => {
+    await OwnerProductList.findOneAndUpdate(
+        { owner },
+        { $pull: { products: { status: "BASKET" } } }
+    )
+};

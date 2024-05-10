@@ -40,6 +40,14 @@ exports.deleteOwnerProduct = async (req, res) => {
     res.send({ error: null });
 };
 
+exports.deleteAllBasketProducts = async (req, res) => {
+    const userId = req.user.id;
+
+    await ownerProductService.deleteAllBasketProducts(userId);
+
+    res.send({ error: null });
+};
+
 exports.getCountFavoritesBasketOrders = async (req, res) => {
     const ownerId = req.user.id;
 

@@ -4,6 +4,7 @@ const ownerProductController = require("../controllers/owner-product-list.contro
 
 ownerProduct.get("/", ownerProductController.getOwnerProducts);
 ownerProduct.post("/", ownerProductController.addOwnerProduct);
+ownerProduct.delete("/basket", ownerProductController.deleteAllBasketProducts);
 ownerProduct.delete("/:id", ownerProductController.deleteOwnerProduct);
 ownerProduct.get("/count-all", ownerProductController.getCountFavoritesBasketOrders);
 

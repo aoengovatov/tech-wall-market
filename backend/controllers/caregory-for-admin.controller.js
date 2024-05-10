@@ -25,8 +25,6 @@ exports.deleteCategory = async (req, res) => {
         req.params.id
     );
 
-    console.log(productCountInCategory);
-
     if (productCountInCategory > 0) {
         res.send({
             error: `Ошибка удаления. Найдены связанные записи Products: ${productCountInCategory}`,
