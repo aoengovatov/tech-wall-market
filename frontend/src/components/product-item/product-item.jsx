@@ -25,6 +25,7 @@ export const ProductItem = ({
     price,
     sale,
     imageUrl,
+    deleteProduct=null
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
     const [isBasketFlag, setIsBasketFlag] = useState(false);
@@ -89,7 +90,7 @@ export const ProductItem = ({
                 <SaleWidget count={sale} />
                 {buttonDelete && (
                     <div className="ml-[10px]">
-                        <ButtonDelete />
+                        <ButtonDelete onClick={() => deleteProduct(id)}/>
                     </div>
                 )}
             </div>

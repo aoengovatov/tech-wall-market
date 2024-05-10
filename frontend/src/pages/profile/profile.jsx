@@ -20,7 +20,14 @@ export const Profile = () => {
                 }
             });
         }
-    }, []);
+        if (checkAccess([ROLE.USER], user.roleId)) {
+            request("/users/products/count-all").then((data) => {
+                if (data.error === null) {
+                    setCountAll(data.count);
+                }
+            });
+        }
+    }, [user.roleId]);
 
     if (user.roleId === ROLE.GUEST) {
         return <Navigate to={"/login"} />;
@@ -47,17 +54,17 @@ export const Profile = () => {
                         <>
                             <WidgetItem
                                 name={"favorites"}
-                                count={25}
+                                count={countAll.favorites}
                                 link={"/profile/favorites"}
                             />
                             <WidgetItem
                                 name={"basket"}
-                                count={5}
+                                count={countAll.basket}
                                 link={"/profile/basket"}
                             />
                             <WidgetItem
                                 name={"my-orders"}
-                                count={2}
+                                count={countAll.orders}
                                 link={"/profile/my-orders"}
                             />
                         </>

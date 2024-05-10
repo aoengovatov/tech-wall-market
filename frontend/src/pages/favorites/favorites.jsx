@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumbs, ProductItem } from "../../components";
 import { useEffect } from "react";
 import { request } from "../../utils";
-import { getFavoriteProducts, setFavoriteList } from "../../store/favoriteSlice";
+import {
+    getFavoriteProducts,
+    setFavoriteList,
+    deleteFavoriteProduct,
+} from "../../store/favoriteSlice";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 
 export const Favorites = () => {
@@ -21,6 +25,14 @@ export const Favorites = () => {
 
     const favoriteProducts = useSelector(getFavoriteProducts);
 
+    const deleteProduct = (id) => {
+        request(`/users/products/${id}`, "DELETE").then(({ error }) => {
+            if (error === null) {
+                dispatch(deleteFavoriteProduct(id));
+            }
+        });
+    };
+
     return (
         <>
             <Breadcrumbs />
@@ -38,6 +50,7 @@ export const Favorites = () => {
                                 imageUrl={imageUrl}
                                 likeButton={false}
                                 buttonDelete={true}
+                                deleteProduct={deleteProduct}
                             />
                         )
                     )}
