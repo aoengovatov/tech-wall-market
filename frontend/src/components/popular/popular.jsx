@@ -2,19 +2,24 @@ import { useState, useEffect } from "react";
 import { ButtonRed } from "../button-red/button-blue";
 import { ItemCard } from "./components";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { request } from "../../utils";
+import {
+    getPopularProductList,
+    setPopularProductList,
+} from "../../store/popularProductSlice";
 
 export const Popular = () => {
-    const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
+    const products = useSelector(getPopularProductList);
 
     useEffect(() => {
         request("/products/top").then(({ error, products }) => {
             if (error === null) {
-                setProducts(products);
-                console.log(products);
+                dispatch(setPopularProductList(products));
             }
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="mb-[30px]">

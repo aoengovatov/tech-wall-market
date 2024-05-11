@@ -5,6 +5,7 @@ import modalReducers from "./modalSlice";
 import catalogReducers from "./catalogSlice";
 import basketReducers from "./basketSlice";
 import favoriteReducers from "./favoriteSlice";
+import popularProductReducers from "./popularProductSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         catalog: catalogReducers,
         basket: basketReducers,
         favorite: favoriteReducers,
+        popular: popularProductReducers,
     },
     devTools: true,
 });

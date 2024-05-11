@@ -18,7 +18,7 @@ export const ItemCard = ({ id, name, price, sale, imageUrl }) => {
             </div>
 
             <img src={imageUrl} className="max-w-[155px] max-h-[120px] md:max-w-[185px]"></img>
-            <Link to={"/catalog"}>
+            <Link to={`/catalog/${id}`}>
                 <div className="leading-5">{name}</div>
             </Link>
 
