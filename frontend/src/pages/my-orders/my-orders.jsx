@@ -21,16 +21,18 @@ export const MyOrders = () => {
                 <h1 className="ml-[10px] mb-[10px]">Мои заказы</h1>
                 {orders.length > 0 ? (
                     <>
-                        {orders.map(({ id, createdAt, status, products, totalPrice }) => (
-                            <Order
-                                key={id}
-                                id={id}
-                                createdAt={createdAt}
-                                status={status}
-                                products={products}
-                                totalPrice={totalPrice}
-                            />
-                        ))}
+                        {orders.map(
+                            ({ _id: id, createdAt, status, products, totalPrice }) => (
+                                <Order
+                                    key={id}
+                                    id={id}
+                                    createdAt={createdAt}
+                                    status={status}
+                                    products={products}
+                                    totalPrice={totalPrice}
+                                />
+                            )
+                        )}
                     </>
                 ) : (
                     <>

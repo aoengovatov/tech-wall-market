@@ -1,12 +1,15 @@
 import { ProductCard } from "../product-card/product-card";
+import { datetimeStringFormatter } from "../../../../utils";
 
 export const Order = ({ id, createdAt, status, products, totalPrice }) => {
     return (
         <div className="px-[20px] py-[15px] mb-[20px] bg-lightGray rounded-2xl">
             <div className="mb-[15px] flex align-top justify-between">
                 <div className="flex flex-col">
-                    <h2>Заказ № {id}</h2>
-                    <div className="text-darkGray">{createdAt}</div>
+                    <h2>Заказ № {id.slice(-8)}</h2>
+                    <div className="text-darkGray">
+                        {datetimeStringFormatter(createdAt)}
+                    </div>
                 </div>
                 <div className="flex flex-col items-end">
                     <div className="text-[22px]">{status}</div>
@@ -14,7 +17,7 @@ export const Order = ({ id, createdAt, status, products, totalPrice }) => {
                 </div>
             </div>
             <div className="grid grid-cols-5 content-center justify-items-center gap-4 mb-[20px]">
-                {products.map(({ id, name, price, count, imageUrl }) => (
+                {products.map(({ _id: id, name, price, count, imageUrl }) => (
                     <ProductCard
                         key={id}
                         id={id}

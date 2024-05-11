@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { ButtonRed } from "../button-red/button-blue";
 import { ItemCard } from "./components";
+import { setBasketList } from "../../store/basketSlice";
+import { OWNER_PRODUCT_STATUS } from "../../constants";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { request } from "../../utils";
@@ -14,11 +16,21 @@ export const Popular = () => {
     const products = useSelector(getPopularProductList);
 
     useEffect(() => {
-        request("/products/top").then(({ error, products }) => {
-            if (error === null) {
-                dispatch(setPopularProductList(products));
-            }
-        });
+        Promise.all([
+            request("/products/top").then(({ error, products }) => {
+                if (error === null) {
+                    dispatch(setPopularProductList(products));
+                }
+            }),
+            request("/users/products").then(({ error, data }) => {
+                if (error === null) {
+                    const basketProducts = data.products.filter(
+                        (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
+                    );
+                    dispatch(setBasketList(basketProducts));
+                }
+            }),
+        ]);
     }, [dispatch]);
 
     return (
