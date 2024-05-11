@@ -1,16 +1,17 @@
 const Order = require("../models/Order");
 const ORDER_STATUS = require("../constants/order-status.js");
+const mapOrder = require("../mappers/mapOrder.js");
 
 exports.getOrdersByUser = async (userId) => {
-    const orders = await Order.find({ owner: userId }).sort({createdAt: -1});
+    const orders = await Order.find({ owner: userId }).sort({ createdAt: -1 });
 
     return orders;
 };
 
 exports.getOrders = async () => {
-    const orders = await Order.find();
+    const orders = await Order.find().sort({ createdAt: -1 }).populate("owner");
 
-    return orders;
+    return orders.map(mapOrder);
 };
 
 exports.createOrder = async (userId, products, totalPrice) => {

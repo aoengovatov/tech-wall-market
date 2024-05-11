@@ -3,7 +3,7 @@ const orderService = require("../services/order.service");
 exports.getOrders = async (req, res) => {
     const orders = await orderService.getOrders();
 
-    res.send({ data: orders });
+    res.send({ error: null, orders });
 };
 
 exports.updateStatus = async (req, res) => {
@@ -17,5 +17,5 @@ exports.updateStatus = async (req, res) => {
 };
 
 exports.getStatusForOrders = (req, res) => {
-    res.send({ data: orderService.getStatusForOrders() });
+    res.send({ error: null, status: orderService.getStatusForOrders() });
 };
