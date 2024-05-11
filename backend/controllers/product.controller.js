@@ -6,10 +6,9 @@ exports.getProduct = async (req, res) => {
         const product = await productService.getProduct(req.params.id);
 
         res.send({ error: null, product });
-    }catch(e) {
-        res.send({error: e.message})
+    } catch (e) {
+        res.send({ error: e.message });
     }
-    
 };
 
 exports.getProducts = async (req, res) => {
@@ -24,4 +23,10 @@ exports.getProducts = async (req, res) => {
     );
 
     res.send({ lastPage, products });
+};
+
+exports.getTopProducts = async (req, res) => {
+    const topProducts = await productService.getTopProducts();
+
+    res.send({ error: null, products: topProducts });
 };

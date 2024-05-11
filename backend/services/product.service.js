@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
 exports.getProduct = (id) => {
-    return product = Product.findOne({ _id: id });
+    return (product = Product.findOne({ _id: id }));
 };
 
 exports.getProducts = async (search = "", limit = 10, page = 1, category, priceSort) => {
@@ -44,6 +44,12 @@ exports.getProducts = async (search = "", limit = 10, page = 1, category, priceS
     }
 
     return { products, lastPage: Math.ceil(count / limit) };
+};
+
+exports.getTopProducts = async () => {
+    const topProducts = await Product.find({ popular: true }).limit(4);
+
+    return topProducts;
 };
 
 exports.getProductsCountByCategoryId = async (categoryId) => {
