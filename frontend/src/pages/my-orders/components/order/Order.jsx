@@ -1,12 +1,12 @@
 import { ProductCard } from "../product-card/product-card";
 
-export const Order = ({ id, date, status, products, totalPrice }) => {
+export const Order = ({ id, createdAt, status, products, totalPrice }) => {
     return (
         <div className="px-[20px] py-[15px] mb-[20px] bg-lightGray rounded-2xl">
             <div className="mb-[15px] flex align-top justify-between">
                 <div className="flex flex-col">
                     <h2>Заказ № {id}</h2>
-                    <div className="text-darkGray">{date}</div>
+                    <div className="text-darkGray">{createdAt}</div>
                 </div>
                 <div className="flex flex-col items-end">
                     <div className="text-[22px]">{status}</div>
