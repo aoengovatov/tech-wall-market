@@ -33,5 +33,11 @@ exports.updateStatus = async (id, data) => {
 };
 
 exports.getStatusForOrders = () => {
-    return ORDER_STATUS;
+    return [
+        { id: 1, name: ORDER_STATUS.CREATED },
+        { id: 2, name: ORDER_STATUS.SORT },
+        { id: 3, name: ORDER_STATUS.TRANSIT },
+        { id: 4, name: ORDER_STATUS.IN_POINT },
+        { id: 5, name: ORDER_STATUS.RECIEVED },
+    ];
 };

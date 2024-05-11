@@ -9,7 +9,6 @@ exports.getOrders = async (req, res) => {
 exports.updateStatus = async (req, res) => {
     const orderId = req.params.id;
     const status = req.body.status;
-    console.log(orderId, status);
 
     const updatedOrder = await orderService.updateStatus(orderId, { status });
 
@@ -17,5 +16,5 @@ exports.updateStatus = async (req, res) => {
 };
 
 exports.getStatusForOrders = (req, res) => {
-    res.send({ error: null, status: orderService.getStatusForOrders() });
+    res.send({ error: null, statusList: orderService.getStatusForOrders() });
 };
