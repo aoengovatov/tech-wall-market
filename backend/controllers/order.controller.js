@@ -5,7 +5,7 @@ exports.getOrdersByUser = async (req, res) => {
 
     const orders = await orderService.getOrdersByUser(userId);
 
-    res.send({ data: orders });
+    res.send({ error: null, orders });
 };
 
 exports.createOrder = async (req, res) => {
@@ -14,5 +14,5 @@ exports.createOrder = async (req, res) => {
 
     const newOrder = await orderService.createOrder(userId, products, totalPrice);
 
-    res.send({ data: newOrder });
+    res.send({ error: null, order: newOrder });
 };
