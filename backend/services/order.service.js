@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 const ORDER_STATUS = require("../constants/order-status.js");
 
 exports.getOrdersByUser = async (userId) => {
-    const orders = await Order.find({ owner: userId });
+    const orders = await Order.find({ owner: userId }).sort({createdAt: -1});
 
     return orders;
 };
