@@ -17,6 +17,14 @@ export const AddProduct = () => {
     const description = useRef("");
     const characteristic = useRef("");
 
+    /*
+    name.current.value = "Новое имя";
+    popular.current.value = true;
+    categoryId.current.value = "6633687fa32479cbba02ba60";
+    imageUrl.current.value = '123'
+    sale.current.value = 20;
+    */
+
     useEffect(() => {
         request("/categories").then((data) => {
             if (data.error === null) {
@@ -120,6 +128,8 @@ export const AddProduct = () => {
                     />
                     <Input
                         type={"number"}
+                        min={0}
+                        max={100}
                         onChange={() => setServerError("")}
                         ref={sale}
                         placeholder={"скидка, %"}

@@ -8,7 +8,8 @@ import {
     SaleWidget,
     ButtonRed,
 } from "../../components";
-import { oldPriceCount, request } from "../../utils";
+import { EditButton } from "./components";
+import { checkAccess, oldPriceCount, request } from "../../utils";
 import { Page404 } from "../404/page-404";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
 import { ROLE } from "../../constants";
@@ -22,6 +23,7 @@ export const SingleProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
+    const [editFlag, setEditFlag] = useState(false);
     const [product, setProduct] = useState(null);
     const [productNotFound, setProductNotFound] = useState(false);
     const [isBasketFlag, setIsBasketFlag] = useState(false);
@@ -101,9 +103,9 @@ export const SingleProduct = () => {
         return navigate("/profile/basket");
     };
 
-    const redirectToFavoritePage = () => {
-        return navigate("/profile/favorites");
-    };
+    if (checkAccess([ROLE.ADMIN, ROLE.MODERATOR], userRole) && editFlag === false) {
+        setEditFlag(true);
+    }
 
     return product?.name ? (
         <>
@@ -116,6 +118,7 @@ export const SingleProduct = () => {
 
                     <div className="w-1/2">
                         <div className="flex flex-col">
+                            {editFlag && <EditButton id={params.productId} />}
                             <div className="flex items-start justify-between">
                                 <div className="font-semibold text-xl w-10/12 mb-[10px]">
                                     {product.name}
