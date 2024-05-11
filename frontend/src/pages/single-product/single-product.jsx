@@ -8,7 +8,7 @@ import {
     SaleWidget,
     ButtonRed,
 } from "../../components";
-import { EditButton } from "./components";
+import { EditButton, ProductDescriptions } from "./components";
 import { checkAccess, oldPriceCount, request } from "../../utils";
 import { Page404 } from "../404/page-404";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
@@ -118,7 +118,11 @@ export const SingleProduct = () => {
 
                     <div className="w-1/2">
                         <div className="flex flex-col">
-                            {editFlag && <EditButton id={params.productId} />}
+                            {editFlag && (
+                                <EditButton
+                                    link={`/profile/edit-product/${params.productId}`}
+                                />
+                            )}
                             <div className="flex items-start justify-between">
                                 <div className="font-semibold text-xl w-10/12 mb-[10px]">
                                     {product.name}
@@ -171,25 +175,10 @@ export const SingleProduct = () => {
                     </div>
                 </div>
 
-                <div className="flex w-full p-[20px]">
-                    <div className="flex flex-col items-start justify-start w-1/2 pr-[30px]">
-                        <div className="text-base font-semibold mb-2">
-                            Описание товара:
-                        </div>
-                        <div className="font-normal leading-6 whitespace-pre-line">
-                            {product.description}
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-start justify-start w-1/2 pr-[30px]">
-                        <div className="text-base font-semibold mb-1">
-                            Характеристики товара:
-                        </div>
-                        <div className="font-normal leading-7 whitespace-pre-line">
-                            {product.characteristic}
-                        </div>
-                    </div>
-                </div>
+                <ProductDescriptions
+                    description={product.description}
+                    characteristic={product.characteristic}
+                />
             </div>
         </>
     ) : (

@@ -63,6 +63,10 @@ export const MarketApp = () => {
                                     element={<AddProduct />}
                                 />
                                 <Route
+                                    path="/profile/edit-product/:id"
+                                    element={<AddProduct />}
+                                />
+                                <Route
                                     path="/profile/category"
                                     element={<AddCategory />}
                                 />

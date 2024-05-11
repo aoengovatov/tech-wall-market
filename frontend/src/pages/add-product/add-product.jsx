@@ -2,11 +2,14 @@ import { Breadcrumbs, ButtonBlue, Input, Textarea, BackBtn } from "../../compone
 import { request } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useParams, useMatch } from "react-router-dom";
 
 export const AddProduct = () => {
     const navigate = useNavigate();
     const [serverError, setServerError] = useState("");
     const [categories, setCategories] = useState([]);
+    const params = useParams();
+    const isEdit = !!useMatch("/profile/edit-product/:id");
     const name = useRef("");
     const popular = useRef(false);
     const categoryId = useRef("");
@@ -17,20 +20,27 @@ export const AddProduct = () => {
     const description = useRef("");
     const characteristic = useRef("");
 
-    /*
-    name.current.value = "Новое имя";
-    popular.current.value = true;
-    categoryId.current.value = "6633687fa32479cbba02ba60";
-    imageUrl.current.value = '123'
-    sale.current.value = 20;
-    */
-
     useEffect(() => {
         request("/categories").then((data) => {
             if (data.error === null) {
                 setCategories(data.categories);
             }
         });
+        if (isEdit) {
+            request(`/products/${params.id}`).then(({ product, error }) => {
+                if (error === null) {
+                    name.current.value = product.name;
+                    popular.current.value = product.popular;
+                    categoryId.current.value = product.category;
+                    imageUrl.current.value = product.imageUrl;
+                    price.current.value = product.price;
+                    sale.current.value = product.sale;
+                    count.current.value = product.count;
+                    description.current.value = product.description;
+                    characteristic.current.value = product.characteristic;
+                }
+            });
+        }
     }, []);
 
     const addNewProduct = (event) => {
@@ -65,17 +75,57 @@ export const AddProduct = () => {
         });
     };
 
+    const updateProduct = () => {
+        event.preventDefault();
+
+        const product = {
+            name: name.current.value,
+            category: categoryId.current.value,
+            imageUrl: imageUrl.current.value,
+            sale: sale.current.value,
+            popular: popular.current.value,
+            price: price.current.value,
+            count: count.current.value,
+            description: description.current.value,
+            characteristic: characteristic.current.value,
+        };
+
+        request(`/products/${params.id}`, "PATCH", product).then((data) => {
+            if (data.error) {
+                setServerError(`Ошибка: ${data.error}`);
+                return;
+            }
+            name.current.value = "";
+            categoryId.current.value = "";
+            imageUrl.current.value = "";
+            sale.current.value = 0;
+            popular.current.value = false;
+            price.current.value = 0;
+            count.current.value = 0;
+            description.current.value = "";
+            characteristic.current.value = "";
+        });
+
+        return navigate(`/catalog/${params.id}`);
+    };
+
+    const redirectToProduct = () => {
+        return navigate(`/catalog/${params.id}`);
+    };
+
     return (
         <>
-            <Breadcrumbs />
+            {!isEdit && <Breadcrumbs />}
             <div className="mb-[20px] w-full">
                 <div className="flex items-center mb-[10px]">
                     <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">Добавить товар</h1>
+                    <h1 className="ml-[10px]">
+                        {isEdit ? "Редактировать товар" : "Добавить товар"}
+                    </h1>
                 </div>
                 {serverError && <div>{serverError}</div>}
                 <form
-                    onSubmit={addNewProduct}
+                    onSubmit={isEdit ? updateProduct : addNewProduct}
                     className="flex md:w-[60%] w-full mx-auto flex-col mb-[30px] gap-y-1 "
                 >
                     <Input
@@ -155,7 +205,21 @@ export const AddProduct = () => {
                         required={true}
                     />
                     <div className="self-end">
-                        <ButtonBlue type={"submit"}>добавить</ButtonBlue>
+                        {isEdit ? (
+                            <>
+                                <ButtonBlue type={"submit"}>сохранить</ButtonBlue>
+                                <span className="ml-3">
+                                    <ButtonBlue
+                                        type={"button"}
+                                        onClick={redirectToProduct}
+                                    >
+                                        отмена
+                                    </ButtonBlue>
+                                </span>
+                            </>
+                        ) : (
+                            <ButtonBlue type={"submit"}>добавить</ButtonBlue>
+                        )}
                     </div>
                 </form>
             </div>
