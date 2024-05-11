@@ -60,7 +60,7 @@ export const Catalog = () => {
                     <div className="w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            {products.map(({ _id: id, name, price, sale, imageUrl }) => (
+                            {products?.length > 0 ? products.map(({ _id: id, name, price, sale, imageUrl }) => (
                                 <ProductItem
                                     key={id}
                                     id={id}
@@ -69,7 +69,9 @@ export const Catalog = () => {
                                     sale={sale}
                                     imageUrl={imageUrl}
                                 />
-                            ))}
+                            )) : (
+                                <div className="text-center text-[17px] my-5 font-medium">Товары не найдены</div>
+                            )}
                             <Pagination lastPage={lastPage} />
                         </div>
                     </div>

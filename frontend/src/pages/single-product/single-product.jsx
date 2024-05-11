@@ -23,6 +23,7 @@ export const SingleProduct = () => {
     const dispatch = useDispatch();
     const userRole = useSelector(getUserRole);
     const [product, setProduct] = useState(null);
+    const [productNotFound, setProductNotFound] = useState(false);
     const [isBasketFlag, setIsBasketFlag] = useState(false);
     const [isFavoriteFlag, setIsFavoriteFlag] = useState(false);
     const [oldPrice, setOldPrice] = useState(0);
@@ -32,19 +33,21 @@ export const SingleProduct = () => {
             request(`/products/${params.productId}`).then((data) => {
                 if (data.error === null) {
                     setProduct(data.product);
+                } else {
+                    setProductNotFound(true);
                 }
 
-                if (data.product.sale > 0) {
+                if (data?.product?.sale > 0) {
                     setOldPrice(oldPriceCount(data.product.price, data.product.sale));
                 }
             }),
             request("/users/products").then(({ error, data }) => {
                 if (error === null) {
-                    const basketProducts = data.products.filter(
+                    const basketProducts = data?.products.filter(
                         (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
                     );
                     dispatch(setBasketList(basketProducts));
-                    const favoriteProducts = data.products.filter(
+                    const favoriteProducts = data?.products.filter(
                         (product) => product.status === OWNER_PRODUCT_STATUS.FAVORITE
                     );
                     dispatch(setFavoriteList(favoriteProducts));
@@ -102,7 +105,7 @@ export const SingleProduct = () => {
         return navigate("/profile/favorites");
     };
 
-    return product ? (
+    return product?.name ? (
         <>
             <Breadcrumbs />
             <div className="mt-[10px] mb-[30px] border-2 border-lightGray rounded-lg">
@@ -117,17 +120,18 @@ export const SingleProduct = () => {
                                 <div className="font-semibold text-xl w-10/12 mb-[10px]">
                                     {product.name}
                                 </div>
-                                <ButtonLike
-                                    favoriteFlag={isFavoriteFlag}
-                                    onClick={
-                                        isFavoriteFlag
-                                            ? redirectToFavoritePage
-                                            : () =>
-                                                  addOwnerProduct(
-                                                      OWNER_PRODUCT_STATUS.FAVORITE
-                                                  )
-                                    }
-                                />
+                                {!isBasketFlag && (
+                                    <ButtonLike
+                                        favoriteFlag={isFavoriteFlag}
+                                        onClick={
+                                            !isFavoriteFlag &&
+                                            (() =>
+                                                addOwnerProduct(
+                                                    OWNER_PRODUCT_STATUS.FAVORITE
+                                                ))
+                                        }
+                                    />
+                                )}
                             </div>
 
                             <ProductCode>{product._id.slice(-8)}</ProductCode>
@@ -186,6 +190,6 @@ export const SingleProduct = () => {
             </div>
         </>
     ) : (
-        <Page404 />
+        <>{productNotFound && <Page404 />}</>
     );
 };
