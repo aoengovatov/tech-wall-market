@@ -49,7 +49,7 @@ export const Profile = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap w-full gap-2">
                     {checkAccess([ROLE.USER], user.roleId) && (
                         <>
                             <WidgetItem

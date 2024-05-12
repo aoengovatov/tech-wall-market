@@ -47,7 +47,7 @@ export const WidgetItem = ({ name, count, link }) => {
     return (
         <Link
             to={link}
-            className="flex w-[260px] h-[150px] items-center justify-end  mb-[15px] mr-[15px] rounded-xl relative transition-all duration-100 hover:scale-105"
+            className="flex w-full h-[150px] min-[450px]:w-[49%] min-[850px]:w-[32%] min-[1100px]:w-[24%] items-center justify-end rounded-xl relative transition-all duration-100 hover:scale-105"
             style={{ backgroundColor: color }}
         >
             <div className="flex items-center justify-center text-white text-xl bg-black min-w-[45px]  h-[45px] px-[10px] rounded-full opacity-80 absolute top-3 right-3 z-30">
