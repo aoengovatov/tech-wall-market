@@ -19,7 +19,7 @@ export const ItemAmount = ({ currentCount, id }) => {
     };
 
     return (
-        <div className="flex items-center h-[26px] mr-[20px] rounded-xl bg-lightGray">
+        <div className="flex items-center h-[26px] mr-[5px] min-[450px]:mr-[15px] rounded-xl bg-lightGray">
             <ButtonAdd src={"/src/assets/minus.png"} onClick={() => onButtonClick(-1)} />
             <div className="w-[28px] text-sm text-center">{count}</div>
             <ButtonAdd src={"/src/assets/plus.png"} onClick={() => onButtonClick(1)} />

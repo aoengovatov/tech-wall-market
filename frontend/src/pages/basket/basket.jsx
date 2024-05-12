@@ -92,9 +92,9 @@ export const Basket = () => {
                 <TitleProfileWithBack>Корзина</TitleProfileWithBack>
 
                 {basketProducts?.length > 0 ? (
-                    <div className="flex">
-                        <div className="w-8/12">
-                            <div className="flex flex-col mr-[10px]">
+                    <div className="flex flex-col items-center min-[880px]:items-start min-[880px]:flex-row">
+                        <div className="w-full min-[880px]:w-8/12">
+                            <div className="flex flex-col mr-0 min-[880px]:mr-[10px]">
                                 {basketProducts.map(
                                     ({
                                         count,
@@ -115,7 +115,7 @@ export const Basket = () => {
                             </div>
                         </div>
                         {totalCount > 0 && (
-                            <div className="w-4/12">
+                            <div className="w-full min-[450px]:w-8/12 min-[880px]:w-4/12">
                                 <div className="flex flex-col w-full bg-lightGray p-[20px] rounded-xl">
                                     <div className="flex items-center justify-between mb-[5px]">
                                         <div className="text-2xl font-semibold">
