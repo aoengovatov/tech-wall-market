@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Breadcrumbs } from "../../components";
+import { Breadcrumbs, InfoTextBlock } from "../../components";
 import { Order } from "./components/order/Order";
 import { request } from "../../utils";
 
@@ -35,11 +35,7 @@ export const MyOrders = () => {
                         )}
                     </>
                 ) : (
-                    <>
-                        <div className="text-[17px] my-4 text-center">
-                            заказов не найдено
-                        </div>
-                    </>
+                    <InfoTextBlock>заказов не найдено</InfoTextBlock>
                 )}
             </div>
         </>

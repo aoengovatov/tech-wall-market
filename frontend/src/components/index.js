@@ -22,3 +22,4 @@ export * from "./button-small/button-small";
 export * from "./error-block/error-block";
 export * from "./back-btn/back-btn";
 export * from "./main-title/main-title";
+export * from "./info-text-block/info-text-block";
