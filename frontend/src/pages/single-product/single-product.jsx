@@ -111,12 +111,12 @@ export const SingleProduct = () => {
         <>
             <Breadcrumbs />
             <div className="mt-[10px] mb-[30px] border-2 border-lightGray rounded-lg">
-                <div className="flex w-full mb-[15px] p-[15px]">
-                    <div className="flex items-center justify-center w-1/2">
+                <div className="flex flex-col w-full mb-0 md:mb-[15px] p-[15px] md:flex-row">
+                    <div className="flex items-center justify-center w-full md:w-1/2">
                         <img src={product.imageUrl} className="w-[300px] m-[20px]"></img>
                     </div>
 
-                    <div className="w-1/2">
+                    <div className="w-full md:w-1/2">
                         <div className="flex flex-col">
                             {editFlag && (
                                 <EditButton
@@ -124,7 +124,7 @@ export const SingleProduct = () => {
                                 />
                             )}
                             <div className="flex items-start justify-between">
-                                <div className="font-semibold text-xl w-10/12 mb-[10px]">
+                                <div className="font-semibold text-[18px] sm:text-xl w-10/12 mb-[10px]">
                                     {product.name}
                                 </div>
                                 {!isBasketFlag && (
@@ -155,7 +155,7 @@ export const SingleProduct = () => {
                             <div className="text-sm text-darkGray mb-[10px]">
                                 бесплатная доставка курьером
                             </div>
-                            <div className="w-8/12 m-auto">
+                            <div className="w-9/12 m-auto md:w-8/12">
                                 <ButtonRed
                                     onClick={
                                         isBasketFlag
