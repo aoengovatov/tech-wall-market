@@ -10,6 +10,7 @@ import {
     getPopularProductList,
     setPopularProductList,
 } from "../../store/popularProductSlice";
+import { MainTitle } from "../main-title/main-title";
 
 export const Popular = () => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ export const Popular = () => {
 
     return (
         <div className="mb-[30px]">
-            <h1 className="ml-[10px] mb-[15px]">Популярные товары</h1>
+            <MainTitle>Популярные товары</MainTitle>
             <div className="flex w-[100%] justify-center mb-[15px] flex-wrap gap-3 ">
                 {products.map(({ _id: id, name, price, sale, imageUrl }) => (
                     <ItemCard

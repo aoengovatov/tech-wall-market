@@ -80,7 +80,7 @@ export const ItemCard = ({ id, name, price, sale, imageUrl }) => {
                             : () => addOwnerProduct(OWNER_PRODUCT_STATUS.BASKET)
                     }
                 >
-                    {isBasketFlag ? "оформить заказ" : "в корзину"}
+                    {isBasketFlag ? "оформить" : "в корзину"}
                 </ButtonBlue>
             </div>
         </div>
