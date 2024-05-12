@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Breadcrumbs, ProductItem } from "../../components";
+import { Link } from "react-router-dom";
+import { Breadcrumbs, ProductItem, InfoTextBlock } from "../../components";
 import { useEffect } from "react";
 import { request } from "../../utils";
 import {
@@ -38,23 +39,32 @@ export const Favorites = () => {
             <Breadcrumbs />
             <div className="mb-[20px]">
                 <h1 className="ml-[10px] mb-[10px]">Избранное</h1>
-                <div className="flex flex-col ml-[10px]">
-                    {favoriteProducts.map(
-                        ({ product: { _id: id, name, price, sale, imageUrl } }) => (
-                            <ProductItem
-                                key={id}
-                                id={id}
-                                name={name}
-                                price={price}
-                                sale={sale}
-                                imageUrl={imageUrl}
-                                likeButton={false}
-                                buttonDelete={true}
-                                deleteProduct={deleteProduct}
-                            />
-                        )
-                    )}
-                </div>
+                {favoriteProducts?.length > 0 ? (
+                    <div className="flex flex-col ml-[10px]">
+                        {favoriteProducts.map(
+                            ({ product: { _id: id, name, price, sale, imageUrl } }) => (
+                                <ProductItem
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    price={price}
+                                    sale={sale}
+                                    imageUrl={imageUrl}
+                                    likeButton={false}
+                                    buttonDelete={true}
+                                    deleteProduct={deleteProduct}
+                                />
+                            )
+                        )}
+                    </div>
+                ) : (
+                    <InfoTextBlock>
+                        в избранном пусто :( <br />
+                        <Link to={"/catalog"} className="text-blue hover:underline">
+                            перейти в каталог
+                        </Link>
+                    </InfoTextBlock>
+                )}
             </div>
         </>
     );

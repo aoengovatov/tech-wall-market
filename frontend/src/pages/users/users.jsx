@@ -1,4 +1,4 @@
-import { Breadcrumbs, BackBtn } from "../../components";
+import { Breadcrumbs, BackBtn, TitleProfileWithBack } from "../../components";
 import { UserRoll } from "./components/user-roll/user-roll";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -35,10 +35,8 @@ export const Users = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <div className="flex items-center mb-[10px]">
-                    <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">Пользователи</h1>
-                </div>
+                <TitleProfileWithBack>Пользователи</TitleProfileWithBack>
+
                 <div className="grid grid-cols-3 mb-[5px] px-[5px] w-[80%]">
                     <div className="text-gray">Логин</div>
                     <div className="text-gray">Дата создания</div>

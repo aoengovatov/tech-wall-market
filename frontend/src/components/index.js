@@ -23,3 +23,4 @@ export * from "./error-block/error-block";
 export * from "./back-btn/back-btn";
 export * from "./main-title/main-title";
 export * from "./info-text-block/info-text-block";
+export * from "./title-profile-with-back/title-profile-with-back";

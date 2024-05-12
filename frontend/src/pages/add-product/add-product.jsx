@@ -1,4 +1,11 @@
-import { Breadcrumbs, ButtonBlue, Input, Textarea, BackBtn } from "../../components";
+import {
+    Breadcrumbs,
+    ButtonBlue,
+    Input,
+    Textarea,
+    BackBtn,
+    TitleProfileWithBack,
+} from "../../components";
 import { request } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
@@ -117,12 +124,10 @@ export const AddProduct = () => {
         <>
             {!isEdit && <Breadcrumbs />}
             <div className="mb-[20px] w-full">
-                <div className="flex items-center mb-[10px]">
-                    <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">
-                        {isEdit ? "Редактировать товар" : "Добавить товар"}
-                    </h1>
-                </div>
+                <TitleProfileWithBack>
+                    {isEdit ? "Редактировать товар" : "Добавить товар"}
+                </TitleProfileWithBack>
+
                 {serverError && <div>{serverError}</div>}
                 <form
                     onSubmit={isEdit ? updateProduct : addNewProduct}

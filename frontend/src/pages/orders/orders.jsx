@@ -1,4 +1,4 @@
-import { Breadcrumbs, BackBtn } from "../../components";
+import { Breadcrumbs, BackBtn, TitleProfileWithBack } from "../../components";
 import { request } from "../../utils";
 import { OrderRoll } from "./components/order-roll/order-roll";
 import { useState, useEffect } from "react";
@@ -28,10 +28,8 @@ export const Orders = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <div className="flex items-center mb-[10px]">
-                    <BackBtn onClick={() => navigate(-1)} />
-                    <h1 className="ml-[10px]">Заказы</h1>
-                </div>
+                <TitleProfileWithBack>Заказы</TitleProfileWithBack>
+
                 <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] px-[5px]">
                     <div className="text-gray">дата</div>
                     <div className="text-gray">покупатель</div>
