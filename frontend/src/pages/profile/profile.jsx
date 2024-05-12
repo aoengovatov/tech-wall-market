@@ -43,13 +43,13 @@ export const Profile = () => {
             <Breadcrumbs />
             <div className="mb-[30px]">
                 <div className="flex items-center mb-[10px]">
-                    <h1 className="ml-[10px]">Профиль {user.login}</h1>
+                    <h1 className="text-[25px] ml-[10px] md:text-[30px]">Профиль {user.login}</h1>
                     <div className="ml-[15px]">
                         <ButtonSmall onClick={userLogout}>выход</ButtonSmall>
                     </div>
                 </div>
 
-                <div className="flex flex-wrap w-full gap-2">
+                <div className="flex flex-wrap w-full min-h-[50vh] gap-2">
                     {checkAccess([ROLE.USER], user.roleId) && (
                         <>
                             <WidgetItem

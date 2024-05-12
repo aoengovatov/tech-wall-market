@@ -7,7 +7,7 @@ export const TitleProfileWithBack = ({ children }) => {
     return (
         <div className="flex items-center mb-[10px]">
             <BackBtn onClick={() => navigate(-1)} />
-            <h1 className="ml-[10px] w-fit leading-10">{children}</h1>
+            <h1 className="text-[25px] ml-[10px] md:text-[30px] w-fit leading-10">{children}</h1>
         </div>
     );
 };
