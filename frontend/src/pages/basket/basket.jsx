@@ -1,5 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Breadcrumbs, CardPrice, ButtonRed, InfoTextBlock } from "../../components";
+import {
+    Breadcrumbs,
+    CardPrice,
+    ButtonRed,
+    InfoTextBlock,
+    TitleProfileWithBack,
+} from "../../components";
 import { request } from "../../utils";
 import { CardBasket } from "./components";
 import { useEffect } from "react";
@@ -83,7 +89,7 @@ export const Basket = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <h1 className="ml-[10px] mb-[10px]">Корзина</h1>
+                <TitleProfileWithBack>Корзина</TitleProfileWithBack>
 
                 {basketProducts?.length > 0 ? (
                     <div className="flex">
@@ -136,7 +142,9 @@ export const Basket = () => {
                 ) : (
                     <InfoTextBlock>
                         в корзине пусто :( <br />
-                        <Link to={"/catalog"} className="text-blue hover:underline">перейти в каталог</Link>
+                        <Link to={"/catalog"} className="text-blue hover:underline">
+                            перейти в каталог
+                        </Link>
                     </InfoTextBlock>
                 )}
             </div>

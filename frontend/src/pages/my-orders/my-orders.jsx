@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Breadcrumbs, InfoTextBlock } from "../../components";
+import { Breadcrumbs, InfoTextBlock, TitleProfileWithBack } from "../../components";
 import { Order } from "./components/order/Order";
 import { request } from "../../utils";
 
@@ -18,7 +18,8 @@ export const MyOrders = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[30px]">
-                <h1 className="ml-[10px] mb-[10px]">Мои заказы</h1>
+                <TitleProfileWithBack>Мои заказы</TitleProfileWithBack>
+
                 {orders.length > 0 ? (
                     <>
                         {orders.map(

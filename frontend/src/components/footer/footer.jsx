@@ -2,8 +2,8 @@ import { NavPanel } from "./components";
 
 export const Footer = () => {
     return (
-        <div className="flex w-[100%] h-[340px]">
-            <div className="flex justify-center w-1/2 bg-blue text-white p-[40px]">
+        <div className="flex flex-col w-full min-[1150px]:flex-row">
+            <div className="flex justify-center w-full h-fit min-[1150px]:w-1/2 bg-blue text-white p-[20px] md:p-[40px]">
                 <div className="flex flex-col justify-between max-w-[550px]">
                     <div>
                         <div className="text-white text-4xl font-bold mb-[10px]">
@@ -19,7 +19,7 @@ export const Footer = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center w-1/2 overflow-hidden">
+            <div className="flex items-center justify-center w-full max-h-[330px] min-[1150px]:w-1/2 overflow-hidden">
                 <img
                     src="/src/assets/footer-map.png"
                     className="w-full bg-auto bg-no-repeat bg-center object-fill"

@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Breadcrumbs, ProductItem, InfoTextBlock } from "../../components";
+import {
+    Breadcrumbs,
+    ProductItem,
+    InfoTextBlock,
+    TitleProfileWithBack,
+} from "../../components";
 import { useEffect } from "react";
 import { request } from "../../utils";
 import {
@@ -38,7 +43,8 @@ export const Favorites = () => {
         <>
             <Breadcrumbs />
             <div className="mb-[20px]">
-                <h1 className="ml-[10px] mb-[10px]">Избранное</h1>
+                <TitleProfileWithBack>Избранное</TitleProfileWithBack>
+
                 {favoriteProducts?.length > 0 ? (
                     <div className="flex flex-col ml-[10px]">
                         {favoriteProducts.map(

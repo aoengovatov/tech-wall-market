@@ -34,7 +34,7 @@ export const OrderRoll = ({
                 <div className="">{id.slice(-8)}</div>
                 <div className="col-span-2 text-xs">
                     <div className="bg-white p-[5px] mr-[10px] rounded-md">
-                        {products.map(({ _id: id, name, count }) => (
+                        {products.map(({ productId: id, name, count }) => (
                             <div key={id} className="flex justify-between">
                                 <Link to={`/catalog/${id}`} className="text-xs">
                                     {getShortName(name)}
