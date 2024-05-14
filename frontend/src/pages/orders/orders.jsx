@@ -27,7 +27,7 @@ export const Orders = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className="mb-[30px]">
+            <div className="mb-[30px] min-w-[750px]">
                 <TitleProfileWithBack>Заказы</TitleProfileWithBack>
 
                 <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] px-[5px]">
