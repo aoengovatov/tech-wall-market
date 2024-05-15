@@ -20,11 +20,11 @@ export const SortPanel = () => {
     };
 
     return (
-        <div className="flex justify-end mb-[15px]">
+        <div className="flex flex-col justify-end items-end mb-[10px] min-[450px]:flex-row">
             <select
                 value={currentPriceSort}
                 onChange={(target) => onSortChange(target)}
-                className="outline-none text-darkGray border-2 px-[7px] py-[3px] border-gray rounded-lg mr-[10px] focus:border-blue"
+                className="outline-none text-darkGray border-2 px-[7px] py-[3px] border-gray rounded-lg mr-0 mb-[5px] focus:border-blue min-[450px]:mr-[10px] min-[450px]:mb-0"
             >
                 <option value={true}>сначала дешевле</option>
                 <option value={false}>сначала дороже</option>

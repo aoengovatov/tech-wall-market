@@ -25,7 +25,7 @@ export const ProductItem = ({
     price,
     sale,
     imageUrl,
-    deleteProduct=null
+    deleteProduct = null,
 }) => {
     const paddingContentRight = buttonDelete ? 20 : 0;
     const [isBasketFlag, setIsBasketFlag] = useState(false);
@@ -85,33 +85,37 @@ export const ProductItem = ({
     };
 
     return (
-        <div className="flex flex-col w-full h-[160px] border-2 border-lightGray rounded-lg mb-[10px] p-[10px] pr-[${paddingBlockRight}px] transition-all duration-200 hover:border-lightBlue">
+        <div className="flex flex-col w-full h-fit border-2 border-lightGray rounded-lg mb-[10px] p-[10px] pr-[${paddingBlockRight}px] transition-all duration-200 hover:border-lightBlue">
             <div className="flex justify-end">
                 <SaleWidget count={sale} />
                 {buttonDelete && (
                     <div className="ml-[10px]">
-                        <ButtonDelete onClick={() => deleteProduct(id)}/>
+                        <ButtonDelete onClick={() => deleteProduct(id)} />
                     </div>
                 )}
             </div>
-            <div className={`flex pr-[${paddingContentRight}px]`}>
-                <div className="flex min-w-[200px] justify-center">
+            <div
+                className={`flex flex-col pr-[${paddingContentRight}px] min-[760px]:flex-row`}
+            >
+                <div className="flex min-w-[200px] justify-center mb-[10px] min-[760px]:mb-0">
                     <img src={imageUrl} className="h-[100px] mx-[20px]"></img>
                 </div>
 
-                <div className="flex flex-col w-full h-full justify-around">
-                    <div className="flex justify-between">
+                <div className="flex flex-col w-full h-full justify-around mt-[5px]">
+                    <div className="flex flex-col justify-between min-[540px]:flex-row">
                         <Link
                             to={`/catalog/${id}`}
-                            className="font-semibold text-base w-8/12"
+                            className="font-semibold text-base w-full mb-[7px] min-[500px]:w-8/12 min-[540px]:mb-0"
                         >
                             {name}
                         </Link>
-                        <CardPrice price={price} oldPrice={oldPrice} />
+                        <div className="self-end mb-[7px] min-[540px]:self-start min-[540px]:mb-0">
+                            <CardPrice price={price} oldPrice={oldPrice} />
+                        </div>
                     </div>
 
                     <div className="flex items-end justify-between">
-                        <div className="w-8/12">
+                        <div className="w-fit min-[540px]:w-8/12">
                             <ProductCode>{id.slice(-8)}</ProductCode>
                         </div>
                         <div className="flex">
@@ -120,11 +124,12 @@ export const ProductItem = ({
                                     <ButtonLike
                                         favoriteFlag={isFavoriteFlag}
                                         onClick={
-                                            isFavoriteFlag === false ?
-                                            (() =>
-                                                addOwnerProduct(
-                                                    OWNER_PRODUCT_STATUS.FAVORITE
-                                                )): null
+                                            isFavoriteFlag === false
+                                                ? () =>
+                                                      addOwnerProduct(
+                                                          OWNER_PRODUCT_STATUS.FAVORITE
+                                                      )
+                                                : null
                                         }
                                     />
                                 </div>

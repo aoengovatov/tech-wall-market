@@ -53,24 +53,30 @@ export const Catalog = () => {
             <Breadcrumbs />
             <div className="mb-[30px]">
                 <h1 className="ml-[10px] mb-[10px]">Каталог</h1>
-                <div className="flex">
-                    <div className="flex flex-col w-3/12">
+                <div className="flex flex-col min-[1000px]:flex-row">
+                    <div className="w-full min-[1000px]:w-3/12">
                         <CategoryPanel />
                     </div>
-                    <div className="w-9/12">
+                    <div className="w-full min-[1000px]:w-9/12">
                         <div className="flex flex-col ml-[10px]">
                             <SortPanel />
-                            {products?.length > 0 ? products.map(({ _id: id, name, price, sale, imageUrl }) => (
-                                <ProductItem
-                                    key={id}
-                                    id={id}
-                                    name={name}
-                                    price={price}
-                                    sale={sale}
-                                    imageUrl={imageUrl}
-                                />
-                            )) : (
-                                <div className="text-center text-[17px] my-5 font-medium">Товары не найдены</div>
+                            {products?.length > 0 ? (
+                                products.map(
+                                    ({ _id: id, name, price, sale, imageUrl }) => (
+                                        <ProductItem
+                                            key={id}
+                                            id={id}
+                                            name={name}
+                                            price={price}
+                                            sale={sale}
+                                            imageUrl={imageUrl}
+                                        />
+                                    )
+                                )
+                            ) : (
+                                <div className="text-center text-[17px] my-5 font-medium">
+                                    Товары не найдены
+                                </div>
                             )}
                             <Pagination lastPage={lastPage} />
                         </div>
