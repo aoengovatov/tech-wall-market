@@ -13,7 +13,7 @@ export const CategoryPanel = () => {
     };
 
     return (
-        <div className="flex flex-row flex-wrap w-full bg-lightGray p-[10px] mb-[10px] mr-0 gap-y-1 rounded-xl min-[1000px]:flex-col min-[1000px]:mr-[10px] min-[1000px]:mb-[10px]">
+        <div className="flex flex-row justify-center flex-wrap w-full bg-lightGray p-[10px] mb-[10px] mr-0 gap-y-1 rounded-xl min-[1000px]:flex-col min-[1000px]:mr-[10px] min-[1000px]:mb-[10px]">
             {categoryList.map(({ id, name }) => (
                 <CategoryItem
                     key={id}
