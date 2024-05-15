@@ -58,26 +58,29 @@ export const Catalog = () => {
                         <CategoryPanel />
                     </div>
                     <div className="w-full min-[1000px]:w-9/12">
-                        <div className="flex flex-col ml-[10px]">
-                            <SortPanel />
-                            {products?.length > 0 ? (
-                                products.map(
-                                    ({ _id: id, name, price, sale, imageUrl }) => (
-                                        <ProductItem
-                                            key={id}
-                                            id={id}
-                                            name={name}
-                                            price={price}
-                                            sale={sale}
-                                            imageUrl={imageUrl}
-                                        />
+                        <div className="flex flex-col justify-between h-full ml-[10px]">
+                            <div>
+                                <SortPanel />
+                                {products?.length > 0 ? (
+                                    products.map(
+                                        ({ _id: id, name, price, sale, imageUrl }) => (
+                                            <ProductItem
+                                                key={id}
+                                                id={id}
+                                                name={name}
+                                                price={price}
+                                                sale={sale}
+                                                imageUrl={imageUrl}
+                                            />
+                                        )
                                     )
-                                )
-                            ) : (
-                                <div className="text-center text-[17px] my-5 font-medium">
-                                    Товары не найдены
-                                </div>
-                            )}
+                                ) : (
+                                    <div className="text-center text-[17px] my-5 font-medium">
+                                        Товары не найдены
+                                    </div>
+                                )}
+                            </div>
+
                             <Pagination lastPage={lastPage} />
                         </div>
                     </div>

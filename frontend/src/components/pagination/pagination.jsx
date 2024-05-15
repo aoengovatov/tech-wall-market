@@ -37,7 +37,7 @@ export const Pagination = ({ lastPage }) => {
 
     return (
         isVisible && (
-            <div className=" m-auto">
+            <div className="mx-auto">
                 <div className="flex">
                     <Button
                         logoSrc={"/src/assets/first-last.png"}
