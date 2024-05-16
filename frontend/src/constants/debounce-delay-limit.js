@@ -1,0 +1,1 @@
+export const DEBOUNCE_DELAY_LIMIT = 500;

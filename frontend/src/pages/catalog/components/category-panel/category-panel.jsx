@@ -1,15 +1,30 @@
+import { useMemo, useEffect, useState } from "react";
+import { debounce } from "../../../../utils";
 import { CategoryItem } from "../category-item/category-item";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../../../../store/categorySlice";
 import { getCategoryId, setCategoryId } from "../../../../store/catalogSlice";
+import { DEBOUNCE_DELAY_LIMIT } from "../../../../constants";
 
 export const CategoryPanel = () => {
     const dispatch = useDispatch();
+    const [shouldCategory, setShouldCategory] = useState(false);
+    const [catId, setCatId] = useState("");
     const categoryList = useSelector(getCategory);
     const currentCategoryId = useSelector(getCategoryId);
 
+    useEffect(() => {
+        dispatch(setCategoryId(catId));
+    }, [shouldCategory]);
+
+    const startDelayedSetCategory = useMemo(
+        () => debounce(setShouldCategory, DEBOUNCE_DELAY_LIMIT),
+        []
+    );
+
     const onSelectCategory = (id) => {
-        dispatch(setCategoryId(id));
+        setCatId(id);
+        startDelayedSetCategory(!shouldCategory);
     };
 
     return (
@@ -18,7 +33,7 @@ export const CategoryPanel = () => {
                 <CategoryItem
                     key={id}
                     id={id}
-                    onSelectCategory={onSelectCategory}
+                    onSelectCategory={() => onSelectCategory(id)}
                     currentCategoryId={currentCategoryId}
                 >
                     {name}
