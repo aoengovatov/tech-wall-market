@@ -7,6 +7,7 @@ import {
     CardPrice,
     SaleWidget,
     ButtonRed,
+    Loader,
 } from "../../components";
 import { EditButton, ProductDescriptions } from "./components";
 import { checkAccess, oldPriceCount, request } from "../../utils";
@@ -25,6 +26,7 @@ export const SingleProduct = () => {
     const userRole = useSelector(getUserRole);
     const [editFlag, setEditFlag] = useState(false);
     const [product, setProduct] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [productNotFound, setProductNotFound] = useState(false);
     const [isBasketFlag, setIsBasketFlag] = useState(false);
     const [isFavoriteFlag, setIsFavoriteFlag] = useState(false);
@@ -107,8 +109,18 @@ export const SingleProduct = () => {
         setEditFlag(true);
     }
 
-    return product?.name ? (
-        <>
+    if (product?.name && isLoading === true) {
+        setIsLoading(false);
+    }
+
+    return productNotFound ? (
+        <Page404 />
+        
+    ) : (
+        isLoading ? (
+            <Loader />
+        ) : (
+            <>
             <Breadcrumbs />
             <div className="mt-[10px] mb-[30px] border-2 border-lightGray rounded-lg">
                 <div className="flex flex-col w-full mb-0 md:mb-[15px] p-[15px] md:flex-row">
@@ -180,8 +192,6 @@ export const SingleProduct = () => {
                     characteristic={product.characteristic}
                 />
             </div>
-        </>
-    ) : (
-        <>{productNotFound && <Page404 />}</>
+        </>)
     );
 };
