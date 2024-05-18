@@ -48,10 +48,10 @@ exports.deleteAllBasketProducts = async (req, res) => {
     res.send({ error: null });
 };
 
-exports.getCountFavoritesBasketOrders = async (req, res) => {
+exports.getCountFavoritesBasketMyOrders = async (req, res) => {
     const ownerId = req.user.id;
 
-    const countAll = await userService.getCountFavoritesBasketOrders(ownerId);
+    const countAll = await userService.getCountFavoritesBasketMyOrders(ownerId);
 
     res.send({ error: null, count: countAll });
 };

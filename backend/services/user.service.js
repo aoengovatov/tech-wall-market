@@ -61,8 +61,8 @@ exports.getCountUsersCategoriesProductsOrders = async () => {
     return { users, categories, products, orders };
 };
 
-exports.getCountFavoritesBasketOrders = async (ownerId) => {
-    const [orders, ownerProducts] = await Promise.all([
+exports.getCountFavoritesBasketMyOrders = async (ownerId) => {
+    const [myOrders, ownerProducts] = await Promise.all([
         Order.find({ owner: ownerId }).countDocuments(),
         OwnerProductList.findOne({ owner: ownerId }),
     ]);
@@ -78,7 +78,7 @@ exports.getCountFavoritesBasketOrders = async (ownerId) => {
         }
     });
 
-    return { basket, favorites, orders };
+    return { basket, favorites, myOrders };
 };
 
 exports.deleteUser = (id) => {

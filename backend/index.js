@@ -38,12 +38,16 @@ app.use("/products", productRoute);
 
 app.use(authentificated);
 
-app.use("/users/products", hasRole([ROLES.USER]), ownerProductRoute);
-app.use("/users", hasRole([ROLES.ADMIN]), userForAdminRoute);
-app.use("/categories", hasRole([ROLES.ADMIN]), categoryForAdminRoute);
-app.use("/products", hasRole([ROLES.ADMIN]), productForAdminRoute);
-app.use("/orders", hasRole([ROLES.USER, ROLES.ADMIN]), orderRoute);
-app.use("/orders", hasRole([ROLES.ADMIN]), orderForAdminRoute);
+app.use(
+    "/users/products",
+    hasRole([ROLES.USER, ROLES.ADMIN, ROLES.MODERATOR]),
+    ownerProductRoute
+);
+app.use("/users", hasRole([ROLES.ADMIN, ROLES.MODERATOR]), userForAdminRoute);
+app.use("/categories", hasRole([ROLES.ADMIN, ROLES.MODERATOR]), categoryForAdminRoute);
+app.use("/products", hasRole([ROLES.ADMIN, ROLES.MODERATOR]), productForAdminRoute);
+app.use("/orders", hasRole([ROLES.USER, ROLES.ADMIN, ROLES.MODERATOR]), orderRoute);
+app.use("/orders", hasRole([ROLES.ADMIN, ROLES.MODERATOR]), orderForAdminRoute);
 
 mongoose.connect(mongoUri).then(() => {
     app.listen(port, () => {
