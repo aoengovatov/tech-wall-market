@@ -58,6 +58,10 @@ export const Basket = () => {
         });
     };
 
+    const navigateToMyOrders = () => {
+        return navigate("/profile/my-orders");
+    };
+
     const addOrder = () => {
         if (totalCount > 0) {
             let products = [];
@@ -81,10 +85,9 @@ export const Basket = () => {
             request("/users/products/basket", "DELETE").then(({ error }) => {
                 if (error === null) {
                     dispatch(deleteAllBasketProducts());
+                    navigateToMyOrders();
                 }
             });
-
-            return navigate("/profile/my-orders");
         }
     };
 

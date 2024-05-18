@@ -13,7 +13,7 @@ export const ItemAmount = ({ currentCount, id }) => {
 
     useEffect(() => {
         request(`/users/products`, "POST", { productId: id, count }).then(
-            ([{ error }]) => {
+            ({ error }) => {
                 if (error === null) {
                     dispatch(setBasketProductCount({ id, count }));
                 }

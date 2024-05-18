@@ -1,29 +1,35 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumbs, ButtonSmall } from "../../components";
 import { WidgetItem } from "./components";
-import { getUser, reset } from "../../store/userSlice";
+import { getUser, resetUser } from "../../store/userSlice";
 import { ROLE } from "../../constants";
 import { Navigate } from "react-router-dom";
 import { checkAccess, request } from "../../utils";
 import { useEffect, useState } from "react";
+import { resetFavoriteProducts } from "../../store/favoriteSlice";
+import { deleteAllBasketProducts } from "../../store/basketSlice";
 
 export const Profile = () => {
     const dispatch = useDispatch();
     const user = useSelector(getUser);
     const [countAll, setCountAll] = useState({});
+    const [countAllAdmin, setCountAllAdmin] = useState({});
 
     useEffect(() => {
-        if (checkAccess([ROLE.ADMIN, ROLE.MODERATOR], user.roleId)) {
-            request("/users/count-all").then((data) => {
+        if (checkAccess([ROLE.USER, ROLE.MODERATOR, ROLE.ADMIN], user.roleId)) {
+            request("/users/products/count-all").then((data) => {
                 if (data.error === null) {
+                    console.log(countAll);
+
                     setCountAll(data.count);
                 }
             });
         }
-        if (checkAccess([ROLE.USER], user.roleId)) {
-            request("/users/products/count-all").then((data) => {
+        if (checkAccess([ROLE.ADMIN, ROLE.MODERATOR], user.roleId)) {
+            request("/users/count-all").then((data) => {
                 if (data.error === null) {
-                    setCountAll(data.count);
+                    console.log(countAll);
+                    setCountAllAdmin(data.count);
                 }
             });
         }
@@ -34,7 +40,9 @@ export const Profile = () => {
     }
 
     const userLogout = () => {
-        dispatch(reset());
+        dispatch(resetUser());
+        dispatch(resetFavoriteProducts());
+        dispatch(deleteAllBasketProducts());
         sessionStorage.removeItem("userData");
     };
 
@@ -43,14 +51,19 @@ export const Profile = () => {
             <Breadcrumbs />
             <div className="mb-[30px]">
                 <div className="flex items-center mb-[10px]">
-                    <h1 className="text-[25px] ml-[10px] md:text-[30px]">Профиль {user.login}</h1>
+                    <h1 className="text-[25px] ml-[10px] md:text-[30px]">
+                        Профиль {user.login}
+                    </h1>
                     <div className="ml-[15px]">
                         <ButtonSmall onClick={userLogout}>выход</ButtonSmall>
                     </div>
                 </div>
 
                 <div className="flex flex-wrap w-full min-h-[50vh] gap-2">
-                    {checkAccess([ROLE.USER], user.roleId) && (
+                    {checkAccess(
+                        [ROLE.USER, ROLE.MODERATOR, ROLE.ADMIN],
+                        user.roleId
+                    ) && (
                         <>
                             <WidgetItem
                                 name={"favorites"}
@@ -64,7 +77,7 @@ export const Profile = () => {
                             />
                             <WidgetItem
                                 name={"my-orders"}
-                                count={countAll.orders}
+                                count={countAll.myOrders}
                                 link={"/profile/my-orders"}
                             />
                         </>
@@ -74,17 +87,17 @@ export const Profile = () => {
                         <>
                             <WidgetItem
                                 name={"add-product"}
-                                count={countAll.products}
+                                count={countAllAdmin.products}
                                 link={"/profile/add-product"}
                             />
                             <WidgetItem
                                 name={"categories"}
-                                count={countAll.categories}
+                                count={countAllAdmin.categories}
                                 link={"/profile/category"}
                             />
                             <WidgetItem
                                 name={"orders"}
-                                count={countAll.orders}
+                                count={countAllAdmin.orders}
                                 link={"/profile/orders"}
                             />
                         </>
@@ -93,7 +106,7 @@ export const Profile = () => {
                     {checkAccess([ROLE.ADMIN], user.roleId) && (
                         <WidgetItem
                             name={"users"}
-                            count={countAll.users}
+                            count={countAllAdmin.users}
                             link={"/profile/users"}
                         />
                     )}
