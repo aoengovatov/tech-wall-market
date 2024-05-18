@@ -6,8 +6,9 @@ import {
     InfoTextBlock,
     TitleProfileWithBack,
     ButtonRed,
+    Loader,
 } from "../../components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { request } from "../../utils";
 import {
     getFavoriteProducts,
@@ -16,11 +17,11 @@ import {
     resetFavoriteProducts,
 } from "../../store/favoriteSlice";
 import { OWNER_PRODUCT_STATUS } from "../../constants";
-import { setBasketList } from "../../store/basketSlice";
 
 export const Favorites = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         request("/users/products").then(({ error, data }) => {
@@ -29,6 +30,7 @@ export const Favorites = () => {
                     (product) => product.status === OWNER_PRODUCT_STATUS.FAVORITE
                 );
                 dispatch(setFavoriteList(favoriteProducts));
+                setIsLoading(false);
             }
         });
     }, [dispatch]);
@@ -57,7 +59,7 @@ export const Favorites = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className="mb-[20px]">
+            <div className="mb-[20px] min-h-[50Vh]">
                 <TitleProfileWithBack>Избранное</TitleProfileWithBack>
 
                 {favoriteProducts?.length > 0 ? (
@@ -89,6 +91,8 @@ export const Favorites = () => {
                             </div>
                         )}
                     </>
+                ) : isLoading ? (
+                    <Loader />
                 ) : (
                     <InfoTextBlock>
                         в избранном пусто :( <br />

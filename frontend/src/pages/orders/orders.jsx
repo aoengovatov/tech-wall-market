@@ -1,12 +1,11 @@
-import { Breadcrumbs, BackBtn, TitleProfileWithBack } from "../../components";
+import { Breadcrumbs, TitleProfileWithBack, Loader } from "../../components";
 import { request } from "../../utils";
 import { OrderRoll } from "./components/order-roll/order-roll";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const Orders = () => {
-    const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [statusList, setStatusList] = useState([]);
 
     useEffect(() => {
@@ -14,6 +13,7 @@ export const Orders = () => {
             request("/orders").then(({ error, orders }) => {
                 if (error === null) {
                     setOrders(orders);
+                    setIsLoading(false);
                 }
             }),
             request("/orders/status").then(({ error, statusList }) => {
@@ -27,7 +27,7 @@ export const Orders = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className="mb-[30px] min-w-[750px]">
+            <div className="mb-[30px] min-w-[750px] min-h-[50vh]">
                 <TitleProfileWithBack>Заказы</TitleProfileWithBack>
 
                 <div className="grid grid-cols-7 mb-[5px] px-[5px] w-[90%] px-[5px]">
@@ -53,6 +53,8 @@ export const Orders = () => {
                             />
                         )
                     )
+                ) : isLoading ? (
+                    <Loader />
                 ) : (
                     <div className="my-4 text-center text-[17px]">нет заказов</div>
                 )}

@@ -5,10 +5,11 @@ import {
     ButtonRed,
     InfoTextBlock,
     TitleProfileWithBack,
+    Loader,
 } from "../../components";
 import { request } from "../../utils";
 import { CardBasket } from "./components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
     deleteAllBasketProducts,
     deleteBasketProduct,
@@ -22,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 export const Basket = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
     const user = useSelector(getUser);
 
     useEffect(() => {
@@ -31,6 +33,7 @@ export const Basket = () => {
                     (product) => product.status === OWNER_PRODUCT_STATUS.BASKET
                 );
                 dispatch(setBasketList(basketProducts));
+                setIsLoading(false);
             }
         });
     }, [dispatch]);
@@ -88,7 +91,7 @@ export const Basket = () => {
     return (
         <>
             <Breadcrumbs />
-            <div className="mb-[30px]">
+            <div className="mb-[30px] min-h-[50vh]">
                 <TitleProfileWithBack>Корзина</TitleProfileWithBack>
 
                 {basketProducts?.length > 0 ? (
@@ -139,6 +142,8 @@ export const Basket = () => {
                             </div>
                         )}
                     </div>
+                ) : isLoading ? (
+                    <Loader />
                 ) : (
                     <InfoTextBlock>
                         в корзине пусто :( <br />
