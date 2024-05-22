@@ -1,4 +1,5 @@
 import { NavPanel } from "./components";
+import mapImage from "../../assets/footer-map.png";
 
 export const Footer = () => {
     return (
@@ -21,7 +22,7 @@ export const Footer = () => {
 
             <div className="flex items-center justify-center w-full max-h-[330px] min-[1150px]:w-1/2 overflow-hidden">
                 <img
-                    src="/src/assets/footer-map.png"
+                    src={mapImage}
                     className="w-full bg-auto bg-no-repeat bg-center object-fill"
                 ></img>
             </div>

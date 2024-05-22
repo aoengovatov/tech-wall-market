@@ -1,4 +1,10 @@
 import { Link } from "react-router-dom";
+import favoritesIcon from "../../../../assets/favorites.png";
+import basketIcon from "../../../../assets/basket.png";
+import usersIcon from "../../../../assets/users.png";
+import myOrdersIcon from "../../../../assets/my-orders.png";
+import categoriesIcon from "../../../../assets/categories.png";
+import ordersIcon from "../../../../assets/orders.png";
 
 export const WidgetItem = ({ name, count, link }) => {
     let title = "";
@@ -8,37 +14,37 @@ export const WidgetItem = ({ name, count, link }) => {
     switch (name) {
         case "favorites":
             title = "Избранное";
-            src = "/src/assets/favorites.png";
+            src = favoritesIcon;
             color = "#FFADAD";
             break;
         case "basket":
             title = "Корзина";
-            src = "/src/assets/basket.png";
+            src = basketIcon;
             color = "#BAFFEB";
             break;
         case "users":
             title = "Пользователи";
-            src = "/src/assets/users.png";
+            src = usersIcon;
             color = "#BAFFEB";
             break;
         case "my-orders":
             title = "Мои заказы";
-            src = "/src/assets/my-orders.png";
+            src = myOrdersIcon;
             color = "#A0DEFF";
             break;
         case "add-product":
             title = "Добавить товар";
-            src = "/src/assets/my-orders.png";
+            src = myOrdersIcon;
             color = "#A0DEFF";
             break;
         case "categories":
             title = "Категории";
-            src = "/src/assets/categories.png";
+            src = categoriesIcon;
             color = "#FEBDFF";
             break;
         case "orders":
             title = "Заказы";
-            src = "/src/assets/orders.png";
+            src = ordersIcon;
             color = "#D4A9FF";
             break;
         default:

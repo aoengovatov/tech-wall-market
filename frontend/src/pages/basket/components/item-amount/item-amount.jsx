@@ -5,6 +5,8 @@ import { DEBOUNCE_DELAY_LIMIT } from "../../../../constants";
 import { useDispatch } from "react-redux";
 import { request } from "../../../../utils";
 import { setBasketProductCount } from "../../../../store/basketSlice";
+import plusIcon from "../../../../assets/plus.png";
+import minusIcon from "../../../../assets/minus.png";
 
 export const ItemAmount = ({ currentCount, id }) => {
     const [count, setCount] = useState(currentCount);
@@ -12,13 +14,11 @@ export const ItemAmount = ({ currentCount, id }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        request(`/users/products`, "POST", { productId: id, count }).then(
-            ({ error }) => {
-                if (error === null) {
-                    dispatch(setBasketProductCount({ id, count }));
-                }
+        request(`/users/products`, "POST", { productId: id, count }).then(({ error }) => {
+            if (error === null) {
+                dispatch(setBasketProductCount({ id, count }));
             }
-        );
+        });
     }, [shouldCount]);
 
     const startDelayedSetCount = useMemo(
@@ -39,9 +39,9 @@ export const ItemAmount = ({ currentCount, id }) => {
 
     return (
         <div className="flex items-center h-[26px] mr-[5px] min-[450px]:mr-[15px] rounded-xl bg-lightGray">
-            <ButtonAdd src={"/src/assets/minus.png"} onClick={() => onButtonClick(-1)} />
+            <ButtonAdd src={minusIcon} onClick={() => onButtonClick(-1)} />
             <div className="w-[28px] text-sm text-center">{count}</div>
-            <ButtonAdd src={"/src/assets/plus.png"} onClick={() => onButtonClick(1)} />
+            <ButtonAdd src={plusIcon} onClick={() => onButtonClick(1)} />
         </div>
     );
 };

@@ -1,6 +1,8 @@
 import { getPage, setPage } from "../../store/catalogSlice";
 import { Button } from "./components";
 import { useDispatch, useSelector } from "react-redux";
+import firstLastIcon from "../../assets/first-last.png";
+import nextLastIcon from "../../assets/next-last.png";
 
 export const Pagination = ({ lastPage }) => {
     const dispatch = useDispatch();
@@ -40,13 +42,13 @@ export const Pagination = ({ lastPage }) => {
             <div className="mx-auto">
                 <div className="flex">
                     <Button
-                        logoSrc={"/src/assets/first-last.png"}
+                        logoSrc={firstLastIcon}
                         onClick={firstPage}
                         rotateLogo={true}
                         disabled={currentPage === 1}
                     />
                     <Button
-                        logoSrc={"/src/assets/next-last.png"}
+                        logoSrc={nextLastIcon}
                         onClick={onPrevPage}
                         rotateLogo={true}
                         disabled={currentPage === 1}
@@ -56,12 +58,12 @@ export const Pagination = ({ lastPage }) => {
                         {currentPage} из {lastPage}
                     </div>
                     <Button
-                        logoSrc={"/src/assets/next-last.png"}
+                        logoSrc={nextLastIcon}
                         onClick={onNextPage}
                         disabled={currentPage === lastPage}
                     />
                     <Button
-                        logoSrc={"/src/assets/first-last.png"}
+                        logoSrc={firstLastIcon}
                         onClick={onLastPage}
                         disabled={currentPage === lastPage}
                     />
