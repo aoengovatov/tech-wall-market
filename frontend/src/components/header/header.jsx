@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import { IconNavMenu, Logo } from "./components";
 import { getUserRole } from "../../store/userSlice";
 import { ROLE } from "../../constants";
+import likeIcon from "../../assets/like-icon-sm.png";
+import basketIcon from "../../assets/basket_icon-sm.png";
+import userIcon from "../../assets/user-icon-sm.png";
 
 export const Header = () => {
     const userRole = useSelector(getUserRole);
@@ -13,22 +16,13 @@ export const Header = () => {
                 <div className="flex">
                     {userRole !== ROLE.GUEST && (
                         <>
-                            <IconNavMenu
-                                url={"/profile/favorites"}
-                                imageSrc={"/src/assets/like-icon-sm.png"}
-                            />
+                            <IconNavMenu url={"/profile/favorites"} imageSrc={likeIcon} />
 
-                            <IconNavMenu
-                                url={"/profile/basket"}
-                                imageSrc={"/src/assets/basket_icon-sm.png"}
-                            />
+                            <IconNavMenu url={"/profile/basket"} imageSrc={basketIcon} />
                         </>
                     )}
 
-                    <IconNavMenu
-                        url={"/profile"}
-                        imageSrc={"/src/assets/user-icon-sm.png"}
-                    />
+                    <IconNavMenu url={"/profile"} imageSrc={userIcon} />
                 </div>
             </div>
         </div>
