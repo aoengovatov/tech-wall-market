@@ -16,7 +16,6 @@ const hasRole = require("./middlewares/hasRole");
 
 const config = require("config");
 const port = config.get("port");
-const origin = config.get("origin");
 const mongoUri = config.get("mongoUri");
 const ROLES = require("./constants/roles");
 
@@ -25,7 +24,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin,
+        origin: true,
     })
 );
 
