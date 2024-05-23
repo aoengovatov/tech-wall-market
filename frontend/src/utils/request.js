@@ -1,5 +1,5 @@
 export const request = (url, method, data) => {
-    return fetch(`http://95.163.222.242:3001${url}`, {
+    return fetch(`http://localhost:3001${url}`, {
         headers: {
             "content-type": "application/json",
         },
