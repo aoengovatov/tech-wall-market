@@ -1,5 +1,5 @@
 import { ProductCard } from "../product-card/product-card";
-import { datetimeStringFormatter } from "../../../../utils";
+import { datetimeStringFormatter, numberFormatter } from "../../../../utils";
 
 export const Order = ({ id, createdAt, status, products, totalPrice }) => {
     return (
@@ -12,7 +12,9 @@ export const Order = ({ id, createdAt, status, products, totalPrice }) => {
                     </div>
                 </div>
                 <div className="flex flex-col items-end">
-                    <div className="text-[18px] text-right leading-6 md:text-[22px]">{status}</div>
+                    <div className="text-[18px] text-right leading-6 md:text-[22px]">
+                        {status}
+                    </div>
                     <div className="text-darkGray">текущий статус</div>
                 </div>
             </div>
@@ -32,7 +34,7 @@ export const Order = ({ id, createdAt, status, products, totalPrice }) => {
             <div className="flex items-center justify-end">
                 <h2 className="mr-[5px]">Итого: </h2>
                 <span className="text-[22px] font-semibold text-green">
-                    {totalPrice}
+                    {numberFormatter(totalPrice)}
                     <span className="ml-[3px]">₽</span>
                 </span>
             </div>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { numberFormatter } from "../../../../utils";
 
 export const ProductCard = ({ id, name, price, productId, count, imageUrl }) => {
     return (
@@ -17,7 +18,7 @@ export const ProductCard = ({ id, name, price, productId, count, imageUrl }) => 
                 <div className="flex items-center">
                     <span>{count}</span>
                     <span className="mx-[5px] text-xs">х</span>
-                    <span className="font-semibold">{price}</span>
+                    <span className="font-semibold">{numberFormatter(price)}</span>
                     <span className="font-semibold ml-[3px]">₽</span>
                 </div>
             </div>

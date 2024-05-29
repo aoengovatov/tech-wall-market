@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { request } from "../../../../utils";
+import { numberFormatter } from "../../../../utils";
 import { getShortName, datetimeStringFormatter } from "../../../../utils";
 
 export const OrderRoll = ({
@@ -44,7 +45,7 @@ export const OrderRoll = ({
                         ))}
                     </div>
                 </div>
-                <div className="">{totalPrice} ₽</div>
+                <div className="ml-auto mr-1">{numberFormatter(totalPrice)} ₽</div>
                 <select
                     value={updatedStatus}
                     onChange={(target) => onStatusChange(target)}

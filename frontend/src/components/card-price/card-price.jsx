@@ -1,3 +1,5 @@
+import { numberFormatter } from "../../utils";
+
 export const CardPrice = ({ price, oldPrice, color }) => {
     let textColor = "";
 
@@ -12,11 +14,11 @@ export const CardPrice = ({ price, oldPrice, color }) => {
     return (
         <div className="flex flex-col">
             <div className="text-xl font-semibold leading-5" style={{ color: textColor }}>
-                {price} ₽
+                {numberFormatter(price)} ₽
             </div>
             {oldPrice !== 0 && (
                 <div className="text-l line-through leading-5 text-darkGray">
-                    {oldPrice} ₽
+                    {numberFormatter(oldPrice)} ₽
                 </div>
             )}
         </div>
